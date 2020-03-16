@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import './App.css';
+import '../styles/App.css';
+import FlashCard from './FlashCard'
 
 class App extends Component {
   constructor(props) {
@@ -11,14 +12,14 @@ class App extends Component {
   }
 
   fetchData = () => {
-    axios.get('/api/data') // You can simply make your requests to "/api/whatever you want"
+    axios.get('/api/users')
     .then((response) => {
-      // handle success
-      console.log(response.data) // The entire response from the Rails API
 
-      console.log(response.data.message) // Just the message
+      // handle success
+      console.log(response.data)
+
       this.setState({
-        message: response.data.message
+        message: `Hello ${response.data.users[0].name}`
       });
     }) 
   }
@@ -29,7 +30,10 @@ class App extends Component {
         <h1>{ this.state.message }</h1>
         <button onClick={this.fetchData} >
           Fetch Data
-        </button>        
+        </button>   
+        
+        <FlashCard />
+
       </div>
     );
   }
