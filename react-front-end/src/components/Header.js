@@ -1,12 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {Link} from 'react-router-dom'
-import ReactDOM from 'react-dom'
-import CssBaseline from '@material-ui/core/CssBaseline'
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -17,6 +13,16 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     '& .MuiTextField-root': {
       width: 200,
+      color: '#fff'
+    },
+    '& .MuiFormLabel-root': {
+      color: '#fff'
+    },
+    '& .MuiInputBase-root': {
+      color: '#fff'
+    },
+    '& .MuiIconButton-root': {
+      color: '#fff',
     },
   },
   input: {
@@ -107,13 +113,12 @@ export default function Header(props) {
                       options={tags.map(tag => tag.name)}
                       renderInput={params => (
                         <TextField
-                        hi={console.log(params)}
                           {...params}
                           id="outlined-search"
-                          label={<SearchIcon/>}
-                          className={classes.input}
+                          label={<SearchIcon color={classes.root.primary}/>}
                           onChange = {handleChange}
                           value = {inputvalue}
+                          className = {classes.inputRoot}
                         />
                       )}
                     />
