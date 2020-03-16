@@ -22,6 +22,8 @@ const ratingsRoutes = require('./routes/ratings')
 const testquestionsRoutes = require('./routes/testquestions')
 const testsRoutes = require('./routes/tests')
 const usersRoutes = require('./routes/users')
+const tagsRoutes = require('./routes/tags')
+const decktagsRoutes = require('./routes/deck_tags');
 
 App.use('/api/cards', cardsRoutes(db));
 App.use('/api/decks', decksRoutes(db));
@@ -29,6 +31,8 @@ App.use('/api/ratings', ratingsRoutes(db));
 App.use('/api/testquestions', testquestionsRoutes(db));
 App.use('/api/tests', testsRoutes(db));
 App.use('/api/users', usersRoutes(db));
+App.use('/api/tags', tagsRoutes(db));
+App.use('/api/deck_tags', decktagsRoutes(db))
 
 // GET Routes
 App.get('/users/:id', (req, res) =>
