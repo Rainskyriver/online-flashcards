@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import axios from 'axios';
 import '../styles/App.css';
-import FlashCard from './FlashCard'
+import FlashCard from './FlashCard';
+import Header from './Header';
 
 class App extends Component {
   constructor(props) {
@@ -26,7 +33,11 @@ class App extends Component {
 
   render() {
     return (
+      <Router>
       <div className="App">
+      <Header/>
+
+
         <h1>{ this.state.message }</h1>
         <button onClick={this.fetchData} >
           Fetch Data
@@ -35,6 +46,7 @@ class App extends Component {
         <FlashCard />
 
       </div>
+      </Router>
     );
   }
 }
