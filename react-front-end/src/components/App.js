@@ -1,52 +1,26 @@
-import React, { Component } from 'react';
-import {
-  BrowserRouter as Router
-} from "react-router-dom";
-import axios from 'axios';
-import '../styles/App.css';
-import FlashCard from './FlashCard';
-import Header from './Header';
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "../styles/App.css";
+import FlashCard from "./FlashCard";
+import Header from "./Header";
+import Search from "./Search";
 // import CardForm from './CardForm'
 
-class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      message: 'Click the button to load data!'
-    }
-  }
-
-  fetchData = () => {
-    axios.get('/api/users')
-    .then((response) => {
-
-      // handle success
-      console.log(response.data)
-
-      this.setState({
-        message: `Hello ${response.data.users[0].name}`
-      });
-    }) 
-  }
-
-  render() {
-    return (
-      <Router>
-        <div className="App">
-        <Header/>
-
-        <h1>{ this.state.message }</h1>
-        <button onClick={this.fetchData} >
-          Fetch Data
-        </button>   
-        
-        <FlashCard />
+export default function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Header />
+        <Switch>
+          <Route path={'/search/:tag'}>
+            <Search />
+          </Route>
+          <Route exact path="/">
+            <FlashCard />
+          </Route>
+        </Switch>
         {/* <CardForm /> */}
-
       </div>
-      </Router>
-    );
-  }
+    </Router>
+  );
 }
-
-export default App;

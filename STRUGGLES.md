@@ -28,3 +28,5 @@ https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Examples#
 https://material-ui.com/components/text-fields/
 https://material-ui.com/api/autocomplete/#autocomplete-api
 * Submitting a search on the form
+* Getting react router to work properly with the search page
+https://reacttraining.com/react-router/web/guides/quick-start
