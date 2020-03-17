@@ -48,6 +48,7 @@ App.get('/api/search/:tag', (req, res) => {
     )
   )
   OR name LIKE '%${tag}%'
+  OR description LIKE '%${tag}%'
   OR user_id=(
     SELECT id FROM users
     WHERE name LIKE '%${tag}%'

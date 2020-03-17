@@ -107,7 +107,7 @@ export default function Header(props) {
       .catch(err => {
         console.log(err);
       });
-  }, []);
+  }, []); 
   return (
     <nav className="header">
       <div className={classes.root}>
