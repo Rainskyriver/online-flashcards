@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+  BrowserRouter as Router
 } from "react-router-dom";
 import axios from 'axios';
 import '../styles/App.css';
@@ -34,9 +31,8 @@ class App extends Component {
   render() {
     return (
       <Router>
-      <div className="App">
-      <Header/>
-
+        <div className="App">
+        <Header/>
 
         <h1>{ this.state.message }</h1>
         <button onClick={this.fetchData} >

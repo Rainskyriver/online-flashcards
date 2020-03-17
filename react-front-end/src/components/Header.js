@@ -87,10 +87,17 @@ const useStyles = makeStyles(theme => ({
 }));
 export default function Header(props) {
   const classes = useStyles();
-  const [inputvalue, setValue] = useState('')
-  const [tags, setTags] = useState([])
+  const [inputvalue, setValue] = useState('');
+  const [tags, setTags] = useState([]);
   const handleChange = (event) => {
     setValue(event.target.value);
+  }
+  const submitSearch = () => {
+  }
+  const keyEnter = (event) => {
+    if (event.key === 'Enter') {
+      this.submitSearch()
+    }
   }
   useEffect(() => {
     axios.get('/api/tags').then((res) => {
@@ -108,7 +115,7 @@ export default function Header(props) {
                 <Typography className={classes.title} variant="h6" noWrap>
                   Ofc
                 </Typography>
-
+                  <form action={`/search?${inputvalue}`} method="POST">
                     <Autocomplete
                       options={tags.map(tag => tag.name)}
                       renderInput={params => (
@@ -122,17 +129,8 @@ export default function Header(props) {
                         />
                       )}
                     />
-                       {/* <InputBase
-                          placeholder="Search…"
-                          classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                          }}
-                          inputProps={{ 'aria-label': 'search' }}
-                          onChange = {handleChange}
-                          value = {inputvalue}
-                      /> */}
-              <Link className={classes.link} to='/login'>Login</Link>
+                  </form>
+                 <Link className={classes.link} to='/login'>Login</Link>
               </Toolbar>
             </AppBar>
           </div>

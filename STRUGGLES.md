@@ -27,3 +27,4 @@ https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Examples#
 * Creating an Autocomplete search bar attatched to database tags
 https://material-ui.com/components/text-fields/
 https://material-ui.com/api/autocomplete/#autocomplete-api
+* Submitting a search on the form
