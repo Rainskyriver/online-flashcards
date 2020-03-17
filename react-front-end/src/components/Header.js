@@ -5,11 +5,13 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
+import Button from "@material-ui/core/Button";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import axios from "axios";
 import { fade, makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   root: {
+    color: "#fff",
     flexGrow: 1,
     "& .MuiTextField-root": {
       width: 200,
@@ -23,6 +25,10 @@ const useStyles = makeStyles(theme => ({
     },
     "& .MuiIconButton-root": {
       color: "#fff"
+    },
+    "& .MuiSvgIcon-root": {
+      color: "#fff",
+      padding: "10px"
     }
   },
   input: {
@@ -102,9 +108,6 @@ export default function Header(props) {
         console.log(err);
       });
   }, []);
-  useEffect(() => {
-    console.log(inputvalue);
-  });
   return (
     <nav className="header">
       <div className={classes.root}>
@@ -116,18 +119,21 @@ export default function Header(props) {
             <Typography className={classes.title} variant="h6" noWrap>
               Ofc
             </Typography>
-            <form action={`/search/${inputvalue.toLowerCase()}`} method="GET">
+            <form action={`/search/${inputvalue.toLowerCase()}`} method="POST">
               <Autocomplete
                 options={tags.map(tag => tag.name)}
                 renderInput={params => (
-                  <TextField
+                  <div>
+                    <Button type="submit"><SearchIcon /></Button>
+                    <TextField
                     {...params}
-                    label={<SearchIcon color={classes.root.primary} />}
+                    label="Search..."
                     onChange={handleChange}
                     value={inputvalue}
                     className={classes.inputRoot}
-                  />
-                )}
+                    />
+                  </div>
+                  )}
               />
             </form>
             <Link className={classes.link} to="/login">
