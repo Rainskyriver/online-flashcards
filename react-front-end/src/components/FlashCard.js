@@ -33,12 +33,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const footerStyles = makeStyles(() => ({
-  expand: {
-    marginLeft: "auto",
-  }
-}))
-
 export default function FlashCard(props) {
   const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
