@@ -20,6 +20,7 @@ body,
 }
 
 .c {
+  display: flex;
   position: absolute;
   max-width: 750px;
   max-height: 500px;
@@ -27,6 +28,8 @@ body,
   height: 20vw;
   cursor: pointer;
   will-change: transform, opacity;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .front,

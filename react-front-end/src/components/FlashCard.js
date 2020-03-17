@@ -12,6 +12,7 @@ import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +24,6 @@ const useStyles = makeStyles(theme => ({
   },
   expand: {
     transform: "rotate(0deg)",
-    marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     })
@@ -32,6 +32,12 @@ const useStyles = makeStyles(theme => ({
     transform: "rotate(180deg)"
   }
 }));
+
+const footerStyles = makeStyles(() => ({
+  expand: {
+    marginLeft: "auto",
+  }
+}))
 
 export default function FlashCard(props) {
   const [flipped, set] = useState(false);
@@ -72,7 +78,7 @@ export default function FlashCard(props) {
   // } = props;
 
   return (
-    <Card className={classes.root} onClick={handleFlip}>
+    <Card className="root" onClick={handleFlip}>
       <a.div
         className="c front"
         style={{
@@ -92,7 +98,7 @@ export default function FlashCard(props) {
           </Typography>
         </CardContent>
 
-        <CardActions disableSpacing>
+        <CardActions style={{justifyContent: "flex-end", marginTop: "auto"}} disableSpacing>
           <Typography
             align="right"
             variant="subtitle2"
@@ -114,7 +120,7 @@ export default function FlashCard(props) {
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
+          <CardContent style={{padding: 0}}>
             <Typography paragraph>
               HERE IS YOUR BLOODY HINT!!! Hopefully it helped, don't worry about
               the yelling!
@@ -142,9 +148,9 @@ export default function FlashCard(props) {
         </CardContent>
 
 
-        <CardActions disableSpacing>
-        <Typography
-            display="inline"
+        <CardActions style={{justifyContent: "flex-end", marginTop: "auto"}} disableSpacing>
+          <Typography
+            align="right"
             variant="subtitle2"
             component="p"
           >
@@ -164,7 +170,7 @@ export default function FlashCard(props) {
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
+          <CardContent style={{padding: 0}}>
             <Typography paragraph>
               HERE IS A RESOURCE FOR THIS ANSWER!!! www.somethinghelpful.com
             </Typography>
