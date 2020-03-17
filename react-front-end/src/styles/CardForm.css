@@ -21,10 +21,10 @@ body,
 
 .c {
   position: absolute;
-  max-width: 750px;
-  max-height: 500px;
-  width: 30vw;
-  height: 20vw;
+  max-width: 400px;
+  max-height: 300px;
+  width: inherit;
+  height: inherit;
   will-change: transform, opacity;
 }
 
@@ -35,13 +35,4 @@ body,
   border-style: solid;
   border-width: .5em;
   border-color: black;
-}
-
-.front {
-  background-color: lightpink;
-
-}
-
-.back {
-  background-color: lightgreen;
 }

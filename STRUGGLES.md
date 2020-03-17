@@ -28,3 +28,10 @@ https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Examples#
 https://material-ui.com/components/text-fields/
 https://material-ui.com/api/autocomplete/#autocomplete-api
 * Submitting a search on the form
+
+* Setting z-index styles on the flipped card/form
+https://codeburst.io/4-four-ways-to-style-react-components-ac6f323da822
+
+### 17/03/20
+* Overiding Material-ui css
+https://material-ui.com/customization/components/

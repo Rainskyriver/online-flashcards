@@ -31,7 +31,7 @@ export default function CardForm() {
     config: { mass: 5, tension: 500, friction: 80 }
   });
 
-  const handleFlip = event => {
+  const handleFlip = () => {
     set(state => !state);
   };
   const handleZIndex = () => {
@@ -143,9 +143,10 @@ export default function CardForm() {
                     </Grid>
                   </Grid>
                 </Paper>
-                <pre>{JSON.stringify(values, 0, 2)}</pre>
+                {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
               </form>
             </a.div>
+            
           </div>
         )}
       />
