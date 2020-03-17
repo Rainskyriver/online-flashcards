@@ -14,6 +14,8 @@ import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 
+import CardForm from "./CardForm";
+
 const useStyles = makeStyles(theme => ({
   root: {
     maxWidth: 345
@@ -34,6 +36,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function FlashCard(props) {
+  const { question, image, hint, answer, resources, isFlipped } = props;
+
+  console.log("here are props:", props);
+
   const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -63,16 +69,9 @@ export default function FlashCard(props) {
     }
   };
 
-  // const {
-  //   question,
-  //   image,
-  //   hint,
-  //   answer,
-  //   resources
-  // } = props;
-
   return (
     <Card className="root" onClick={handleFlip}>
+      {isFlipped}
       <a.div
         className="c front"
         style={{
@@ -88,7 +87,7 @@ export default function FlashCard(props) {
             align="center"
             component="p"
           >
-            QUESTION?!
+            {question}
           </Typography>
         </CardContent>
 
@@ -114,10 +113,7 @@ export default function FlashCard(props) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent style={{ padding: 0 }}>
-            <Typography paragraph>
-              HERE IS YOUR BLOODY HINT!!! Hopefully it helped, don't worry about
-              the yelling!
-            </Typography>
+            <Typography paragraph>{hint}</Typography>
           </CardContent>
         </Collapse>
       </a.div>
@@ -136,7 +132,7 @@ export default function FlashCard(props) {
             align="center"
             component="p"
           >
-            ANSWER!
+            {answer}
           </Typography>
         </CardContent>
 
@@ -162,9 +158,7 @@ export default function FlashCard(props) {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent style={{ padding: 0 }}>
-            <Typography paragraph>
-              HERE IS A RESOURCE FOR THIS ANSWER!!! www.somethinghelpful.com
-            </Typography>
+            <Typography paragraph>{resources}</Typography>
           </CardContent>
         </Collapse>
       </a.div>

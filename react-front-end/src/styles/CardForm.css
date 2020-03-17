@@ -19,17 +19,16 @@ body,
   flex-direction: column;
 }
 
-.c {
+.f {
   position: absolute;
   max-width: 400px;
-  max-height: 300px;
   width: inherit;
   height: inherit;
   will-change: transform, opacity;
 }
 
-.front,
-.back {
+.fr,
+.ba {
   background-size: cover;
   border-radius: 15px;
   border-style: solid;
