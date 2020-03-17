@@ -34,9 +34,16 @@ export default function CardForm() {
   const handleFlip = event => {
     set(state => !state);
   };
+  const handleZIndex = () => {
+    if (flipped) {
+      return 0;
+    } else {
+      return 1;
+    }
+  };
 
   return (
-    <div style={{ padding: 16, margin: "auto", maxWidth: 600 }}>
+    <div style={{ padding: 16, maxWidth: 750 }}>
       <CssBaseline />
 
       <Form
@@ -46,7 +53,7 @@ export default function CardForm() {
           <div>
             <a.div
               className="c front"
-              style={{ opacity: opacity.interpolate(o => 1 - o), transform }}
+              style={{ zIndex: `${handleZIndex()}`, opacity: opacity.interpolate(o => 1 - o), transform }}
             >
               <form onSubmit={handleSubmit} noValidate>
                 <Paper style={{ padding: 16 }}>
