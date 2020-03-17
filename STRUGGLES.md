@@ -24,3 +24,7 @@ https://codesandbox.io/s/create-react-app-mnfj2
 https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Examples#Example_5:_Event_Propagation
 
 ### 16/03/20
+* Creating an Autocomplete search bar attatched to database tags
+https://material-ui.com/components/text-fields/
+https://material-ui.com/api/autocomplete/#autocomplete-api
+* Submitting a search on the form

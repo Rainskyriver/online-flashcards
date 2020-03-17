@@ -53,9 +53,19 @@ export default function FlashCard(props) {
     setExpanded(!expanded);
   };
 
-  const handleFlip = (event) => {
+  const handleFlip = () => {
     set(state => !state)
+    if (expanded) {
+      setExpanded(!expanded);
+    }
   }
+  const handleZIndex = () => {
+    if (flipped) {
+      return 0;
+    } else {
+      return 1;
+    }
+  };
 
 
 
@@ -70,7 +80,7 @@ export default function FlashCard(props) {
 
   return (
     <Card className={classes.root} onClick={handleFlip}>
-      <a.div className="c front" style={{ opacity: opacity.interpolate(o => 1 - o), transform }}>
+      <a.div className="c front" style={{ zIndex: `${handleZIndex()}`, opacity: opacity.interpolate(o => 1 - o), transform }}>
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             QUESTION?!
