@@ -12,8 +12,9 @@ import Collapse from "@material-ui/core/Collapse";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Autocomplete from "@material-ui/lab/Autocomplete";
 
-
+import CardForm from "./CardForm";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -25,7 +26,6 @@ const useStyles = makeStyles(theme => ({
   },
   expand: {
     transform: "rotate(0deg)",
-    marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     })
@@ -37,6 +37,9 @@ const useStyles = makeStyles(theme => ({
 
 const FlashCard = forwardRef((props, ref) => {
   const [flipped, set] = useState(false)
+  const { question, image, hint, answer, resources } = props;
+
+  console.log("here are props:", props);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
@@ -46,23 +49,29 @@ const FlashCard = forwardRef((props, ref) => {
 
     getAlert() {
       alert("getAlert from Child");
+    },
+    handleFlip() {
+      set(state => !state);
+      if (expanded) {
+        setExpanded(!expanded);
+      }
     }
 
   }));
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = (event) => {
+  const handleExpandClick = event => {
     event.stopPropagation();
     setExpanded(!expanded);
   };
 
   const handleFlip = () => {
-    set(state => !state)
+    set(state => !state);
     if (expanded) {
       setExpanded(!expanded);
     }
-  }
+  };
   const handleZIndex = () => {
     if (flipped) {
       return 0;
@@ -71,28 +80,34 @@ const FlashCard = forwardRef((props, ref) => {
     }
   };
 
-
-
-  // const { 
-  //   question,
-  //   image,
-  //   hint,
-  //   answer,
-  //   resources
-  // } = props;
-
-
   return (
-    <Card className={classes.root} onClick={handleFlip}>
-      <a.div className="c front" style={{ zIndex: `${handleZIndex()}`, opacity: opacity.interpolate(o => 1 - o), transform }}>
+    <Card className="root" onClick={handleFlip}>
+      <a.div
+        className="c front"
+        style={{
+          zIndex: `${handleZIndex()}`,
+          opacity: opacity.interpolate(o => 1 - o),
+          transform
+        }}
+      >
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            QUESTION?!
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            align="center"
+            component="p"
+          >
+            {question}
           </Typography>
         </CardContent>
-        Hint
 
-        <CardActions disableSpacing>
+        <CardActions
+          style={{ justifyContent: "flex-end", marginTop: "auto" }}
+          disableSpacing
+        >
+          <Typography align="right" variant="subtitle2" component="p">
+            Hint
+          </Typography>
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded
@@ -100,32 +115,44 @@ const FlashCard = forwardRef((props, ref) => {
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
+            edge="end"
+            display="inline"
           >
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
-
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            
-            <Typography paragraph>Hint:</Typography>
-
-            <Typography paragraph>
-              HERE IS YOUR BLOODY HINT!!!
-              Hopefully it helped, don't worry about the yelling!
-            </Typography>
+          <CardContent style={{ padding: 0 }}>
+            <Typography paragraph>{hint}</Typography>
           </CardContent>
         </Collapse>
       </a.div>
 
-      <a.div className="c back" style={{ opacity, transform: transform.interpolate(t => `${t} rotateX(180deg)`) }}>
+      <a.div
+        className="c back"
+        style={{
+          opacity,
+          transform: transform.interpolate(t => `${t} rotateX(180deg)`)
+        }}
+      >
         <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            ANSWER!
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            align="center"
+            component="p"
+          >
+            {answer}
           </Typography>
         </CardContent>
 
-        <CardActions disableSpacing>
+        <CardActions
+          style={{ justifyContent: "flex-end", marginTop: "auto" }}
+          disableSpacing
+        >
+          <Typography align="right" variant="subtitle2" component="p">
+            Resource
+          </Typography>
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded
@@ -133,20 +160,15 @@ const FlashCard = forwardRef((props, ref) => {
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
+            edge="end"
+            display="inline"
           >
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
-
-        Resource:
-
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>Resource:</Typography>
-            <Typography paragraph>
-              HERE IS A RESOURCE FOR THIS ANSWER!!!
-              www.somethinghelpful.com
-            </Typography>
+          <CardContent style={{ padding: 0 }}>
+            <Typography paragraph>{resources}</Typography>
           </CardContent>
         </Collapse>
       </a.div>

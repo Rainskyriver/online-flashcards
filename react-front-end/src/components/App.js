@@ -5,7 +5,7 @@ import FlashCard from "./FlashCard";
 import Header from "./Header";
 import Search from "./Search";
 import TestComponent from './TestComponent'
-// import CardForm from './CardForm'
+import CardForm from './CardForm'
 
 export default function App() {
   return (
@@ -17,7 +17,7 @@ export default function App() {
             <Search />
           </Route>
           <Route exact path="/">
-            <TestComponent/>
+            <CardForm/>
           </Route>
         </Switch>
         {/* <CardForm /> */}
