@@ -35,6 +35,29 @@ App.use('/api/tags', tagsRoutes(db));
 App.use('/api/deck_tags', decktagsRoutes(db))
 
 // GET Routes
+App.get('/api/search/:tag', (req, res) => {
+  const tag = req.params.tag;
+  
+  db.query(`
+  SELECT * FROM decks
+  WHERE id=(
+    SELECT deck_id FROM deck_tags
+    WHERE tag_id=(
+      SELECT id FROM tags
+      WHERE name LIKE '${tag}'
+    )
+  )
+  OR name LIKE '%${tag}%'
+  OR user_id=(
+    SELECT id FROM users
+    WHERE name LIKE '%${tag}%'
+  )
+    `).then((result) => {
+    res.send(result.rows)
+  }).catch((e) => 
+  console.log(e));
+});
+
 App.get('/users/:id', (req, res) =>
   res.send('hello1')
 );

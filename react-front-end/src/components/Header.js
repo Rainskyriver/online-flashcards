@@ -119,7 +119,7 @@ export default function Header(props) {
             <Typography className={classes.title} variant="h6" noWrap>
               Ofc
             </Typography>
-            <form action={`/search/${inputvalue.toLowerCase()}`} method="POST">
+            <form action={`/search/${inputvalue.toLowerCase()}`} method="GET">
               <Autocomplete
                 options={tags.map(tag => tag.name)}
                 renderInput={params => (
