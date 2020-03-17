@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../styles/App.css';
-// import FlashCard from './FlashCard'
-import CardForm from './CardForm'
+import FlashCard from './FlashCard'
+// import CardForm from './CardForm'
 
 class App extends Component {
   constructor(props) {
@@ -33,8 +33,8 @@ class App extends Component {
           Fetch Data
         </button>   
         
-        {/* <FlashCard /> */}
-        <CardForm />
+        <FlashCard />
+        {/* <CardForm /> */}
 
       </div>
     );
