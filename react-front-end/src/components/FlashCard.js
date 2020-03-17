@@ -68,6 +68,7 @@ export default function FlashCard(props) {
   };
 
 
+
   // const { 
   //   question,
   //   image,
@@ -85,6 +86,7 @@ export default function FlashCard(props) {
             QUESTION?!
           </Typography>
         </CardContent>
+        Hint
 
         <CardActions disableSpacing>
           <IconButton
@@ -95,14 +97,15 @@ export default function FlashCard(props) {
             aria-expanded={expanded}
             aria-label="show more"
           >
-            Hint
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
 
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
+            
             <Typography paragraph>Hint:</Typography>
+
             <Typography paragraph>
               HERE IS YOUR BLOODY HINT!!!
               Hopefully it helped, don't worry about the yelling!

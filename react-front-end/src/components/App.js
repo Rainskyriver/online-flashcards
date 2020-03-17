@@ -6,6 +6,7 @@ import axios from 'axios';
 import '../styles/App.css';
 import FlashCard from './FlashCard';
 import Header from './Header';
+// import CardForm from './CardForm'
 
 class App extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class App extends Component {
         </button>   
         
         <FlashCard />
+        {/* <CardForm /> */}
 
       </div>
       </Router>
