@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import Login from './Login';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -136,9 +137,7 @@ export default function Header(props) {
                   )}
               />
             </form>
-            <Link className={classes.link} to="/login">
-              Login
-            </Link>
+            <Login />
           </Toolbar>
         </AppBar>
       </div>

@@ -35,6 +35,7 @@ App.use('/api/tags', tagsRoutes(db));
 App.use('/api/deck_tags', decktagsRoutes(db))
 
 // GET Routes
+//Search Api
 App.get('/api/search/:tag', (req, res) => {
   const tag = req.params.tag;
   

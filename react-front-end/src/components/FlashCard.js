@@ -1,5 +1,5 @@
 // import { render } from 'react-dom'
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 import { useSpring, animated as a }from 'react-spring';
 import '../styles/FlashCard.css';
 
@@ -35,16 +35,20 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-
-export default function FlashCard(props) {
+const FlashCard = forwardRef((props, ref) => {
   const [flipped, set] = useState(false)
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
     config: { mass: 5, tension: 500, friction: 80 }
   })
+  useImperativeHandle(ref, () => ({
 
+    getAlert() {
+      alert("getAlert from Child");
+    }
+
+  }));
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -148,4 +152,6 @@ export default function FlashCard(props) {
       </a.div>
     </Card>
   )
-}
+});
+
+export default FlashCard

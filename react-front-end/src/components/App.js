@@ -4,6 +4,7 @@ import "../styles/App.css";
 import FlashCard from "./FlashCard";
 import Header from "./Header";
 import Search from "./Search";
+import TestComponent from './TestComponent'
 // import CardForm from './CardForm'
 
 export default function App() {
@@ -16,7 +17,7 @@ export default function App() {
             <Search />
           </Route>
           <Route exact path="/">
-            <FlashCard />
+            <TestComponent/>
           </Route>
         </Switch>
         {/* <CardForm /> */}
