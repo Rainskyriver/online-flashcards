@@ -92,12 +92,11 @@ export default function FlashCard(props) {
           </Typography>
         </CardContent>
 
-        <CardActions style={{justifyContent: "flex-end", marginTop: "auto"}} disableSpacing>
-          <Typography
-            align="right"
-            variant="subtitle2"
-            component="p"
-          >
+        <CardActions
+          style={{ justifyContent: "flex-end", marginTop: "auto" }}
+          disableSpacing
+        >
+          <Typography align="right" variant="subtitle2" component="p">
             Hint
           </Typography>
           <IconButton
@@ -114,7 +113,7 @@ export default function FlashCard(props) {
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent style={{padding: 0}}>
+          <CardContent style={{ padding: 0 }}>
             <Typography paragraph>
               HERE IS YOUR BLOODY HINT!!! Hopefully it helped, don't worry about
               the yelling!
@@ -141,13 +140,11 @@ export default function FlashCard(props) {
           </Typography>
         </CardContent>
 
-
-        <CardActions style={{justifyContent: "flex-end", marginTop: "auto"}} disableSpacing>
-          <Typography
-            align="right"
-            variant="subtitle2"
-            component="p"
-          >
+        <CardActions
+          style={{ justifyContent: "flex-end", marginTop: "auto" }}
+          disableSpacing
+        >
+          <Typography align="right" variant="subtitle2" component="p">
             Resource
           </Typography>
           <IconButton
@@ -164,7 +161,7 @@ export default function FlashCard(props) {
           </IconButton>
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent style={{padding: 0}}>
+          <CardContent style={{ padding: 0 }}>
             <Typography paragraph>
               HERE IS A RESOURCE FOR THIS ANSWER!!! www.somethinghelpful.com
             </Typography>

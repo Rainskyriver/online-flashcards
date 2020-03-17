@@ -53,7 +53,11 @@ export default function CardForm() {
           <div>
             <a.div
               className="c front"
-              style={{ zIndex: `${handleZIndex()}`, opacity: opacity.interpolate(o => 1 - o), transform }}
+              style={{
+                zIndex: `${handleZIndex()}`,
+                opacity: opacity.interpolate(o => 1 - o),
+                transform
+              }}
             >
               <form onSubmit={handleSubmit} noValidate>
                 <Paper style={{ padding: 16 }}>
@@ -146,7 +150,6 @@ export default function CardForm() {
                 {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
               </form>
             </a.div>
-            
           </div>
         )}
       />
