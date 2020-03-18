@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from '@material-ui/core'
-import FlashCard from './FlashCard'
+import FlashCard from '../FlashCard'
 
 export default function Root() {
 

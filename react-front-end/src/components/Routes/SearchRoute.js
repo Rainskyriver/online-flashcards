@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import Deck from './Deck';
+import Deck from '../Deck';
 import axios from 'axios';
 
 export default function Search() {
@@ -12,6 +12,7 @@ export default function Search() {
     })
   }, [])
   const decks = search.map((result) => {
+    console.log(result);
     let id = 0
     return (
       <div style={{padding: '50px'}} key={result.id}>
