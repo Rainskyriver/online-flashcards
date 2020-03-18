@@ -3,6 +3,7 @@ const App = Express();
 const BodyParser = require('body-parser');
 const PORT = 9001;
 require('dotenv').config();
+const cookie = require('cookie-session');
 
 //Database setup
 const pg = require('pg');
@@ -13,6 +14,10 @@ db.connect();
 // Middleware
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(Express.static('public'));
+App.use(cookie({
+  name:'session',
+  keys: ['key1']
+}));
 
 
 //Api Routes
@@ -59,6 +64,16 @@ App.get('/api/search/:tag', (req, res) => {
   }).catch((e) => 
   console.log(e));
 });
+
+App.post('/api/login', (req, res) => {
+  req.session.userID = 3;
+  res.redirect(`/users/${req.session.userID}`)
+})
+
+App.post('/api/logout', (req, res) => {
+  req.session.userID = 3;
+  res.redirect(`/`)
+})
 
 App.get('/users/:id', (req, res) =>
   res.send('hello1')

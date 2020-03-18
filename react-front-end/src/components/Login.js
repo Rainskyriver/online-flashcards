@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import {Button} from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import Modal from 'react-modal';
+import axios from 'axios'
 
 const customStyles = {
   content : {
@@ -10,7 +11,8 @@ const customStyles = {
     bottom                : 'auto',
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)',
-    zIndex                : '2'
+    overlay:{zIndex       : '10'},
+    borderRadius          : '10px',
   }
 };
 
@@ -22,23 +24,31 @@ export default function Login(props) {
   const closeModal = () => {
     setIsOpen(false);
   } 
+  const handleLogin = (e) => {
+    e.preventDefault()
+    axios.post('/api/login', {
+
+    })
+  }
   return (
-    <div>
-      <Button onClick={openModal} >Login</Button>
+    <div style={{zIndex: 5}}>
+      <Button variant={'contained'} onClick={openModal} >Login</Button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={customStyles}
+        ariaHideApp={false}
       >
-        <h2>Hello</h2>
-          <button onClick={closeModal}>close</button>
-          <div>I am a modal</div>
-          <form>
-            <input />
-            <button>tab navigation</button>
-            <button>stays</button>
-            <button>inside</button>
-            <button>the modal</button>
+        <h2>Please Login</h2>
+          <Button onClick={closeModal}>X</Button>
+          <form action="/api/login" method="POST">
+            <TextField
+            label="Username" 
+            />
+            <TextField
+            label="Password"
+            />
+            <Button type="submit">Login</Button>
           </form>
       </Modal>
     </div>

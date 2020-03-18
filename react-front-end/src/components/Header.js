@@ -29,7 +29,8 @@ const useStyles = makeStyles(theme => ({
     },
     "& .MuiSvgIcon-root": {
       color: "#fff",
-      padding: "10px"
+      padding: "10px",
+      'font-size': '50px'
     }
   },
   input: {
