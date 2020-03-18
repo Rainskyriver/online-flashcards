@@ -4,9 +4,10 @@ import "../styles/App.css";
 import FlashCard from "./FlashCard";
 import Header from "./Header";
 import Search from "./Search";
-import TestComponent from './TestComponent'
-import CardForm from './CardForm'
+import TestComponent from './TestComponent';
+import CardForm from "./CardForm";
 import DeckForm from "./DeckForm";
+import Empty from "./Empty";
 
 export default function App() {
   return (
@@ -19,7 +20,8 @@ export default function App() {
           </Route>
           <Route exact path="/">
             {/* <CardForm/> */}
-            <DeckForm />
+            {/* <DeckForm /> */}
+            <Empty />
           </Route>
         </Switch>
         {/* <CardForm /> */}
