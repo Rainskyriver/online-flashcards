@@ -1,14 +1,16 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "../styles/App.css";
+// import "../styles/App.css";
 import FlashCard from "./FlashCard";
 import Header from "./Header";
 import Search from "./SearchRoute";
 import CardForm from './CardForm'
 import Users from './UsersRoute'
-import Decks from './DecksRoute';
+import EditDeck from './EditDeckRoute';
+import NewDeck from './NewDeckRoute'
 import Study from './StudyRoute';
 import DeckForm from "./DeckForm";
+import Root from "./Root"
 
 export default function App() {
   return (
@@ -19,27 +21,31 @@ export default function App() {
           <Route path={'/users/:id'}>
             <Users/>
           </Route>
+          <Route path={'/study/:id/'}>
+            <Study/>
+          </Route>
+          <Route path={'/study/:id/original'}>
+
+          </Route>
           <Route path={'/study/:id/test'}>
 
           </Route>
           <Route path={'/study/:id/match'}>
 
           </Route>
-          <Route path={'/study/:id/original'}>
-
+          <Route path={'/decks/:id/edit'}>
+            <EditDeck/>
           </Route>
-          <Route path={'/decks/:id'}>
-
+          <Route path={'/decks/:id/new'}>
+            <NewDeck/>
           </Route>
           <Route path={'/search/:tag'}>
             <Search />
           </Route>
           <Route exact path="/">
-            {/* <CardForm/> */}
-            <DeckForm />
+            <Root/>
           </Route>
         </Switch>
-        {/* <CardForm /> */}
       </div>
     </Router>
   );
