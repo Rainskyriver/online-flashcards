@@ -23,6 +23,9 @@
 }
 
 .game-test {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .game-memory-match {
