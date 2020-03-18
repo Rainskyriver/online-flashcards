@@ -97,18 +97,13 @@ export default function Header(props) {
   const classes = useStyles();
   const [inputvalue, setValue] = useState("");
   const [tags, setTags] = useState([]);
+  const [login, setLogin] = useState(false);
   const handleChange = event => {
     setValue(event.target.value);
   };
   useEffect(() => {
-    axios
-      .get("/api/tags")
-      .then(res => {
-        setTags(res.data.tags);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    //Get Tags
+    axios.get("/api/tags").then(res => {setTags(res.data.tags);}).catch(err => {console.log(err);});
   }, []); 
   return (
     <nav className="header">
@@ -138,7 +133,7 @@ export default function Header(props) {
                   )}
               />
             </form>
-            <Login />
+            <Login login={login} setLogin={setLogin}/>
           </Toolbar>
         </AppBar>
       </div>

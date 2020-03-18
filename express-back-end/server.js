@@ -75,7 +75,7 @@ App.post('/api/logout', (req, res) => {
   res.redirect(`/`)
 })
 
-App.get('/users/:id', (req, res) =>
+App.get('/api/users/:id', (req, res) =>
   res.send('hello1')
 );
 

@@ -23,15 +23,16 @@ export default function Login(props) {
   }
   const closeModal = () => {
     setIsOpen(false);
-  } 
-  const handleLogin = (e) => {
-    e.preventDefault()
-    axios.post('/api/login', {
-
-    })
+  }
+  const handleLogin = () => {
+    props.setLogin(true);
+  }
+  const handleLogout = () => {
+    props.setLogin(false);
   }
   return (
     <div style={{zIndex: 5}}>
+
       <Button variant={'contained'} onClick={openModal} >Login</Button>
       <Modal
         isOpen={modalIsOpen}
