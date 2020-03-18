@@ -19,13 +19,16 @@ export default function App() {
           <Route path={'/users/:id'}>
             <Users/>
           </Route>
+          <Route path={'/study/:id/'}>
+            <Study/>
+          </Route>
+          <Route path={'/study/:id/original'}>
+
+          </Route>
           <Route path={'/study/:id/test'}>
 
           </Route>
           <Route path={'/study/:id/match'}>
-
-          </Route>
-          <Route path={'/study/:id/original'}>
 
           </Route>
           <Route path={'/decks/:id'}>

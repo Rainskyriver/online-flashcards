@@ -9,13 +9,15 @@ export default function Search() {
   useEffect(() => {
     axios.get(`/api/search/${tag}`).then((res) => {
       setSearch(res.data)
-      console.log(search);
     })
   }, [])
-  console.log(search)
   const decks = search.map((result) => {
+    let id = 0
     return (
-      <Deck key={result.id} title={result.name} description={result.description}/>
+      <div style={{padding: '50px'}} key={result.id}>
+        <Deck  title={result.name} description={result.description} id={id} deck_id={result.id}/>
+        {id++}
+      </div>
     )
   })
   return (

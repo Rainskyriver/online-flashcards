@@ -50,14 +50,14 @@ App.get('/api/search/:tag', (req, res) => {
     SELECT deck_id FROM deck_tags
     WHERE tag_id=(
       SELECT id FROM tags
-      WHERE name LIKE '${tag}'
+      WHERE LOWER(name) LIKE '${tag}'
     )
   )
-  OR name LIKE '%${tag}%'
+  OR LOWER(name) LIKE '%${tag}%'
   OR description LIKE '%${tag}%'
   OR user_id=(
     SELECT id FROM users
-    WHERE name LIKE '%${tag}%'
+    WHERE LOWER(name) LIKE '%${tag}%'
   )
     `).then((result) => {
     res.send(result.rows)
@@ -65,16 +65,65 @@ App.get('/api/search/:tag', (req, res) => {
   console.log(e));
 });
 
+//Login/Logout API
 App.post('/api/login', (req, res) => {
   req.session.userID = 3;
   res.redirect(`/users/${req.session.userID}`)
 })
-
 App.post('/api/logout', (req, res) => {
   req.session.userID = 3;
   res.redirect(`/`)
 })
 
+//Study API
+App.get('/api/study/:id', (req, res) => {
+  const id = req.params.id
+  let data = {};
+  db.query(`
+  SELECT name FROM tags
+  WHERE id IN (SELECT tag_id FROM deck_tags
+    WHERE deck_id=${id})
+  `).then((result) => {
+    data.tags = (result.rows);
+    db.query(`
+    SELECT * FROM decks
+    WHERE id=${id}
+    `).then((result) => {
+      data.deck = (result.rows[0]);
+      res.send(data);
+    })
+  }).catch((e) => {
+    console.error(e);
+  })
+})
+
+//Decks API
+App.get('/api/decks/:id', (req, res) => {
+  const id = req.params.id
+  let data = {};
+  db.query(`
+  SELECT name FROM tags
+  WHERE id IN (SELECT tag_id FROM deck_tags
+    WHERE deck_id=${id})
+  `).then((result) => {
+    data.tags = (result.rows);
+    db.query(`
+    SELECT * FROM decks
+    WHERE id=${id}
+    `).then((result) => {
+      data.deck = (result.rows[0]);
+      db.query(`
+      SELECT * FROM cards
+      WHERE deck_id=${id}
+      `).then((result) => {
+        data.cards = (result.rows)
+        res.send(data);
+      })
+    })
+  }).catch((e) => {
+    console.error(e);
+  })
+})
 App.get('/api/users/:id', (req, res) =>
   res.send('hello1')
 );
