@@ -8,7 +8,7 @@ import TestComponent from './TestComponent';
 import CardForm from "./CardForm";
 import DeckForm from "./DeckForm";
 import Empty from "./Empty";
-import StudyDeckGame from "./StudyDeckGame";
+import StudyDeckGame from "./StudyDeck/StudyDeckGame";
 
 export default function App() {
   return (
