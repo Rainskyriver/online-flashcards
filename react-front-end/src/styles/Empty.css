@@ -1,0 +1,17 @@
+.cover {
+  display: flex;
+  position: absolute;
+  max-width: 500px;
+  max-height: 300px;
+  width: 40vw;
+  height: 30vh;
+  justify-content: center;
+  flex-direction: row;
+  box-sizing: inherit;
+  border-radius: 15px;
+  border-style: solid;
+  border-width: .5em;
+  border-color: black;
+  background-color: paleturquoise;
+  cursor: pointer; 
+}

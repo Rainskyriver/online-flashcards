@@ -43,6 +43,8 @@ export default function App() {
             <Search />
           </Route>
           <Route exact path="/">
+
+            <Empty />
             <Root/>
           </Route>
         </Switch>
