@@ -1,0 +1,36 @@
+.cover {
+  display: flex;
+  position: absolute;
+  max-width: 750px;
+  max-height: 500px;
+  width: 40vw;
+  height: 30vh;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: inherit;
+  border-radius: 15px;
+  border-style: solid;
+  border-width: .5em;
+  border-color: black;
+  background-color: paleturquoise;
+}
+
+.new-deck {
+  display: flex;
+  justify-content: space-between;
+  background-color: lightyellow;
+  border-style: dashed;
+  padding: 16px;
+  width: 100vw;
+}
+
+.deck-display {
+  align-self: flex-start;
+}
+
+.deck-form {
+  align-self: flex-end;
+}
+
+
+
