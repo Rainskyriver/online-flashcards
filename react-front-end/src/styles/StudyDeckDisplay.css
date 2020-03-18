@@ -1,0 +1,23 @@
+.deck-display {
+  display: flex;
+  width: 100vw;
+  height: 40vh;
+  background-color: orange
+}
+
+.left-display {
+  width: 50vw;
+  margin-left: 5vw;
+}
+
+.right-display {
+  width: 50vw;
+  margin-right: 5vw;
+}
+
+.deck-image {
+  border-radius: 8px;
+  width: 280px;
+  height: 280px;
+  align-self: flex-start;
+}
