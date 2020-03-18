@@ -8,7 +8,7 @@ import TestComponent from './TestComponent';
 import CardForm from "./CardForm";
 import DeckForm from "./DeckForm";
 import Empty from "./Empty";
-import StudyDeckGame from "./StudyDeck/StudyDeckGame";
+import StudyIndex from "./StudyDeck/StudyIndex";
 
 export default function App() {
   return (
@@ -23,7 +23,7 @@ export default function App() {
             {/* <CardForm/> */}
             {/* <DeckForm /> */}
             {/* <Empty /> */}
-            <StudyDeckGame />
+            <StudyIndex />
           </Route>
         </Switch>
         {/* <CardForm /> */}
