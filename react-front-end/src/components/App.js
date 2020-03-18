@@ -8,6 +8,7 @@ import TestComponent from './TestComponent';
 import CardForm from "./CardForm";
 import DeckForm from "./DeckForm";
 import Empty from "./Empty";
+import StudyDeckGame from "./StudyDeckGame";
 
 export default function App() {
   return (
@@ -21,7 +22,8 @@ export default function App() {
           <Route exact path="/">
             {/* <CardForm/> */}
             {/* <DeckForm /> */}
-            <Empty />
+            {/* <Empty /> */}
+            <StudyDeckGame />
           </Route>
         </Switch>
         {/* <CardForm /> */}

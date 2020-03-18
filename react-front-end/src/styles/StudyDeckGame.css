@@ -1,0 +1,39 @@
+.game-display {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 60vh;
+  background-color: palevioletred;
+}
+
+.game-info {
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  width: 95vw;
+  height: 53vh;
+  margin-left: 2.5vw;
+  margin-right: 2.5vw;
+  margin-bottom: 2.5vh;
+}
+
+.game-flash-cards {
+  display: flex;
+  flex-direction: row;
+}
+
+.game-test {
+}
+
+.game-memory-match {
+}
+
+.game-left-display {
+  width: 45vw;
+  margin-left: 2.5vw;
+}
+
+.game-right-display {
+  width: 45vw;
+  margin-left: 2.5vw;
+}
