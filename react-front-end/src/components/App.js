@@ -1,16 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // import "../styles/App.css";
-import FlashCard from "./FlashCard";
 import Header from "./Header";
-import Search from "./SearchRoute";
-import CardForm from './CardForm'
-import Users from './UsersRoute'
-import EditDeck from './EditDeckRoute';
-import NewDeck from './NewDeckRoute'
-import Study from './StudyRoute';
-import DeckForm from "./DeckForm";
-import Root from "./Root"
+import Search from "./Routes/SearchRoute";
+import Users from './Routes/UsersRoute'
+import EditDeck from './Routes/EditDeckRoute';
+import NewDeck from './Routes/NewDeckRoute'
+import Study from './Routes/StudyRoute';
+import Root from "./Routes/Root"
 
 export default function App() {
   return (
@@ -36,7 +33,7 @@ export default function App() {
           <Route path={'/decks/:id/edit'}>
             <EditDeck/>
           </Route>
-          <Route path={'/decks/:id/new'}>
+          <Route path={'/decks/new'}>
             <NewDeck/>
           </Route>
           <Route path={'/search/:tag'}>

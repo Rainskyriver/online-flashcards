@@ -71,7 +71,7 @@ App.post('/api/login', (req, res) => {
   res.redirect(`/users/${req.session.userID}`)
 })
 App.post('/api/logout', (req, res) => {
-  req.session.userID = 3;
+  req.session.userID = null;
   res.redirect(`/`)
 })
 
@@ -124,6 +124,7 @@ App.get('/api/decks/:id/edit', (req, res) => {
     console.error(e);
   })
 })
+
 App.get('/api/users/:id', (req, res) =>
   res.send('hello1')
 );

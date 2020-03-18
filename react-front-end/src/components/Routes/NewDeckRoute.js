@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from '@material-ui/core'
 import axios from "axios";
-import DeckForm from './DeckForm'
+import DeckForm from '../DeckForm'
 
 export default function EditDeck() {
   const saveDeck = () => {};
