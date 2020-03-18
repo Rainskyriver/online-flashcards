@@ -35,8 +35,6 @@ const useStyles = makeStyles(theme => ({
 const FlashCard = forwardRef((props, ref) => {
   const [flipped, set] = useState(false)
   const { question, image, hint, answer, resources } = props;
-
-  console.log("here are props:", props);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
@@ -165,7 +163,7 @@ const FlashCard = forwardRef((props, ref) => {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent style={{ padding: 0 }}>
-            <Typography paragraph>{resources}</Typography>
+          Link to:<a href={resources}> {resources}</a>
           </CardContent>
         </Collapse>
       </a.div>
