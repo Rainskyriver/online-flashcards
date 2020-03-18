@@ -32,7 +32,6 @@ export default function Deck(props) {
 
           <CardActions style={{ marginTop: "auto" }} disableSpacing>
             <Typography
-              multiline
               align="right"
               variant="subtitle2"
               component="p"
@@ -47,7 +46,6 @@ export default function Deck(props) {
             disableSpacing
           >
             <Typography
-              multiline
               align="right"
               variant="subtitle2"
               component="p"
