@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "../styles/App.css";
+// import "../styles/App.css";
 import FlashCard from "./FlashCard";
 import Header from "./Header";
 import Search from "./SearchRoute";
@@ -10,6 +10,7 @@ import EditDeck from './EditDeckRoute';
 import NewDeck from './NewDeckRoute'
 import Study from './StudyRoute';
 import DeckForm from "./DeckForm";
+import Root from "./Root"
 
 export default function App() {
   return (
@@ -42,11 +43,9 @@ export default function App() {
             <Search />
           </Route>
           <Route exact path="/">
-            {/* <CardForm/> */}
-            <DeckForm />
+            <Root/>
           </Route>
         </Switch>
-        {/* <CardForm /> */}
       </div>
     </Router>
   );
