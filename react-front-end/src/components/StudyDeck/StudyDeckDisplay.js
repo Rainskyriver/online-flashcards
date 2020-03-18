@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/StudyDeckDisplay.css";
+import "../../styles/StudyDeckDisplay.css";
 
 export default function StudyDeckDisplay(props) {
   const { title, image, numOfCards, description, tags } = props;
