@@ -98,7 +98,7 @@ App.get('/api/study/:id', (req, res) => {
 })
 
 //Decks API
-App.get('/api/decks/:id', (req, res) => {
+App.get('/api/decks/:id/edit', (req, res) => {
   const id = req.params.id
   let data = {};
   db.query(`

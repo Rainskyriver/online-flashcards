@@ -6,7 +6,8 @@ import Header from "./Header";
 import Search from "./SearchRoute";
 import CardForm from './CardForm'
 import Users from './UsersRoute'
-import Decks from './DecksRoute';
+import EditDeck from './EditDeckRoute';
+import NewDeck from './NewDeckRoute'
 import Study from './StudyRoute';
 import DeckForm from "./DeckForm";
 
@@ -31,8 +32,11 @@ export default function App() {
           <Route path={'/study/:id/match'}>
 
           </Route>
-          <Route path={'/decks/:id'}>
-
+          <Route path={'/decks/:id/edit'}>
+            <EditDeck/>
+          </Route>
+          <Route path={'/decks/:id/new'}>
+            <NewDeck/>
           </Route>
           <Route path={'/search/:tag'}>
             <Search />
