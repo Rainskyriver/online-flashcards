@@ -133,7 +133,6 @@ export default function CardForm() {
                       </Grid>
                     </Grid>
                   </Paper>
-                  <pre>{JSON.stringify(values, 0, 1)}</pre>
                 </form>
               </a.div>
 
@@ -182,7 +181,6 @@ export default function CardForm() {
                       </Grid>
                     </Grid>
                   </Paper>
-                  {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                 </form>
               </a.div>
             </div>
