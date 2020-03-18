@@ -1,6 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Form, Field } from "react-final-form";
-// import { TextField } from "final-form-material-ui";
+import { Form } from "react-final-form";
 import { Paper, Grid, Button, CssBaseline, TextField } from "@material-ui/core";
 
 import { useSpring, animated as a } from "react-spring";
@@ -133,7 +132,6 @@ export default function CardForm() {
                       </Grid>
                     </Grid>
                   </Paper>
-                  <pre>{JSON.stringify(values, 0, 1)}</pre>
                 </form>
               </a.div>
 
@@ -182,7 +180,6 @@ export default function CardForm() {
                       </Grid>
                     </Grid>
                   </Paper>
-                  {/* <pre>{JSON.stringify(values, 0, 2)}</pre> */}
                 </form>
               </a.div>
             </div>

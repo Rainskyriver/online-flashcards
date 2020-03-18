@@ -8,6 +8,7 @@ import CardForm from './CardForm'
 import Users from './UsersRoute'
 import Decks from './DecksRoute';
 import Study from './StudyRoute';
+import DeckForm from "./DeckForm";
 
 export default function App() {
   return (
@@ -34,7 +35,8 @@ export default function App() {
             <Search />
           </Route>
           <Route exact path="/">
-            <CardForm/>
+            {/* <CardForm/> */}
+            <DeckForm />
           </Route>
         </Switch>
         {/* <CardForm /> */}
