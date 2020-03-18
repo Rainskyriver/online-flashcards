@@ -1,0 +1,42 @@
+.new-deck {
+  display: flex;
+  justify-content: space-around;
+  background-color: lightyellow;
+  border-style: dashed;
+  padding: 16px;
+  width: 100vw;
+}
+
+.cover {
+  display: flex;
+  position: absolute;
+  max-width: 500px;
+  max-height: 300px;
+  width: 40vw;
+  height: 30vh;
+  justify-content: flex-start;
+  flex-direction: row;
+  box-sizing: inherit;
+  border-radius: 15px;
+  border-style: solid;
+  border-width: .5em;
+  border-color: black;
+  background-color: paleturquoise;
+}
+
+.deck-display {
+  align-self: flex-start;
+}
+
+.deck-form {
+  align-self: flex-end;
+}
+
+.deck-image {
+  border-radius: 8px;
+  width: 280px;
+  height: 280px;
+  align-self: flex-start;
+}
+
+
