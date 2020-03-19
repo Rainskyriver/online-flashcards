@@ -34,8 +34,6 @@ export default function DeckForm() {
 
   return (
     <div className="new-deck">
-      <CssBaseline />
-
       <div className="deck-display">
         <Deck
           title={input.title}
@@ -44,7 +42,7 @@ export default function DeckForm() {
           tags={input.tags}
         />
       </div>
-
+      
       <div className="deck-form">
         <Form
           onSubmit={onSubmit}
