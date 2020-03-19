@@ -1,0 +1,11 @@
+.App {
+  display: flex;
+}
+.searchContainer {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+}
+.searchElement {
+  margin: 25px;
+}

@@ -10,8 +10,8 @@ export default function Users() {
     })
   }, [])
   return (
-    <div>
+    <div style={{textAlign: 'center', height: 'auto'}}>
       <h2>{`Your decks`}</h2>
-    </div>
+    </div>  
   )
 }
