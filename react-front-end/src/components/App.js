@@ -8,6 +8,10 @@ import EditDeck from './Routes/EditDeckRoute';
 import NewDeck from './Routes/NewDeckRoute'
 import Study from './Routes/StudyRoute';
 import Root from "./Routes/Root"
+import Match from "./Routes/StudyRoutes/MatchRoute";
+import Test from "./Routes/StudyRoutes/TestRoute";
+import Original from "./Routes/StudyRoutes/OriginalRoute";
+
 
 export default function App() {
   return (
@@ -19,13 +23,13 @@ export default function App() {
             <Users/>
           </Route>
           <Route path={'/study/:id/original'}>
-
+            <Original/>
           </Route>
           <Route path={'/study/:id/test'}>
-
+            <Test/>
           </Route>
           <Route path={'/study/:id/match'}>
-
+            <Match/>
           </Route>
           <Route path={'/study/:id/'}>
             <Study/>
