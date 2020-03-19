@@ -8,7 +8,10 @@ import axios from 'axios'
 export default function Deck(props) {
   const { title, description, image, tags, id, deck_id } = props;
   const handleSubmit = () => {
-    document.getElementsByClassName('study_form')[id].submit()
+    const formRef = document.getElementsByClassName('study_form')[id]
+    if (formRef) {
+      formRef.submit()
+    }
   }
   return (
     <Card className="root">
