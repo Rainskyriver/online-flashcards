@@ -5,7 +5,7 @@ body,
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   user-select: none;
   background: #f0f0f0;
 }
