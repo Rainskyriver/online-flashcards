@@ -5,7 +5,12 @@
   display: flex;
   flex-wrap: wrap;
   height: auto;
+  /* justify-content: space-between; */
+  align-content: flex-start
 }
 .searchElement {
-  margin: 25px;
+  margin: 2%;
+}
+.MuiPaper-rounded {
+  border-radius: 15px;
 }

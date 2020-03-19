@@ -18,7 +18,7 @@ export default function Users() {
     console.log(deck);
     return (
       <div  className='searchElement' key={deck.id}>
-        <Deck title={deck.name} description={deck.description} id={deck_id} deck_id={deck.id}/>
+        <Deck image={deck.image_url} title={deck.name} description={deck.description} id={deck_id} deck_id={deck.id}/>
       </div>
     )
   })

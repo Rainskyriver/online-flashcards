@@ -17,7 +17,7 @@ export default function Search() {
     console.log(result);
     return (
       <div  className='searchElement' key={result.id}>
-        <Deck title={result.name} description={result.description} id={id} deck_id={result.id}/>
+        <Deck image={result.image_url} title={result.name} description={result.description} id={id} deck_id={result.id}/>
       </div>
     )
   })
