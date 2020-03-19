@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import StudyIndex from "../StudyDeck/StudyIndex"
 import axios from 'axios';
 
 export default function Study() {
@@ -11,7 +12,7 @@ export default function Study() {
   }, [])
   return (
     <div>
-      <h2>{`STUDY for deck with id: ${id}`}</h2>
+      <StudyIndex/>
     </div>
   )
 }
