@@ -3,6 +3,8 @@ import { Button } from "@material-ui/core";
 import FlashCard from "../FlashCard";
 import "../../styles/Root.css";
 
+import LoginModal from "../modals/LoginModal";
+
 export default function Root() {
   return (
     <div className="landing-page">
@@ -26,7 +28,14 @@ export default function Root() {
           </p>
         </div>
         <div id="landing-card">
-          <Button style={{color: "blue"}} onClick={() => document.getElementsByClassName('login-button')[0].click}>Click Here To Get Started!</Button>
+          <LoginModal
+            render={openModal => (
+              <Button style={{ color: "blue" }} onClick={openModal}>
+                Click Here To Get Started!
+              </Button>
+            )}
+          />
+
           <FlashCard
             question="What's 2 + 2?"
             hint="Bill Wurtz"
