@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import { Button, TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import Modal from "react-modal";
-import axios from "axios";
 
+import React, { useState } from 'react';
+import { Button, TextField } from '@material-ui/core'
+import Modal from 'react-modal';
+import axios from 'axios'
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 const useStyles = makeStyles(theme => ({
   root: {
     "& > *": {
@@ -38,18 +39,26 @@ export default function Login(props) {
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  const handleLogin = () => {
-    props.setLogin(true);
-  };
-
+  const handleLogin = (e) => {
+    e.preventDefault();
+    cookies.set('LoggedIn', 'Hello', { path: '/'})
+    closeModal();
+  }
   const handleLogout = () => {
-    props.setLogin(false);
-  };
-
+    cookies.remove('LoggedIn', { path: '/' });
+  }
   const classes = useStyles();
-
-  console.log(props);
+  
+    if (cookies.get('LoggedIn')) {
+    return (
+      <div style={{ display: 'flex'}}>
+      <a style={{ padding: '10px', color: '#FFF', textDecoration: 'none'}} href='/users/3'>Userpage</a>
+        <form action="/" method="GET">
+          <Button type="submit" variant={'contained'} onClick={handleLogout}>Logout</Button>
+        </form>
+      </div>
+    )
+  } else {
 
   return (
     <div style={{ zIndex: 10 }}>
@@ -66,10 +75,7 @@ export default function Login(props) {
           <h2>Please Login</h2>
           <div className={classes.root}>
             <TextField label="Username" />
-            <TextField
-              label="Password"
-              type="password"
-            />
+            <TextField label="Password" type="password" />
           </div>
         </div>
         <div
@@ -80,11 +86,13 @@ export default function Login(props) {
           }}
         >
           <Button onClick={closeModal}>X</Button>
-          <form action="/api/login" method="POST" style={{ display: "flex" }}>
+          <form onSubmit={handleLogin} action="/login" method="POST" style={{ display: "flex" }}>
             <Button type="submit">Login</Button>
           </form>
         </div>
       </Modal>
     </div>
   );
+  }
 }
+
