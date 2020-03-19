@@ -90,9 +90,6 @@ const useStyles = makeStyles(theme => ({
         width: 200
       }
     }
-  },
-  header: {
-    padding: 35
   }
 }));
 export default function Header(props) {
