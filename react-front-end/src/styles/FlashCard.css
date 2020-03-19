@@ -28,8 +28,8 @@ body,
   height: 20vw;
   cursor: pointer;
   will-change: transform, opacity;
-  /* justify-content: center; */
-  /* flex-direction: column; */
+  justify-content: center;
+  flex-direction: column;
 }
 
 .front,

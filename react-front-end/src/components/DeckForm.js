@@ -84,7 +84,8 @@ export default function DeckForm() {
                       <TextField
                         fullWidth
                         name="image"
-                        value={input.value}
+                        value={input.image}
+                        onChange={e => handleChange(e, "image")}
                         multiline
                         label="Image-URL"
                       />

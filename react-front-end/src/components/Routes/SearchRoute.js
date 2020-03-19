@@ -14,7 +14,6 @@ export default function Search() {
   }, [])
   const decks = search.map((result) => {
     id++
-    console.log(result);
     return (
       <div  className='searchElement' key={result.id}>
         <Deck image={result.image_url} title={result.name} description={result.description} id={id} deck_id={result.id}/>
