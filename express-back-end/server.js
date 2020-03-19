@@ -125,9 +125,17 @@ App.get('/api/decks/:id/edit', (req, res) => {
   })
 })
 
-App.get('/api/users/:id', (req, res) =>
-  res.send('hello1')
-);
+App.get('/api/users/:id', (req, res) => {
+  const id = req.params.id;
+  db.query(`
+  SELECT * FROM decks
+  WHERE user_id=${id}
+  `).then((results) => {
+    res.send(results.rows);
+  }).catch((e) => {
+    console.error(e);
+  })
+});
 
 App.get('/study/:id/original', (req, res) =>
   res.send('hello2')

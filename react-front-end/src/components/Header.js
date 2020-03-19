@@ -90,6 +90,9 @@ const useStyles = makeStyles(theme => ({
         width: 200
       }
     }
+  },
+  header: {
+    padding: 35
   }
 }));
 export default function Header(props) {
@@ -105,7 +108,7 @@ export default function Header(props) {
     axios.get("/api/tags").then(res => {setTags(res.data.tags);}).catch(err => {console.log(err);});
   }, []); 
   return (
-    <nav className="header">
+    <nav className={classes.header}>
       <div className={classes.root}>
         <AppBar>
           <Toolbar>

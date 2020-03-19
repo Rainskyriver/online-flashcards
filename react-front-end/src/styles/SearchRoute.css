@@ -1,0 +1,15 @@
+.App {
+  display: flex;
+}
+.searchContainer {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  /* justify-content: space-between; */
+  align-content: flex-start;
+
+}
+.searchElement {
+  margin: 2%;
+
+}

@@ -1,6 +1,6 @@
 .cover {
   display: flex;
-  position: absolute;
+  /* position: absolute; */
   max-width: 500px;
   max-height: 300px;
   width: 40vw;

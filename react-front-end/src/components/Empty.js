@@ -7,13 +7,11 @@ import "../styles/Empty.css";
 
 export default function Empty(props) {
   return (
-    <div className="cover" onClick={props.onAdd}>
+    <div className="cover" onClick={props.onClick}>
       <Tooltip
         title="Add"
         aria-label="add"
-        style={{ fontSize: 50, alignSelf: "center" }}
-        onClick={props.onAdd}
-      >
+        style={{ fontSize: 50, alignSelf: "center" }}>
         <Fab color="primary">
           <AddIcon />
         </Fab>
