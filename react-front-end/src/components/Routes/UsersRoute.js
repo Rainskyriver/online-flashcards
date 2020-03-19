@@ -15,19 +15,21 @@ export default function Users() {
   }, [])
   const decklist = decks.map((deck) => {
     deck_id++
-    console.log(deck);
     return (
       <div  className='searchElement' key={deck.id}>
         <Deck image={deck.image_url} title={deck.name} description={deck.description} id={deck_id} deck_id={deck.id}/>
       </div>
     )
   })
+  const newDeck = () => {
+    window.location.href = '/decks/new';
+  }
   return (
     <div style={{textAlign: 'center', height: 'auto'}}>
       <h2>{`Your decks`}</h2>
       <div className='searchContainer' >
         <div className='searchElement' >
-        <Empty />
+        <Empty onClick={newDeck}/>
         </div>
         {decklist}
       </div>

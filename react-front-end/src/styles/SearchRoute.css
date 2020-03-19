@@ -6,11 +6,10 @@
   flex-wrap: wrap;
   height: auto;
   /* justify-content: space-between; */
-  align-content: flex-start
+  align-content: flex-start;
+
 }
 .searchElement {
   margin: 2%;
-}
-.MuiPaper-rounded {
-  border-radius: 15px;
+
 }
