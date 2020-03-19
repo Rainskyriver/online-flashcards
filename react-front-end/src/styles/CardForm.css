@@ -2,7 +2,8 @@
 .f {
   position: absolute;
   max-width: 400px;
-  width: inherit;
+  width: 400px;
+  left: 1000px;
   height: inherit;
   will-change: transform, opacity;
 }

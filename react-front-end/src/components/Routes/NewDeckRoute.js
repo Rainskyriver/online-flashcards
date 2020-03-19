@@ -9,8 +9,10 @@ export default function EditDeck() {
   const [id, setId] = useState(0)
   const [cards, setCards] = useState([])
   const saveDeck = () => {};
+  const cardList = (document.getElementsByClassName('cardFormContainer'));
   const newCard = () => {
-    setCards(prev => [...prev, <div key={id}><CardForm/></div>])
+    console.log(id)
+    setCards(prev => [...prev, <div key={id}><CardForm id={id}/></div>])
     setId(prev => prev + 1)
   }
   return (
@@ -20,7 +22,9 @@ export default function EditDeck() {
       <div style={{display: 'flex', alignItems: 'center', padding: '10px', justifyContent: 'center'}}>
         <Empty onClick={newCard} />
       </div>
+      <div className="cardContainer" style={{display:'flex'}}>
       {cards}
+      </div>
       <Button>Save Deck</Button>
     </div>
   );

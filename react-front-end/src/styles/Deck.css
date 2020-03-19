@@ -27,10 +27,6 @@
   align-self: flex-start;
 }
 
-.deck-form {
-  align-self: flex-end;
-}
-
 .deck-image {
   width: 25vw;
   height: 30vh;

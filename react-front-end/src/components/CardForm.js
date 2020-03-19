@@ -24,7 +24,7 @@ const validate = values => {
   return errors;
 };
 
-export default function CardForm() {
+export default function CardForm(props) {
   const [flipped, set] = useState(false);
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
@@ -55,10 +55,12 @@ export default function CardForm() {
     setInput({ ...input, [userInput]: e.target.value });
   };
 
+  const topVal = props.id * 300
   console.log("in the question:", input.question);
-
   return (
     <div>
+
+      <div className="cardFormContainer" style={{ position: 'relative', top: topVal}}>
       <FlashCard
         ref={flashCardRef}
         question={input.question}
@@ -67,10 +69,6 @@ export default function CardForm() {
         answer={input.answer}
         resources={input.resources}
         />
-
-      <div style={{ padding: 250, maxWidth: 750 }}>
-        <CssBaseline />
-
         <Form
           onSubmit={onSubmit}
           validate={validate}
