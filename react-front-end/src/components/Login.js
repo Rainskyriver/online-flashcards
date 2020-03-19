@@ -36,7 +36,8 @@ export default function Login(props) {
   }
   if (cookies.get('LoggedIn')) {
     return (
-      <div>
+      <div style={{ display: 'flex'}}>
+      <a style={{ padding: '10px', color: '#FFF', textDecoration: 'none'}} href='/users/3'>Userpage</a>
         <form action="/" method="GET">
           <Button type="submit" variant={'contained'} onClick={handleLogout}>Logout</Button>
         </form>
