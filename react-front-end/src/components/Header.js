@@ -99,7 +99,6 @@ export default function Header(props) {
   const classes = useStyles();
   const [inputvalue, setValue] = useState("");
   const [tags, setTags] = useState([]);
-  const [login, setLogin] = useState(false);
   const handleChange = event => {
     setValue(event.target.value);
   };
@@ -135,7 +134,7 @@ export default function Header(props) {
                   )}
               />
             </form>
-            <Login login={login} setLogin={setLogin}/>
+            <Login/>
           </Toolbar>
         </AppBar>
       </div>
