@@ -62,7 +62,7 @@ export default function Login(props) {
 
   return (
     <div style={{ zIndex: 10 }}>
-      <Button variant={"contained"} onClick={openModal}>
+      <Button className="login-button" variant={"contained"} onClick={openModal}>
         Login
       </Button>
       <Modal
