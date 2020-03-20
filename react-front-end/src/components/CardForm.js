@@ -52,7 +52,10 @@ export default function CardForm(props) {
   };
 
   const handleChange = (e, userInput) => {
+    const id = props.id
+    console.log(userInput);
     setInput({ ...input, [userInput]: e.target.value });
+    props.giveCardData(id, input)
   };
 
   const topVal = props.id * 300

@@ -4,25 +4,28 @@ import Empty from '../Empty'
 import CardForm from '../CardForm'
 import axios from "axios";
 import DeckForm from '../DeckForm'
-import {fetchURL } from 'fetch';
 
 export default function EditDeck() {
   const [id, setId] = useState(0)
   const [cards, setCards] = useState([])
-  const [deck, setDeck] = useState({})
+  const [cardData, setCardData] = useState({})
+  const [deckData, setDeckData] = useState({})
   const getDeckData = (data => {
-    setDeck(data)
+    setDeckData(data)
+  })
+  const getCardData = ((id, input) => {
+    setCardData(prev => ({...prev, [id]: input}))
   })
   const saveDeck = (e) => {
     e.preventDefault();
-    const data = JSON.stringify({deck, cards})
+    const data = JSON.stringify({deckData, cardData})
     axios.post('/api/decks/new', {
       data
     }).then((res) => {console.log(res)})
   };
   const newCard = () => {
     console.log(id)
-    setCards(prev => [...prev, <div key={id}><CardForm id={id}/></div>])
+  setCards(prev => [...prev, <div key={id}><CardForm giveCardData={getCardData} id={id}/></div>])
     setId(prev => prev + 1)
   }
   return (
