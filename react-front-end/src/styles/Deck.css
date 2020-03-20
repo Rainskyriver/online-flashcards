@@ -4,7 +4,6 @@
   background-color: lightyellow;
   border-style: dashed;
   padding: 16px;
-  width: 100vw;
 }
 
 .cover {
@@ -27,10 +26,6 @@
   align-self: flex-start;
 }
 
-.deck-form {
-  align-self: flex-end;
-}
-
 .deck-image {
   width: 25vw;
   height: 30vh;
@@ -45,7 +40,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .deck-info {

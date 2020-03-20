@@ -1,7 +1,10 @@
 import React from "react";
 import { Button } from "@material-ui/core";
 import Cookies from "universal-cookie";
-
+import React, { useState } from 'react';
+import { Button, TextField, makeStyles } from '@material-ui/core'
+import Modal from 'react-modal';
+import Cookies from 'universal-cookie';
 import LoginModal from "./modals/LoginModal";
 const cookies = new Cookies();
 

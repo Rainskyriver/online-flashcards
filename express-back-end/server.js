@@ -137,6 +137,14 @@ App.get('/api/users/:id', (req, res) => {
   })
 });
 
+//New Deck API
+App.post('/api/decks/new', (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+})
+
+
+
 App.get('/study/:id/original', (req, res) =>
   res.send('hello2')
 );

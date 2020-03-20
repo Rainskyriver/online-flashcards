@@ -20,7 +20,7 @@ const validate = values => {
   return errors;
 };
 
-export default function DeckForm() {
+export default function DeckForm(props) {
   const [input, setInput] = useState({
     title: "",
     description: "",
@@ -30,12 +30,11 @@ export default function DeckForm() {
 
   const handleChange = (e, userInput) => {
     setInput({ ...input, [userInput]: e.target.value });
+    props.giveDeckData(input);
   };
 
   return (
     <div className="new-deck">
-      <CssBaseline />
-
       <div className="deck-display">
         <Deck
           title={input.title}
