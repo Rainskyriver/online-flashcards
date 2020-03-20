@@ -56,11 +56,10 @@ export default function CardForm(props) {
   };
 
   const topVal = props.id * 300
-  console.log("in the question:", input.question);
   return (
     <div>
 
-      <div className="cardFormContainer" style={{ position: 'relative', top: topVal}}>
+      <div className="cardFormContainer" style={{ alignItems: 'flex-between', position: 'relative', top: topVal}}>
       <FlashCard
         ref={flashCardRef}
         question={input.question}
@@ -83,7 +82,7 @@ export default function CardForm(props) {
                 }}
               >
                 <form onSubmit={handleSubmit} noValidate>
-                  <Paper style={{ padding: 16 }}>
+                  <Paper style={{ padding: 3 }}>
                     <Grid container alignItems="flex-start" spacing={2}>
                       <Grid item xs={12}>
                         <TextField

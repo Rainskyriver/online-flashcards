@@ -22,8 +22,8 @@ body,
   position: absolute;
   max-width: 750px;
   max-height: 500px;
-  width: 30vw;
-  height: 20vw;
+  width: 400px;
+  height: 250px;
   cursor: pointer;
   will-change: transform, opacity;
   justify-content: center;

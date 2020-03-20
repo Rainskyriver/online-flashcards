@@ -9,7 +9,6 @@ export default function EditDeck() {
   const [id, setId] = useState(0)
   const [cards, setCards] = useState([])
   const saveDeck = () => {};
-  const cardList = (document.getElementsByClassName('cardFormContainer'));
   const newCard = () => {
     console.log(id)
     setCards(prev => [...prev, <div key={id}><CardForm id={id}/></div>])
@@ -25,7 +24,7 @@ export default function EditDeck() {
       <div className="cardContainer" style={{display:'flex'}}>
       {cards}
       </div>
-      <Button>Save Deck</Button>
+      <Button color={'primary'} variant={'contained'} style={{position: 'fixed', bottom:'0px', zIndex:'5', right:'0'}} >Save Deck</Button>
     </div>
   );
 }

@@ -4,7 +4,7 @@
   max-width: 400px;
   width: 400px;
   left: 1000px;
-  height: inherit;
+  height: 250px;
   will-change: transform, opacity;
 }
 
@@ -22,7 +22,7 @@
   justify-content: space-between;
   background-color: lightyellow;
   border-style: dashed;
-  padding: 16px;
+  padding: 3px;
   width: 100vw;
 }
 
