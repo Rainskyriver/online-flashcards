@@ -26,7 +26,7 @@ export default function Users() {
   }
   return (
     <div style={{textAlign: 'center', height: 'auto'}}>
-      <h2>{`Your decks`}</h2>
+      <h2 style={{ paddingTop: "100px", marginBlockEnd: "0" }}>{`Your decks`}</h2>
       <div className='searchContainer' >
         <div className='searchElement' >
         <Empty onClick={newDeck}/>
