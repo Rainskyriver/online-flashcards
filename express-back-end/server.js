@@ -13,6 +13,7 @@ db.connect();
 
 // Middleware
 App.use(BodyParser.urlencoded({ extended: false }));
+App.use(BodyParser.json())
 App.use(Express.static('public'));
 App.use(cookie({
   name:'session',
@@ -139,6 +140,10 @@ App.get('/api/users/:id', (req, res) => {
 
 //New Deck API
 App.post('/api/decks/new', (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+})
+App.get('/api/decks/new', (req, res) => {
   console.log(req.body);
   res.send(req.body);
 })
