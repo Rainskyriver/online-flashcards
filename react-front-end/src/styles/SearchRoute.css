@@ -3,13 +3,15 @@
 }
 .searchContainer {
   display: flex;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  height: auto;
-  /* justify-content: space-between; */
-  align-content: flex-start;
+  padding-top: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
 
 }
-.searchElement {
-  margin: 2%;
 
+.searchElement {
+  display: flex;
+  margin: 2%
 }

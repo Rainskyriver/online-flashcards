@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
@@ -20,7 +19,6 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function StudyDeckGame(props) {
-  const { id } = useParams()
   const [mode, setMode] = useState("FLASHCARDS");
 
   const classes = useStyles();
@@ -34,13 +32,13 @@ export default function StudyDeckGame(props) {
   const handlePlay = game => {
     if (mode === FLASHCARDS) {
       // link to FLASHCARDS game route
-      window.location.href = `/study/${id}/original`;
+      console.log("does it work? in FLASHCARDS");
     } else if (mode === TEST) {
       // link to TEST game route
-      window.location.href = `/study/${id}/test`;
+      console.log("does it work? in TEST");
     } else if (mode === MEMORYMATCH) {
       // link to MEMORYMATCH game route
-      window.location.href = `/study/${id}/match`;
+      console.log("does it work? in MEMORYMATCH");
     }
   };
 

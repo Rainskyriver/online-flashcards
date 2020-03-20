@@ -10,13 +10,6 @@ body,
   background: #f0f0f0;
 }
 
-#root > div {
-  width: 100%;
-  height: 50%;
-  display: flex;
-  flex-direction: column;
-}
-
 .c {
   display: flex;
   position: absolute;

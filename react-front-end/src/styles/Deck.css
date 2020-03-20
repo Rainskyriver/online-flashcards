@@ -27,6 +27,7 @@
 }
 
 .deck-image {
+  border-radius: 8px;
   width: 25vw;
   height: 30vh;
   align-self: flex-start;

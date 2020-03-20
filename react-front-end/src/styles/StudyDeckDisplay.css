@@ -1,24 +1,24 @@
 .deck-display {
   display: flex;
-  width: 100%;
-  height: 480px;
+  width: 100vw;
+  height: 470px;
 }
 
 .left-display {
-  padding-top: 5%;
+  padding-top: 80px;
   width: 50%;
   padding-left: 15%;
 }
 
 .right-display {
-  padding-top: 10%;
+  padding-top: 150px;
   width: 50%;
   padding-right: 15%;
 }
 
 .deck-image {
   border-radius: 8px;
-  width: 280px;
-  height: 280px;
+  width: 25vw;
+  height: 30vh;
   align-self: flex-start;
 }
