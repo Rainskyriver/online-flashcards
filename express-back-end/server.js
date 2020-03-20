@@ -4,6 +4,7 @@ const BodyParser = require('body-parser');
 const PORT = 9001;
 require('dotenv').config();
 const cookie = require('cookie-session');
+const getSQLValues = require('./helpers/getSQLValues')
 
 //Database setup
 const pg = require('pg');
@@ -149,8 +150,10 @@ App.post('/api/decks/new', (req, res) => {
   INSERT INTO decks (user_id, name, description, image_url) 
   VALUES (3, '${d.title}', '${d.description}', '${d.image}') RETURNING *;
   `).then((data) => {
+    const cardValues = Object.values(c)
     const deckID = data[1].rows[0].id;
-    console.log(Object.values(c))
+    //Get deck_id, front, back, hint, resource, image_url
+    console.log(getSQLValues(cardValues));  
   }).catch(e => console.log(e)) 
   res.send(req.body);
 })
