@@ -24,8 +24,7 @@ export default function EditDeck() {
     }).then((res) => {console.log(res)})
   };
   const newCard = () => {
-    console.log(id)
-  setCards(prev => [...prev, <div key={id}><CardForm giveCardData={getCardData} id={id}/></div>])
+    setCards(prev => [...prev, <div key={id}><CardForm giveCardData={getCardData} id={id}/></div>])
     setId(prev => prev + 1)
   }
   return (

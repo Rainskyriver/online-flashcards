@@ -33,11 +33,11 @@ export default function CardForm(props) {
   });
   const flashCardRef = useRef();
   const [input, setInput] = useState({
-    question: "",
-    image: "",
-    hint: "",
-    answer: "",
-    resources: ""
+    question: props.question | "",
+    image: props.image | "",
+    hint: props.hint | "",
+    answer: props.answer | "",
+    resources: props.resources | ""
   });
 
   const handleFlip = () => {
