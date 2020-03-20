@@ -1,0 +1,37 @@
+.landing-page {
+  display: flex;
+  background: url("https://www.psdgraphics.com/file/fresh-background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 96vw;
+  height: 95vh;
+  padding-top: 7vh;
+  padding-left: 2vw;
+  padding-right: 2vw;
+}
+
+.landing-image {
+  border-radius: 15px;
+  width: 500px;
+  height: 500px;
+}
+
+.landing-left {
+  display: flex;
+  flex-direction: column;
+  width: 50vw;
+  padding-top: 10vh;
+  padding-left: 2vw;
+}
+
+.landing-right {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 50vw;
+}
+
+#landing-card {
+  align-self: center;
+  width: 50vw;
+}

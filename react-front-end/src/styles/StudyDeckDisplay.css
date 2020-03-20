@@ -6,15 +6,15 @@
 }
 
 .left-display {
-  padding-top: 5vh;
-  width: 50vw;
-  margin-left: 5vw;
+  padding-top: 5%;
+  width: 50%;
+  padding-left: 15%;
 }
 
 .right-display {
-  padding-top: 13vh;
-  width: 50vw;
-  margin-right: 5vw;
+  padding-top: 10%;
+  width: 50%;
+  padding-right: 15%;
 }
 
 .deck-image {

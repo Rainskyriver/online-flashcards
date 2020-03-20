@@ -83,6 +83,7 @@ export default function StudyDeckGame(props) {
         size="large"
         startIcon={<PlayCircleFilledIcon />}
         onClick={() => handlePlay(mode)}
+        style={{ width: "fit-content", marginTop: "30px" }}
       >
         Play
       </Button>

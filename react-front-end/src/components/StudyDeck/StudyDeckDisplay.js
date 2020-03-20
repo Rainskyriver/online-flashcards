@@ -8,11 +8,11 @@ export default function StudyDeckDisplay(props) {
     <div className="deck-display">
       <div className="left-display">
         <div>
-          <h1>title: {title}</h1>
+          <h1>{title}</h1>
         </div>
         <div>
           <img
-            src="https://external-preview.redd.it/m946jqmcLv5lwf5LBsNwjILkX6h76K3PM3JNPd20zFY.png?auto=webp&s=329081a64c646ed24826cedd743d9046463d562c"
+            src={image}
             alt={title}
             className="deck-image"
           ></img>
@@ -20,9 +20,15 @@ export default function StudyDeckDisplay(props) {
       </div>
 
       <div className="right-display">
-        <div>Number of Cards: {numOfCards}</div>
-        <div>Description: {description}</div>
-        <div>Tags: {tags}</div>
+        <div>
+          <h3>Number of Cards: </h3><p>{numOfCards}Hey I've got cards</p>
+        </div>
+        <div>
+          <h3>Description: </h3><p>{description}</p>
+        </div>
+        <div>
+          <h3>Tags: </h3> <p>{tags} hi I'm a tag</p>
+        </div>
       </div>
     </div>
   );
