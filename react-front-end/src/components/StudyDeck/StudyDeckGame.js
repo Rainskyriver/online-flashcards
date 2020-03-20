@@ -33,23 +33,13 @@ export default function StudyDeckGame(props) {
 
   const handlePlay = game => {
     if (game === FLASHCARDS) {
-      // link to FLASHCARDS game route
-      console.log("does it work? in FLASHCARDS");
-      return "/study/:id/original";;
-
+      return "/study/:id/original";
     } else if (game === "TEST") {
-      // link to TEST game route
-      console.log("does it work? in TEST");
       return "/study/:id/test";
-
     } else if (game === MEMORYMATCH) {
-      // link to MEMORYMATCH game route
-      console.log("does it work? in MEMORYMATCH");
       return "/study/:id/match";
-
     }
   };
-
 
   return (
     <div className="game-display">
@@ -85,18 +75,18 @@ export default function StudyDeckGame(props) {
         {mode === MEMORYMATCH && <GameMemoryMatch />}
       </div>
       {/* <Link to="/study/3/test"> */}
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          startIcon={<PlayCircleFilledIcon />}
-          onClick={() => handlePlay(mode)}
-          style={{ width: "fit-content", marginTop: "30px" }}
-          component={Link}
-          to={handlePlay(mode)}
-        >
-          Play
-        </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        size="large"
+        startIcon={<PlayCircleFilledIcon />}
+        onClick={() => handlePlay(mode)}
+        style={{ width: "fit-content", marginTop: "30px" }}
+        component={Link}
+        to={handlePlay(mode)}
+      >
+        Play
+      </Button>
       {/* </Link> */}
     </div>
   );
