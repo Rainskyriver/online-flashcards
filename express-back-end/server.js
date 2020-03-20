@@ -140,15 +140,17 @@ App.get('/api/users/:id', (req, res) => {
 
 //New Deck API
 App.post('/api/decks/new', (req, res) => {
-  console.log(req.body);
+  console.log(JSON.parse(req.body.data).deckData.title);
+  const data = JSON.parse(req.body.data)
+  const d = data.deckData
+  const c = data.cardData
+  db.query(`INSERT INTO decks (user_id, name, description, image_url) 
+  VALUES (3, '${d.title}', '${d.description}', '${d.image}') RETURNING *;
+  `).then((data) => {
+    console.log(data.rows);
+  }).catch(e => console.log(e)) 
   res.send(req.body);
 })
-App.get('/api/decks/new', (req, res) => {
-  console.log(req.body);
-  res.send(req.body);
-})
-
-
 
 App.get('/study/:id/original', (req, res) =>
   res.send('hello2')
