@@ -20,7 +20,7 @@ const validate = values => {
   return errors;
 };
 
-export default function DeckForm() {
+export default function DeckForm(props) {
   const [input, setInput] = useState({
     title: "",
     description: "",
@@ -30,6 +30,7 @@ export default function DeckForm() {
 
   const handleChange = (e, userInput) => {
     setInput({ ...input, [userInput]: e.target.value });
+    props.giveDeckData(input);
   };
 
   return (
@@ -42,7 +43,7 @@ export default function DeckForm() {
           tags={input.tags}
         />
       </div>
-      
+
       <div className="deck-form">
         <Form
           onSubmit={onSubmit}
