@@ -43,16 +43,13 @@
   padding-left: 20px;
 }
 
-/* For card sliding animation */
-.simple-trans-main > div {
+/* For card sliding animation  */
+ .simple-trans-main > div {
   cursor: pointer;
   position: absolute;
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
   font-weight: 800;
   font-size: 25em;
   will-change: transform, opacity;
