@@ -33,11 +33,11 @@ export default function CardForm(props) {
   });
   const flashCardRef = useRef();
   const [input, setInput] = useState({
-    question: props.question | "",
-    image: props.image | "",
-    hint: props.hint | "",
-    answer: props.answer | "",
-    resources: props.resources | ""
+    question: props.question ? props.question : "",
+    image: props.image ? props.image :  "",
+    hint: props.hint ? props.hint : "",
+    answer: props.answer ? props.answer : "",
+    resources: props.resources ? props.resources : ""
   });
 
   const handleFlip = () => {
@@ -50,10 +50,8 @@ export default function CardForm(props) {
       return 1;
     }
   };
-
   const handleChange = (e, userInput) => {
     const id = props.id
-    console.log(userInput);
     setInput({ ...input, [userInput]: e.target.value });
     props.giveCardData(id, input)
   };

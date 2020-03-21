@@ -8,10 +8,10 @@ import DeckForm from '../DeckForm'
 
 
 export default function EditDeck() {
+  let buildID = -1
   const { id } = useParams()
-  let buildID = 0
-  const [cards, setCards] = useState([])
-  const [cardData, setCardData] = useState({})
+  // const [cards, setCards] = useState([])
+  const [cardData, setCardData] = useState([])
   const [deckData, setDeckData] = useState({})
   const getDeckData = (data => {
     setDeckData(data)
@@ -20,32 +20,41 @@ export default function EditDeck() {
     setCardData(prev => ({...prev, [id]: input}))
   })
   useEffect(() => {
-    axios.get(`/api/decks/${id}/edit`).then((res) => {
-      console.log(res.data)
-      res.data.cards.forEach((card) => {
-        setCards(prev => [...prev, 
-          <div key={buildID} >
-            <CardForm 
-              id={buildID}
-              question={card.front} 
-              answer={card.back} 
-              hint={card.hint}
-              image={card.image_url} 
-              resources={card.resource} 
-              giveCardData={getCardData} 
-              />
-          </div>])
-          buildID++;
-        })
-      })
-    }, [])
-    const [cid, setcId] = useState(0)
+    axios.get(`/api/decks/${id}/edit`).then(res => {
+      setCardData(res.data.cards)
+      setDeckData(res.data.deck)
+    })
+  }, [])
+  console.log(deckData)
+  const cardList = cardData.map(card => {
+    buildID++;
     return (
+      <div key={buildID} >
+        <CardForm 
+        id={buildID}
+        question={card.front}
+        image={card.image_url}
+        answer={card.back}
+        hint={card.hint}
+        resources={card.resource}/>
+      </div>
+    )
+  })
+  const [cid, setCid] = useState(cardList.length - 1)
+  const newCard = () => {
+    setCardData(prev => [...prev, <div key={cid}><CardForm giveCardData={getCardData} id={cid}/></div>])
+    setCid(prev => prev + 1)
+  }
+  return (
     <div>
       <h2>{`EDIT for deck with id: ${id}`}</h2>
+      <DeckForm title={deckData.name} description={deckData.description} image={deckData.image_url} giveDeckData={getDeckData} />
+      <div style={{display: 'flex', alignItems: 'center', padding: '10px', justifyContent: 'center'}}>
+        <Empty onClick={newCard} />
+      </div>
       <Button>Save Deck</Button>
       <div className="cardContainer" style={{display: 'flex'}}>
-        {cards}
+        {cardList}
       </div>
     </div>
   )
