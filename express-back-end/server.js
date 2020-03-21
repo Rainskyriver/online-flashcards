@@ -209,14 +209,12 @@ App.post('/api/decks/:id/edit', (req, res) => {
   if (d.image_url) {
     d.image = d.image_url
   }
-  console.log(d);
   db.query(`UPDATE decks SET 
     name = '${d.title}',
     description = '${d.description}',
     image_url = '${d.image}'
   WHERE id = ${id};
   `).then((data) => {
-    console.log(data.rows[0]);
     const cardValues = Object.values(c)
     // //Get deck_id, front, back, hint, resource, image_url
     db.query(`DELETE FROM cards
@@ -227,6 +225,15 @@ App.post('/api/decks/:id/edit', (req, res) => {
     }).catch(e => console.log(e))
   }).catch(e => console.log(e)) 
   res.send(req.body);
+})
+
+//Delete deck API
+App.post('/api/decks/:id/delete', (req, res) => {
+  const id = req.params.id;
+  db.query(`DELETE FROM decks
+  WHERE id=${id}`).then((res) => {
+    console.log(res);
+  })
 })
 
 App.get('/study/:id/original', (req, res) =>
