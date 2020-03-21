@@ -161,7 +161,7 @@ App.post('/api/decks/new', (req, res) => {
     const deckID = data[1].rows[0].id;
     //Get deck_id, front, back, hint, resource, image_url
     db.query(`
-    INSERT INTO cards (deck_id, front, back, hint, resource, image_url)
+    INSERT INTO cards (deck_id, front, image_url, hint, back, resource)
     VALUES ${getSQLValues(deckID, cardValues)}
     `).then((data) => {
     }).catch(e => console.log(e))
