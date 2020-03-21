@@ -40,7 +40,7 @@ export default function Login(props) {
   };
   const handleLogin = (e) => {
     e.preventDefault();
-    cookies.set('LoggedIn', 'Hello', { path: '/'})
+    cookies.set('LoggedIn', 3, { path: '/'})
     closeModal();
   }
   const handleLogout = () => {

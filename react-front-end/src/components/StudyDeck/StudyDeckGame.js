@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
+import { Link, useParams } from "react-router-dom";
 
 import GameFlashCards from "./GameFlashCards";
 import GameTest from "./GameTest";
@@ -22,6 +23,7 @@ export default function StudyDeckGame(props) {
   const [mode, setMode] = useState("FLASHCARDS");
 
   const classes = useStyles();
+  const { id } = useParams();
 
   // Help to set the state to call the right component
   const FLASHCARDS = "FLASHCARDS";
@@ -30,15 +32,12 @@ export default function StudyDeckGame(props) {
 
   // For the onClick in the Play Button to handle the route
   const handlePlay = game => {
-    if (mode === FLASHCARDS) {
-      // link to FLASHCARDS game route
-      console.log("does it work? in FLASHCARDS");
-    } else if (mode === TEST) {
-      // link to TEST game route
-      console.log("does it work? in TEST");
-    } else if (mode === MEMORYMATCH) {
-      // link to MEMORYMATCH game route
-      console.log("does it work? in MEMORYMATCH");
+    if (game === FLASHCARDS) {
+      return `/study/${id}/original/`;
+    } else if (game === "TEST") {
+      return `/study/${id}/test/`;
+    } else if (game === MEMORYMATCH) {
+      return `/study/${id}/match/`;
     }
   };
 
@@ -75,6 +74,7 @@ export default function StudyDeckGame(props) {
 
         {mode === MEMORYMATCH && <GameMemoryMatch />}
       </div>
+      {/* <Link to="/study/3/test"> */}
       <Button
         variant="contained"
         color="primary"
@@ -82,9 +82,12 @@ export default function StudyDeckGame(props) {
         startIcon={<PlayCircleFilledIcon />}
         onClick={() => handlePlay(mode)}
         style={{ width: "fit-content", marginTop: "30px" }}
+        component={Link}
+        to={handlePlay(mode)}
       >
         Play
       </Button>
+      {/* </Link> */}
     </div>
   );
 }

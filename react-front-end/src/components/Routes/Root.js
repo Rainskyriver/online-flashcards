@@ -26,7 +26,7 @@ export default function Root() {
           </p>
         </div>
         <div id="landing-card">
-          <Button style={{color: "blue"}} onClick={() => document.getElementsByClassName('login-button')[0].click}>Click Here To Get Started!</Button>
+          <Button style={{color: "blue"}}>Click Here To Get Started!</Button>
           <FlashCard
             question="What's 2 + 2?"
             hint="Bill Wurtz"
@@ -39,6 +39,7 @@ export default function Root() {
         <img
           className="landing-image"
           src="https://images.pexels.com/photos/301920/pexels-photo-301920.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          alt="Landing Page"
         ></img>
       </div>
     </div>
