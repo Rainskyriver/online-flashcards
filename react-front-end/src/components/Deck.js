@@ -59,9 +59,8 @@ export default function Deck(props) {
                 component="p"
                 style={{ textAlign: "left" }}
               >
-
-                <Button onClick={handleEdit} >Edit</Button>
-                <Button onClick={handleDelete} >Delete</Button>
+              <Button onClick={handleEdit} >Edit</Button>
+              <Button onClick={handleDelete} >Delete</Button>
               </Typography>
             </CardActions>
           </div>

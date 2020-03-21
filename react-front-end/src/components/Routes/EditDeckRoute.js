@@ -23,7 +23,6 @@ export default function EditDeck() {
     axios.get(`/api/decks/${id}/edit`).then(res => {
       setCardData(res.data.cards)
       setDeckData(res.data.deck)
-      console.log(res.data.deck)
     })
   }, [])
   const cardList = cardData.map(card => {
@@ -53,6 +52,7 @@ export default function EditDeck() {
         description={deckData.description} 
         image={deckData.image_url} 
         giveDeckData={getDeckData} 
+        edit={true}
         />
       )
     } else {
