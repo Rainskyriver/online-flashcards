@@ -101,8 +101,8 @@ App.get('/api/study/:id', (req, res) => {
 })
 
 
-//Study TEST game API
-App.get('/api/study/:id/test', (req, res) => {
+//Study Original game API
+App.get('/api/study/:id/original', (req, res) => {
   const id = req.params.id;
 
   let data = {};
