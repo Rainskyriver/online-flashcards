@@ -16,7 +16,7 @@ export default function Study(props) {
 
   useEffect(() => {
     axios.get(`/api/study/${id}`).then((res) => {
-      console.log(res.data)
+      // console.log(res.data)
       setInput({
         "title": res.data.deck.name,
         "description": res.data.deck.description,

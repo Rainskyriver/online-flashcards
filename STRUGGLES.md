@@ -30,6 +30,7 @@ https://material-ui.com/api/autocomplete/#autocomplete-api
 * Submitting a search on the form
 * Getting react router to work properly with the search page
 https://reacttraining.com/react-router/web/guides/quick-start
+
 * Setting z-index styles on the flipped card/form
 https://codeburst.io/4-four-ways-to-style-react-components-ac6f323da822
 
@@ -37,5 +38,34 @@ https://codeburst.io/4-four-ways-to-style-react-components-ac6f323da822
 * Overiding Material-ui css
 https://material-ui.com/customization/components/
 
+
+### 18/03/20
+* TODAY WAS A GOOD DAY
+
+### 19/03/20
+* Hoang did not sleep enough
+Fixed by sleeping more
+
 ### 20/03/20
+* React issue with passing down unique keys for an array children
+https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js
+* Couldn't figure out an issue with req.params
+Solved by looking at each individual file associated with the file path to find it.
 * Passing data between props for editting decks
+### 21/03/20
+
+
+### 22/03/20
+
+
+### 23/03/20
+
+
+### 24/03/20
+
+
+### 25/03/20
+
+
+### 26/03/20
+
