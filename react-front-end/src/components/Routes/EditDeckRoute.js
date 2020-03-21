@@ -23,9 +23,9 @@ export default function EditDeck() {
     axios.get(`/api/decks/${id}/edit`).then(res => {
       setCardData(res.data.cards)
       setDeckData(res.data.deck)
+      console.log(res.data.deck)
     })
   }, [])
-  console.log(deckData)
   const cardList = cardData.map(card => {
     buildID++;
     return (
@@ -45,10 +45,24 @@ export default function EditDeck() {
     setCardData(prev => [...prev, <div key={cid}><CardForm giveCardData={getCardData} id={cid}/></div>])
     setCid(prev => prev + 1)
   }
+  const deckForm = () => {
+    if (deckData.name) {
+      return(
+        <DeckForm
+        title={deckData.name} 
+        description={deckData.description} 
+        image={deckData.image_url} 
+        giveDeckData={getDeckData} 
+        />
+      )
+    } else {
+      return <div></div>
+    }
+  }
   return (
     <div>
       <h2>{`EDIT for deck with id: ${id}`}</h2>
-      <DeckForm title={deckData.name} description={deckData.description} image={deckData.image_url} giveDeckData={getDeckData} />
+      {deckForm()}
       <div style={{display: 'flex', alignItems: 'center', padding: '10px', justifyContent: 'center'}}>
         <Empty onClick={newCard} />
       </div>

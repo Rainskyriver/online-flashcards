@@ -21,12 +21,14 @@ const validate = values => {
 };
 
 export default function DeckForm(props) {
+  // console.log(props);
   const [input, setInput] = useState({
-    title: "",
-    description: "",
-    image: "",
+    title: props.title ? props.title : "",
+    description: props.description ? props.description : "",
+    image: props.image ? props.image : "",
     tags: ""
   });
+  console.log(input);
 
   const handleChange = (e, userInput) => {
     setInput({ ...input, [userInput]: e.target.value });

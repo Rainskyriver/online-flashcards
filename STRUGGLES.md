@@ -28,15 +28,14 @@ https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Examples#
 https://material-ui.com/components/text-fields/
 https://material-ui.com/api/autocomplete/#autocomplete-api
 * Submitting a search on the form
-<<<<<<< HEAD
 * Getting react router to work properly with the search page
 https://reacttraining.com/react-router/web/guides/quick-start
-=======
-
 * Setting z-index styles on the flipped card/form
 https://codeburst.io/4-four-ways-to-style-react-components-ac6f323da822
 
 ### 17/03/20
 * Overiding Material-ui css
 https://material-ui.com/customization/components/
->>>>>>> bc9063eb3351c97d465bbbb13d3773d9ed9d13e1
+
+### 20/03/20
+* Passing data between props for editting decks
