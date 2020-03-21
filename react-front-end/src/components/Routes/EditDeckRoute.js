@@ -50,6 +50,7 @@ export default function EditDeck() {
         description={deckData.description} 
         image={deckData.image_url} 
         giveDeckData={getDeckData} 
+        edit={true}
       />
       )
   })

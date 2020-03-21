@@ -139,6 +139,7 @@ App.get('/api/users/:id', (req, res) => {
   db.query(`
   SELECT * FROM decks
   WHERE user_id=${id}
+  ORDER BY id DESC;
   `).then((results) => {
     res.send(results.rows);
   }).catch((e) => {

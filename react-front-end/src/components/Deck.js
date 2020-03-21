@@ -17,6 +17,23 @@ export default function Deck(props) {
   const handleDelete = () => {
 
   }
+  const buttonHandler = () => {
+    if (props.edit) {
+      return (
+        <div>
+          <Button disabled={true} onClick={handleEdit} >Edit</Button>
+          <Button disabled={true} onClick={handleDelete} >Delete</Button>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <Button onClick={handleEdit} >Edit</Button>
+          <Button onClick={handleDelete} >Delete</Button>
+        </div>
+      )
+    }
+  }
   return (
     <Card className="root" style={{ borderRadius: "18px" }}>
         <div className="cover">
@@ -59,8 +76,7 @@ export default function Deck(props) {
                 component="p"
                 style={{ textAlign: "left" }}
               >
-              <Button onClick={handleEdit} >Edit</Button>
-              <Button onClick={handleDelete} >Delete</Button>
+              {buttonHandler()}
               </Typography>
             </CardActions>
           </div>
