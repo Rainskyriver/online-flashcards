@@ -1,7 +1,44 @@
 .game-landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: auto; 
   width: 100%;
-  padding-top: 50px;
+  padding-top: 100px;
   padding-left: 50px;
   padding-right: 50px;
+}
+
+.game-box {
+  display: flex;
+  flex-direction: column;
+  width: 430px;
+  height: 300px;
+}
+
+.start-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.start-message {
+  text-align: center;
+  border: solid;
+  padding: 20px;
+}
+
+.answer-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.previous-button {
+  align-self: center;
+  padding-right: 20px;
+}
+
+.next-button {
+  align-self: center;
+  padding-left: 20px;
 }

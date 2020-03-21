@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import GameFlashCards from "./GameFlashCards";
 import GameTest from "./GameTest";
@@ -23,6 +23,7 @@ export default function StudyDeckGame(props) {
   const [mode, setMode] = useState("FLASHCARDS");
 
   const classes = useStyles();
+  const { id } = useParams();
 
   // Help to set the state to call the right component
   const FLASHCARDS = "FLASHCARDS";
@@ -30,14 +31,13 @@ export default function StudyDeckGame(props) {
   const MEMORYMATCH = "MEMORYMATCH";
 
   // For the onClick in the Play Button to handle the route
-
   const handlePlay = game => {
     if (game === FLASHCARDS) {
-      return "/study/:id/original";
+      return `/study/${id}/original/`;
     } else if (game === "TEST") {
-      return "/study/:id/test";
+      return `/study/${id}/test/`;
     } else if (game === MEMORYMATCH) {
-      return "/study/:id/match";
+      return `/study/${id}/match/`;
     }
   };
 
