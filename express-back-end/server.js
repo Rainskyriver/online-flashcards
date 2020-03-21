@@ -4,6 +4,7 @@ const BodyParser = require('body-parser');
 const PORT = 9001;
 require('dotenv').config();
 const cookie = require('cookie-session');
+const getSQLValues = require('./helpers/getSQLValues')
 
 //Database setup
 const pg = require('pg');
@@ -13,6 +14,7 @@ db.connect();
 
 // Middleware
 App.use(BodyParser.urlencoded({ extended: false }));
+App.use(BodyParser.json())
 App.use(Express.static('public'));
 App.use(cookie({
   name:'session',
@@ -98,6 +100,7 @@ App.get('/api/study/:id', (req, res) => {
   })
 })
 
+
 //Study TEST game API
 App.get('/api/study/:id/test', (req, res) => {
   const id = req.params.id;
@@ -129,7 +132,45 @@ App.get('/api/study/:id/test', (req, res) => {
   })
 })
 
-//Decks API
+
+//Users Decks API
+App.get('/api/users/:id', (req, res) => {
+  const id = req.params.id;
+  db.query(`
+  SELECT * FROM decks
+  WHERE user_id=${id}
+  `).then((results) => {
+    res.send(results.rows);
+  }).catch((e) => {
+    console.error(e);
+  })
+});
+
+//New Deck API
+App.post('/api/decks/new', (req, res) => {
+  const data = JSON.parse(req.body.data)
+  const d = data.deckData
+  const c = data.cardData
+  db.query(`DELETE FROM decks
+  WHERE name='${d.title}';
+  
+  INSERT INTO decks (user_id, name, description, image_url) 
+  VALUES (3, '${d.title}', '${d.description}', '${d.image}') RETURNING *;
+  `).then((data) => {
+    const cardValues = Object.values(c)
+    const deckID = data[1].rows[0].id;
+    //Get deck_id, front, back, hint, resource, image_url
+    db.query(`
+    INSERT INTO cards (deck_id, front, back, hint, resource, image_url)
+    VALUES ${getSQLValues(deckID, cardValues)}
+    `).then((data) => {
+    }).catch(e => console.log(e))
+  }).catch(e => console.log(e)) 
+  res.send(req.body);
+})
+
+
+//Edit Decks API
 App.get('/api/decks/:id/edit', (req, res) => {
   const id = req.params.id
   let data = {};
@@ -156,45 +197,55 @@ App.get('/api/decks/:id/edit', (req, res) => {
     console.error(e);
   })
 })
-
-App.get('/api/users/:id', (req, res) => {
+App.post('/api/decks/:id/edit', (req, res) => {
   const id = req.params.id;
-  db.query(`
-  SELECT * FROM decks
-  WHERE user_id=${id}
-  `).then((results) => {
-    res.send(results.rows);
-  }).catch((e) => {
-    console.error(e);
-  })
-});
-
-//New Deck API
-App.post('/api/decks/new', (req, res) => {
-  console.log(req.body);
+  const data = JSON.parse(req.body.data)
+  const d = data.deckData
+  const c = data.cardData
+  if (d.name) {
+    d.title = d.name
+  }
+  if (d.image_url) {
+    d.image = d.image_url
+  }
+  console.log(d);
+  db.query(`UPDATE decks SET 
+    name = '${d.title}',
+    description = '${d.description}',
+    image_url = '${d.image}'
+  WHERE id = ${id};
+  `).then((data) => {
+    console.log(data.rows[0]);
+    const cardValues = Object.values(c)
+    // //Get deck_id, front, back, hint, resource, image_url
+    db.query(`DELETE FROM cards
+    WHERE deck_id = ${id};
+    INSERT INTO cards (deck_id, front, image_url, hint, back, resource)
+    VALUES ${getSQLValues(id, cardValues)};
+    `).then((data) => {
+    }).catch(e => console.log(e))
+  }).catch(e => console.log(e)) 
   res.send(req.body);
 })
 
-
-
 App.get('/study/:id/original', (req, res) =>
-  res.send('hello2')
+res.send('hello2')
 );
 
 App.get('/study/:id/test', (req, res) =>
-  res.send('hello3')
+res.send('hello3')
 );
 
 App.get('/study/:id/match', (req, res) =>
-  res.send('hello4')
+res.send('hello4')
 );
 
 App.get('/deck/:id', (req, res) =>
-  res.send('hello5')
+res.send('hello5')
 );
 
 App.get('/search/:params', (req, res) =>
-  res.send('hello6')
+res.send('hello6')
 );
 
 App.get('/study/:id', (req, res) =>

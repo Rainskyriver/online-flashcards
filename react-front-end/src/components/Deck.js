@@ -2,22 +2,25 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
+import Button from "@material-ui/core/Button";
 import "../styles/Deck.css";
 import axios from "axios";
 
 export default function Deck(props) {
   const { title, description, image, tags, id, deck_id } = props;
   const handleSubmit = () => {
-    const formRef = document.getElementsByClassName("study_form")[id];
-    if (formRef) {
-      formRef.submit();
-    }
+    window.location.href=`/study/${deck_id}`;
   };
+  const handleEdit = () => {
+    window.location.href=`/decks/${deck_id}/edit`;
+  }
+  const handleDelete = () => {
+
+  }
   return (
     <Card className="root" style={{ borderRadius: "18px" }}>
-      <form className="study_form" action={`/study/${deck_id}`} method="GET">
-        <div onClick={handleSubmit} className="cover">
-          <div className="deck-image">
+        <div className="cover">
+          <div onClick={handleSubmit} className="deck-image">
             <img src={image} alt={title}></img>
           </div>
           <div className="deck-info">
@@ -56,13 +59,12 @@ export default function Deck(props) {
                 component="p"
                 style={{ textAlign: "left" }}
               >
-                Tags:
-                {tags}
+              <Button onClick={handleEdit} >Edit</Button>
+              <Button onClick={handleDelete} >Delete</Button>
               </Typography>
             </CardActions>
           </div>
         </div>
-      </form>
     </Card>
   );
 }

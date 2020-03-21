@@ -38,6 +38,7 @@ https://codeburst.io/4-four-ways-to-style-react-components-ac6f323da822
 * Overiding Material-ui css
 https://material-ui.com/customization/components/
 
+
 ### 18/03/20
 * TODAY WAS A GOOD DAY
 
@@ -50,7 +51,7 @@ Fixed by sleeping more
 https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array-children-in-react-js
 * Couldn't figure out an issue with req.params
 Solved by looking at each individual file associated with the file path to find it.
-
+* Passing data between props for editting decks
 ### 21/03/20
 
 

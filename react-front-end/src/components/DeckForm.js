@@ -22,9 +22,9 @@ const validate = values => {
 
 export default function DeckForm(props) {
   const [input, setInput] = useState({
-    title: "",
-    description: "",
-    image: "",
+    title: props.title ? props.title : "",
+    description: props.description ? props.description : "",
+    image: props.image ? props.image : "",
     tags: ""
   });
 
