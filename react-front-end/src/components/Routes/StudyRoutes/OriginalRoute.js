@@ -12,7 +12,7 @@ import FlashCard from "../../FlashCard";
 import "../../../styles/Game.css";
 
 export default function Original() {
-  const [deck, setDeck] = useState({});
+  // const [deck, setDeck] = useState({});
   const [cards, setCards] = useState([]);
   const [start, setStart] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
@@ -20,7 +20,7 @@ export default function Original() {
 
   useEffect(() => {
     axios.get(`/api/study/${id}/original`).then(res => {
-      setDeck(res.data.deck);
+      // setDeck(res.data.deck);
       setCards(res.data.cards);
     });
   }, []);
@@ -67,19 +67,18 @@ export default function Original() {
   };
 
   // tests for animation card slide
-  const rightTransitions = useTransition(currentCard, p => p, {
+
+  const rightTransition = useTransition(currentCard, p => p, {
     from: { opacity: 0, transform: "translate3d(100%,0,0)" },
     enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
     leave: { opacity: 0, transform: "translate3d(-80%,0,0)" }
   });
 
-  const leftTransitions = useTransition(currentCard, p => p, {
+  const leftTransition = useTransition(currentCard, p => p, {
     from: { opacity: 0, transform: "translate3d(-80%,0,0)" },
     enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
     leave: { opacity: 0, transform: "translate3d(100%,0,0)" }
-  })
-
-  console.log(flashCards.length)
+  });
 
   const startGame = () => {
     if (start === false) {
@@ -101,7 +100,7 @@ export default function Original() {
               </IconButton>
             </div>
             <div className="game-box">
-              {leftTransitions.map(({ item, props, key }) => {
+              {rightTransition.map(({ item, props, key }) => {
                 const Page = flashCards[item];
                 return <Page key={key} style={props} />;
               })}
