@@ -79,6 +79,8 @@ export default function Original() {
     leave: { opacity: 0, transform: "translate3d(100%,0,0)" }
   })
 
+  console.log(flashCards.length)
+
   const startGame = () => {
     if (start === false) {
       return (
@@ -99,12 +101,10 @@ export default function Original() {
               </IconButton>
             </div>
             <div className="game-box">
-              <div className="simple-trans-main">
               {leftTransitions.map(({ item, props, key }) => {
                 const Page = flashCards[item];
                 return <Page key={key} style={props} />;
               })}
-              </div>
             </div>
             <div className="next-button">
               <IconButton onClick={nextCard}>
