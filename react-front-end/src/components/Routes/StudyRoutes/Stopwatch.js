@@ -1,51 +1,59 @@
-import React from "react";
-import { ReactDOM } from "react-dom";
-const Stopwatch = React.createClass({
-  getInitialState: function() {
-     return { secondsElapsed: 0 }
-  },
-  getMilliseconds: function() {
-    return ('0' +this.state.secondsElapsed * 100).slice(-2);
-  },
-  getSeconds: function() {
-     return ('0' + parseInt(this.state.secondsElapsed % 60)).slice(-2);
-  },
-  getMinutes: function() {
-    return ('0' + Math.floor(this.state.secondsElapsed / 60)).slice(-2);
-  },
-  startTimer: function() {
-    var runningTime = this;
-    this.incrementer = setInterval(function() {
-      runningTime.setState({
-        secondsElapsed: (runningTime.state.secondsElapsed + 0.01)
-      });
-    }, 10)
-  },
-  resetTimer: function() {
-     this.setState({
-       secondsElapsed: 0
-     })
-  },
-  stopTimer: function() {
-    clearInterval(this.incrementer);
-  },
-  render: function() {
-    return (
-      <div className="display">
-        <h1>{this.getMinutes()}:{this.getSeconds()}:{this.getMilliseconds()}</h1>
-        <button type="button"
-                className="btn btn-danger"
-                onClick={this.stopTimer}>Stop</button>
-        <button type="button"
-                className="btn btn-success"
-                onClick={this.startTimer}>Start</button>
-        <button type="button"
-                className="btn btn-warning"
-                onClick={this.resetTimer}>Reset</button>
-      </div>
-    );
-  }
-});
+import React, { useState, useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import { Link, useParams } from "react-router-dom";
 
-export default <Stopwatch />
-ReactDOM.render(<Stopwatch />, document.getElementById("container"));
+export default function Stopwatch(props) {
+  const [time, setTime] = useState(0);
+  const [isActive, setIsActive] = useState(false);
+  const [counter, setCounter] = useState(null);
+
+  const { id } = useParams();
+
+  const getMilliseconds = () => {
+    return ("0" + time * 100).slice(-2);
+  };
+
+  const getSeconds = () => {
+    return ("0" + parseInt(time % 60)).slice(-2);
+  };
+
+  const getMinutes = () => {
+    return ("0" + Math.floor(time / 60)).slice(-2);
+  };
+
+  const completeTest = () => {
+    return `/study/${id}`
+  };
+
+
+  useEffect(() => {
+    // let interval = null;
+    setIsActive(props.start);
+
+    if (isActive) {
+      setCounter(
+        setInterval(() => {
+          setTime(time => time + 0.001);
+        }, 100)
+      );
+    }
+  }, [isActive, time, props.start]);
+
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h1>
+        {getMinutes()}:{getSeconds()}:{getMilliseconds()}
+      </h1>
+      <Button
+        variant="outlined"
+        color="primary"
+        size="large"
+        onClick={() => completeTest()}
+        component={Link}
+        to={completeTest()}
+      >
+        Complete Test
+      </Button>
+    </div>
+  );
+}

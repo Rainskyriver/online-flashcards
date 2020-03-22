@@ -6,18 +6,25 @@ import green from "@material-ui/core/colors/green";
 import blue from "@material-ui/core/colors/blue";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import { useTransition, animated } from "react-spring";
 import axios from "axios";
 import FlashCard from "../../FlashCard";
+
+import ProgressBar from "./ProgressBar";
+import Stopwatch from "./Stopwatch";
+
 import "../../../styles/Game.css";
 
 export default function Original() {
   const [deck, setDeck] = useState({});
   const [cards, setCards] = useState([]);
-  const [visible, setVisible] = useState(false);
   const [start, setStart] = useState(false);
-  const [currentCard, setCurrentCard] = useState(0)
+  const [currentCard, setCurrentCard] = useState(0);
+  const [answer, setAnswer] = useState(false);
+
   const { id } = useParams();
 
+  // Gets data for the deck and cards based on deckid
   useEffect(() => {
     axios.get(`/api/study/${id}/original`).then(res => {
       setDeck(res.data.deck);
@@ -25,6 +32,7 @@ export default function Original() {
     });
   }, []);
 
+  // Find cookie user id
   const getCurrentUser = cookieName => {
     var value = "; " + document.cookie;
     var parts = value.split("; " + cookieName + "=");
@@ -37,35 +45,59 @@ export default function Original() {
 
   const userId = getCurrentUser("LoggedIn");
 
+  // Renders all the cards for the selected deck
   const flashCards = cards.map(result => {
-    return (
-      <FlashCard
-        key={result.id}
-        question={result.front}
-        image={result.image_url}
-        hint={result.hint}
-        answer={result.back}
-        resources={result.resource}
-      />
+    return ({ style }) => (
+      <animated.div style={{ ...style }}>
+        <FlashCard
+          key={result.id}
+          question={result.front}
+          image={result.image_url}
+          hint={result.hint}
+          answer={result.back}
+          resources={result.resource}
+        />
+      </animated.div>
     );
   });
 
 
+  // Toggle next card or previous card
   const nextCard = () => {
     if (currentCard === flashCards.length - 1) {
-      return
+      return;
     }
     setCurrentCard(currentCard + 1);
-  }
+  };
 
   const previousCard = () => {
     if (currentCard === 0) {
-      return
+      return;
     }
     setCurrentCard(currentCard - 1);
+  };
+
+  // For animation card slide
+  const rightTransition = useTransition(currentCard, p => p, {
+    from: { opacity: 0, transform: "translate3d(100%,0,0)" },
+    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
+    leave: { opacity: 0, transform: "translate3d(-80%,0,0)" }
+  });
+
+  const leftTransition = useTransition(currentCard, p => p, {
+    from: { opacity: 0, transform: "translate3d(-80%,0,0)" },
+    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
+    leave: { opacity: 0, transform: "translate3d(100%,0,0)" }
+  });
+
+  // Setting the card answer value
+  const handleCorrect = () => {
+    setAnswer(true)
   }
 
-
+  const handleIncorrect = () => {
+    setAnswer(false);
+  }
 
   const startGame = () => {
     if (start === false) {
@@ -80,13 +112,21 @@ export default function Original() {
     } else if (start === true) {
       return (
         <>
+          <Stopwatch start="true"/>
+
           <div style={{ display: "flex", alignItems: "center" }}>
+
             <div className="previous-button">
               <IconButton onClick={previousCard}>
                 <ArrowBackIcon />
               </IconButton>
             </div>
-            <div className="game-box">{flashCards[currentCard]}</div>
+            <div className="game-box">
+              {rightTransition.map(({ item, props, key }) => {
+                const Page = flashCards[item];
+                return <Page key={key} style={props} />;
+              })}
+            </div>
             <div className="next-button">
               <IconButton onClick={nextCard}>
                 <ArrowForwardIcon />
@@ -97,10 +137,16 @@ export default function Original() {
             <Button style={{ color: red[500] }}>Incorrect</Button>
             <Button style={{ color: green[500] }}>Correct</Button>
           </div>
+          <ProgressBar
+            current={currentCard + 1}
+            length={flashCards.length}
+          />
         </>
       );
     }
   };
+
+
 
   return (
     <div className="game-landing-page">
