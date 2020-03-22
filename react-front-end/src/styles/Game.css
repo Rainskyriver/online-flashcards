@@ -42,16 +42,3 @@
   align-self: center;
   padding-left: 20px;
 }
-
-/* For card sliding animation  */
- .simple-trans-main > div {
-  cursor: pointer;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 800;
-  font-size: 25em;
-  will-change: transform, opacity;
-  text-shadow: 0px 2px 40px #00000020, 0px 2px 5px #00000030;
-}
