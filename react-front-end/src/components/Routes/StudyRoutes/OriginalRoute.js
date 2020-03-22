@@ -9,6 +9,10 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { useTransition, animated } from "react-spring";
 import axios from "axios";
 import FlashCard from "../../FlashCard";
+
+import ProgressBar from "./ProgressBar";
+import Stopwatch from "./Stopwatch";
+
 import "../../../styles/Game.css";
 
 export default function Original() {
@@ -16,8 +20,11 @@ export default function Original() {
   const [cards, setCards] = useState([]);
   const [start, setStart] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
+  const [answer, setAnswer] = useState(false);
+
   const { id } = useParams();
 
+  // Gets data for the deck and cards based on deckid
   useEffect(() => {
     axios.get(`/api/study/${id}/original`).then(res => {
       // setDeck(res.data.deck);
@@ -25,6 +32,7 @@ export default function Original() {
     });
   }, []);
 
+  // Find cookie user id
   const getCurrentUser = cookieName => {
     var value = "; " + document.cookie;
     var parts = value.split("; " + cookieName + "=");
@@ -37,6 +45,7 @@ export default function Original() {
 
   const userId = getCurrentUser("LoggedIn");
 
+  // Renders all the cards for the selected deck
   const flashCards = cards.map(result => {
     return ({ style }) => (
       <animated.div style={{ ...style }}>
@@ -52,6 +61,8 @@ export default function Original() {
     );
   });
 
+
+  // Toggle next card or previous card
   const nextCard = () => {
     if (currentCard === flashCards.length - 1) {
       return;
@@ -66,8 +77,7 @@ export default function Original() {
     setCurrentCard(currentCard - 1);
   };
 
-  // tests for animation card slide
-
+  // For animation card slide
   const rightTransition = useTransition(currentCard, p => p, {
     from: { opacity: 0, transform: "translate3d(100%,0,0)" },
     enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
@@ -79,6 +89,15 @@ export default function Original() {
     enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
     leave: { opacity: 0, transform: "translate3d(100%,0,0)" }
   });
+
+  // Setting the card answer value
+  const handleCorrect = () => {
+    setAnswer(true)
+  }
+
+  const handleIncorrect = () => {
+    setAnswer(false);
+  }
 
   const startGame = () => {
     if (start === false) {
@@ -93,7 +112,10 @@ export default function Original() {
     } else if (start === true) {
       return (
         <>
+          <Stopwatch start="true"/>
+
           <div style={{ display: "flex", alignItems: "center" }}>
+
             <div className="previous-button">
               <IconButton onClick={previousCard}>
                 <ArrowBackIcon />
@@ -115,6 +137,10 @@ export default function Original() {
             <Button style={{ color: red[500] }}>Incorrect</Button>
             <Button style={{ color: green[500] }}>Correct</Button>
           </div>
+          <ProgressBar
+            current={currentCard + 1}
+            length={flashCards.length}
+          />
         </>
       );
     }
