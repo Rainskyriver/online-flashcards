@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, IconButton } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
@@ -16,7 +16,7 @@ import Stopwatch from "./Stopwatch";
 import "../../../styles/Game.css";
 
 export default function Original() {
-  // const [deck, setDeck] = useState({});
+  const [deck, setDeck] = useState({});
   const [cards, setCards] = useState([]);
   const [start, setStart] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
@@ -27,7 +27,7 @@ export default function Original() {
   // Gets data for the deck and cards based on deckid
   useEffect(() => {
     axios.get(`/api/study/${id}/original`).then(res => {
-      // setDeck(res.data.deck);
+      setDeck(res.data.deck);
       setCards(res.data.cards);
     });
   }, []);
@@ -145,6 +145,8 @@ export default function Original() {
       );
     }
   };
+
+
 
   return (
     <div className="game-landing-page">
