@@ -8,7 +8,7 @@ export default function Match() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios.get(`/api/decks/${id}/match`).then((res) => {
+    axios.get(`/api/study/${id}/match`).then((res) => {
       console.log(res.data)
     })
   }, []);
