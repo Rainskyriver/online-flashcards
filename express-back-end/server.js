@@ -48,7 +48,7 @@ App.get('/api/search/:tag', (req, res) => {
   
   db.query(`
   SELECT * FROM decks
-  WHERE id=(
+  WHERE id IN (
     SELECT deck_id FROM deck_tags
     WHERE tag_id=(
       SELECT id FROM tags
