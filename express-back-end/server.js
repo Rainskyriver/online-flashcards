@@ -151,6 +151,7 @@ App.get('/api/study/:id/match', (req, res) => {
       db.query(`
       SELECT * FROM cards
       WHERE deck_id=${id}
+      LIMIT 6;
       `).then((result) => {
         data.cards = (result.rows)
         console.log(data)
