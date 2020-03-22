@@ -48,7 +48,7 @@ App.get('/api/search/:tag', (req, res) => {
   
   db.query(`
   SELECT * FROM decks
-  WHERE id=(
+  WHERE id IN (
     SELECT deck_id FROM deck_tags
     WHERE tag_id=(
       SELECT id FROM tags
@@ -139,6 +139,7 @@ App.get('/api/users/:id', (req, res) => {
   db.query(`
   SELECT * FROM decks
   WHERE user_id=${id}
+  ORDER BY id DESC;
   `).then((results) => {
     res.send(results.rows);
   }).catch((e) => {
@@ -161,7 +162,7 @@ App.post('/api/decks/new', (req, res) => {
     const deckID = data[1].rows[0].id;
     //Get deck_id, front, back, hint, resource, image_url
     db.query(`
-    INSERT INTO cards (deck_id, front, back, hint, resource, image_url)
+    INSERT INTO cards (deck_id, front, image_url, hint, back, resource)
     VALUES ${getSQLValues(deckID, cardValues)}
     `).then((data) => {
     }).catch(e => console.log(e))
@@ -208,14 +209,12 @@ App.post('/api/decks/:id/edit', (req, res) => {
   if (d.image_url) {
     d.image = d.image_url
   }
-  console.log(d);
   db.query(`UPDATE decks SET 
     name = '${d.title}',
     description = '${d.description}',
     image_url = '${d.image}'
   WHERE id = ${id};
   `).then((data) => {
-    console.log(data.rows[0]);
     const cardValues = Object.values(c)
     // //Get deck_id, front, back, hint, resource, image_url
     db.query(`DELETE FROM cards
@@ -226,6 +225,15 @@ App.post('/api/decks/:id/edit', (req, res) => {
     }).catch(e => console.log(e))
   }).catch(e => console.log(e)) 
   res.send(req.body);
+})
+
+//Delete deck API
+App.post('/api/decks/:id/delete', (req, res) => {
+  const id = req.params.id;
+  db.query(`DELETE FROM decks
+  WHERE id=${id}`).then((res) => {
+    console.log(res);
+  })
 })
 
 App.get('/study/:id/original', (req, res) =>

@@ -41,6 +41,7 @@ export default function DeckForm(props) {
           description={input.description}
           image={input.image}
           tags={input.tags}
+          edit={props.edit | undefined}
         />
       </div>
 

@@ -12,8 +12,6 @@ export default function Search() {
       setSearch(res.data);
     });
   }, []);
-  console.log(search)
-
   const decks = search.map(result => {
     id++;
     return (
@@ -24,6 +22,7 @@ export default function Search() {
           description={result.description}
           id={id}
           deck_id={result.id}
+          edit={true}
         />
       </div>
     );
