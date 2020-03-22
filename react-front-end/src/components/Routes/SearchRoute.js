@@ -22,6 +22,7 @@ export default function Search() {
           description={result.description}
           id={id}
           deck_id={result.id}
+          edit={true}
         />
       </div>
     );
