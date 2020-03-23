@@ -17,8 +17,6 @@ export default function Match() {
   
   return (
     <div className="game-landing-page">
-      <h2>{`MEMORY MATCH for deck with id: ${id}`}</h2>
-      <Button>Start Memory Match</Button>
       <MatchGame cards={cardData} />
     </div>
   )
