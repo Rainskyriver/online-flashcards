@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import FirstCard from './MatchCard/FirstCard';
 import SecondCard from './MatchCard/SecondCard';
-import '../../../../styles/MatchGame.css'
+import '../../../../styles/MatchGame.css';
 
 function shuffle(array) {
   const returnArray = array.slice(0);
@@ -33,6 +33,7 @@ export default function MatchGame(props) {
   const [first, setFirst] = useState(0);
   const [second, setSecond] = useState(0);
   const [flipHistory, setFlipHistory] = useState([])
+
   const selectedCard = (id, uid) => {
     if (!first) {
       setFirst(() => id);
@@ -90,8 +91,18 @@ export default function MatchGame(props) {
       )
     }
   }))
+  const victoryScreen = () => {
+    if (flipHistory.length === 12) {
+      return (
+        <div>
+          <h2>Congratulations</h2>
+        </div>
+      )
+    }
+  }
   return (
     <div className="wrapper">
+      {victoryScreen()}
       <div className='container' >
         {deckR}
       </div>

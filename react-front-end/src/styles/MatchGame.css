@@ -10,3 +10,7 @@
   /* overflow: hidden; */
   /* resize: both; */
 }
+.congratulations-container {
+  position: absolute;
+  align-self: center;
+}
