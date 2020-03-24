@@ -30,7 +30,7 @@ export default function EditDeck() {
   return (
     <div>
       <h2>{`NEW deck`}</h2>
-      <DeckForm giveDeckData={getDeckData} />
+      <DeckForm edit={true} giveDeckData={getDeckData} />
       <div style={{display: 'flex', alignItems: 'center', padding: '10px', justifyContent: 'center'}}>
         <Empty onClick={newCard} />
       </div>

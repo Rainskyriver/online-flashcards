@@ -16,7 +16,6 @@ export default function Stopwatch(props) {
   const stopTimer = () => {
     const startTime = moment(startTimer).format("YYYY-MM-DD h:mm:ss");
     const endTime = moment().format("YYYY-MM-DD h:mm:ss");
-
     const data = JSON.stringify({startTime, endTime, answers, cards});
 
     axios.post(`/api/study/${id}/original`, {

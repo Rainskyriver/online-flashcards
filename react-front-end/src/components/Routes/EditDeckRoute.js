@@ -42,7 +42,6 @@ export default function EditDeck() {
       </div>
     )
   })
-  
   const deck = Object.keys(deckData).map(() => {
     return (
       <DeckForm
@@ -50,13 +49,14 @@ export default function EditDeck() {
         description={deckData.description} 
         image={deckData.image_url} 
         giveDeckData={getDeckData} 
+        edit={true}
       />
       )
   })
-  const [cid, setCid] = useState(cardList.length)
   const newCard = () => {
-    setCardData(prev => [...prev, <div key={cid}><CardForm giveCardData={getCardData} id={cid}/></div>])
-    setCid(prev => prev + 1)
+    setCardData(prev => {
+      return {...prev, [cardList.length]: 0}
+    })
   }
   const saveDeck = (e) => {
     e.preventDefault()
