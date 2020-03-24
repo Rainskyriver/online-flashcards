@@ -4,7 +4,9 @@ const BodyParser = require('body-parser');
 const PORT = 9001;
 require('dotenv').config();
 const cookie = require('cookie-session');
-const getSQLValues = require('./helpers/getSQLValues')
+const getSQLValues = require('./helpers/getSQLValues');
+const getSQLTestQuestions = require('./helpers/getSQLTestQuestions');
+
 
 //Database setup
 const pg = require('pg');
@@ -92,7 +94,7 @@ App.get('/api/study/:id', (req, res) => {
     WHERE id=${id}
     `).then((result) => {
       data.deck = (result.rows[0]);
-      console.log(data)
+      // console.log(data)
       res.send(data);
     })
   }).catch((e) => {
@@ -134,8 +136,7 @@ App.get('/api/study/:id/original', (req, res) => {
 //Study Match game API
 App.get('/api/study/:id/match', (req, res) => {
   const id = req.params.id;
-
-  let data = {};
+    let data = {};
 
   db.query(`
   SELECT name FROM tags
@@ -160,8 +161,40 @@ App.get('/api/study/:id/match', (req, res) => {
     })
   }).catch((e) => {
     console.error(e);
-  })
+      })
 })
+
+
+//Study Original game Timestamps
+App.post('/api/study/:id/original', (req, res) => {
+  const data = JSON.parse(req.body.data)
+  const answers = data.answers;
+  const id = req.params.id;
+  const startTime = data.startTime;
+  const endTime = data.endTime;
+
+  data.cards.forEach((card) => {
+    if (!(card.id in answers)) {
+      answers[card.id] = false
+    }
+  })
+
+  // id here is DeckId
+  db.query(`
+  INSERT INTO tests (user_id, deck_id, time_start, time_end)
+  VALUES (3, '${id}', '${startTime}', '${endTime}')
+  RETURNING *;
+  `).then((data) => {
+    const testId = data.rows[0].id
+    db.query(`
+      INSERT INTO testquestions (card_id, test_id, correct)
+      VALUES ${getSQLTestQuestions(answers, testId)}
+    `)
+  }).catch((err) => {
+    console.log('here in error', err)
+      })
+})
+
 
 //Users Decks API
 App.get('/api/users/:id', (req, res) => {

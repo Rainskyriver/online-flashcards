@@ -15,12 +15,14 @@ import Stopwatch from "./Stopwatch";
 
 import "../../../styles/Game.css";
 
+const moment = require("moment");
+
 export default function Original() {
   const [deck, setDeck] = useState({});
   const [cards, setCards] = useState([]);
   const [start, setStart] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
-  const [answer, setAnswer] = useState(false);
+  const [correctness, setCorrectness] = useState({});
 
   const { id } = useParams();
 
@@ -29,7 +31,7 @@ export default function Original() {
     axios.get(`/api/study/${id}/original`).then(res => {
       setDeck(res.data.deck);
       setCards(res.data.cards);
-    });
+    })
   }, []);
 
   // Find cookie user id
@@ -61,7 +63,6 @@ export default function Original() {
     );
   });
 
-
   // Toggle next card or previous card
   const nextCard = () => {
     if (currentCard === flashCards.length - 1) {
@@ -92,12 +93,12 @@ export default function Original() {
 
   // Setting the card answer value
   const handleCorrect = () => {
-    setAnswer(true)
-  }
+    setCorrectness({ ...correctness, [cards[currentCard].id]: true });
+  };
 
   const handleIncorrect = () => {
-    setAnswer(false);
-  }
+    setCorrectness({ ...correctness, [cards[currentCard].id]: false });
+  };
 
   const startGame = () => {
     if (start === false) {
@@ -110,12 +111,17 @@ export default function Original() {
         </div>
       );
     } else if (start === true) {
+      const startTime = Date.now();
+
       return (
         <>
-          <Stopwatch start="true"/>
+          <Stopwatch
+            startTimer={startTime}
+            answers={correctness}
+            cards={cards}
+          />
 
           <div style={{ display: "flex", alignItems: "center" }}>
-
             <div className="previous-button">
               <IconButton onClick={previousCard}>
                 <ArrowBackIcon />
@@ -134,13 +140,20 @@ export default function Original() {
             </div>
           </div>
           <div className="answer-buttons">
-            <Button style={{ color: red[500] }}>Incorrect</Button>
-            <Button style={{ color: green[500] }}>Correct</Button>
+            <Button
+              style={{ color: red[500] }}
+              onClick={() => handleIncorrect()}
+            >
+              Incorrect
+            </Button>
+            <Button
+              style={{ color: green[500] }}
+              onClick={() => handleCorrect()}
+            >
+              Correct
+            </Button>
           </div>
-          <ProgressBar
-            current={currentCard + 1}
-            length={flashCards.length}
-          />
+          <ProgressBar current={currentCard + 1} length={flashCards.length} />
         </>
       );
     }

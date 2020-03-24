@@ -52,13 +52,20 @@ https://stackoverflow.com/questions/28329382/understanding-unique-keys-for-array
 * Couldn't figure out an issue with req.params
 Solved by looking at each individual file associated with the file path to find it.
 * Passing data between props for editting decks
+
 ### 21/03/20
 
 
 ### 22/03/20
+* Learned about requestAnimationFrame to make a smoother timer
+https://css-tricks.com/using-requestanimationframe-with-react-hooks/
 
 
 ### 23/03/20
+* Forgot how to check if a key exists in an object (bleh)
+https://stackoverflow.com/questions/455338/how-do-i-check-if-an-object-has-a-key-in-javascript
+* Re-learning PSQL queries
+https://www.postgresql.org/docs/9.5/sql-insert.html
 
 
 ### 24/03/20
