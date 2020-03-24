@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form } from "react-final-form";
 import { Paper, Grid, TextField } from "@material-ui/core";
 import Deck from "./Deck";
-import '../styles/Deck.css';
+import '../styles/DeckForm.css';
 
 const onSubmit = async values => {
   // const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
@@ -33,9 +33,9 @@ export default function DeckForm(props) {
     props.giveDeckData(input);
   };
 
+  console.log(props.averageTime);
   return (
     <div className="new-deck">
-      <div className="deck-display">
         <Deck
           title={input.title}
           description={input.description}
@@ -43,7 +43,6 @@ export default function DeckForm(props) {
           tags={input.tags}
           edit={props.edit | undefined}
         />
-      </div>
 
       <div className="deck-form">
         <Form
