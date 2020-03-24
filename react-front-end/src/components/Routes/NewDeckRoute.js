@@ -4,6 +4,7 @@ import Empty from '../Empty'
 import CardForm from '../CardForm'
 import axios from "axios";
 import DeckForm from '../DeckForm'
+import '../../styles/EditDeckRoute.css'
 
 export default function EditDeck() {
   const [id, setId] = useState(0)
@@ -28,13 +29,13 @@ export default function EditDeck() {
     setId(prev => prev + 1)
   }
   return (
-    <div>
+    <div className={'wrapper'}>
       <h2>{`NEW deck`}</h2>
       <DeckForm edit={true} giveDeckData={getDeckData} />
       <div style={{display: 'flex', alignItems: 'center', padding: '10px', justifyContent: 'center'}}>
         <Empty onClick={newCard} />
       </div>
-      <div className="cardContainer" style={{display:'flex'}}>
+      <div>
       {cards}
       </div>
       <form onSubmit={saveDeck}>
