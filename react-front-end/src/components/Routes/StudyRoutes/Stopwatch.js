@@ -1,50 +1,52 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useParams } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import axios from "axios";
+
+const moment = require('moment')
 
 export default function Stopwatch(props) {
-  const [time, setTime] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-  const [counter, setCounter] = useState(null)
-
-
-  const getMilliseconds = () => {
-    return ("0" + time * 100).slice(-2);
-  };
-
-  const getSeconds = () => {
-    return ("0" + parseInt(time % 60)).slice(-2);
-  };
-
-  const getMinutes = () => {
-    return ("0" + Math.floor(time / 60)).slice(-2);
-  };
+  const [displayTime, setDisplayTime] = useState("");
+  
+  const { startTimer, answers, cards } = props;
+  
+  const requestRef = useRef();
+  const { id } = useParams();
 
   const stopTimer = () => {
-    // setIsActive(false)
-    // clearInterval(counter);
+    const startTime = moment(startTimer).format("YYYY-MM-DD h:mm:ss");
+    const endTime = moment().format("YYYY-MM-DD h:mm:ss");
+
+    const data = JSON.stringify({startTime, endTime, answers, cards});
+
+    axios.post(`/api/study/${id}/original`, {
+      data
+    }).then((res) => {console.log(res)})
   };
+  
+  const animate = () => {
+    let dur = moment.duration(moment().diff(startTimer))
+    let mins = dur.minutes().toString().padStart(2, '0');
+    let secs = dur.seconds().toString().padStart(2, '0');
+    let millis = Math.floor(dur.milliseconds()/10).toString().padStart(2, '0');
+    setDisplayTime(`${mins}:${secs}:${millis}`);
 
-  // console.log('is this run', stopTimer())
-
+    requestRef.current = requestAnimationFrame(animate);
+  }
+  
   useEffect(() => {
-    // let interval = null;
-    setIsActive(props.start)
-
-    if (isActive) {
-      setCounter(setInterval(() => {
-        setTime(time => time + 0.001);
-      }, 100));
-    }
-
-  }, [isActive, time, props.start]);
+    requestRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(requestRef.current);
+  }, []); 
 
   return (
     <div style={{ textAlign: "center" }}>
       <h1>
-        {getMinutes()}:{getSeconds()}:{getMilliseconds()}
+        {displayTime}
       </h1>
-      <button type="button" className="btn btn-danger" onClick={stopTimer()}>
+      <Button variant="contained" color="primary" size="large" onClick={() => stopTimer()} component={Link} to={`/study/${id}`}>
         Complete Test
-      </button>
+      </Button>
     </div>
   );
 }
