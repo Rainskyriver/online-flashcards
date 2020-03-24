@@ -104,11 +104,37 @@ App.get('/api/study/:id', (req, res) => {
         SELECT COUNT(user_id) as attempts
         FROM tests
         WHERE user_id=3
-        AND deck_id=2
-        `)
-        .then((result) => {
-        data.attempts = (result.rows[0].attempts)
-        res.send(data);
+        AND deck_id=${id}
+        `).then((result) => {
+          data.attempts = (result.rows[0].attempts)
+          db.query(`
+          SELECT user_id, deck_id, avg(time_end - time_start) as average_time
+          FROM tests
+          WHERE user_id=3
+          AND deck_id=${id}
+          GROUP BY user_id, deck_id
+          `).then((result) => {
+            data.averageTime = (result.rows[0].average_time)
+            db.query(`
+            SELECT card_id, correct, COUNT(card_id) as mostwrong
+            FROM testquestions
+              WHERE correct=false
+              AND card_id IN (SELECT id FROM cards
+                WHERE deck_id=${id})
+            GROUP BY card_id, correct
+            ORDER BY mostwrong DESC LIMIT 1;
+            `).then((result) => {
+              data.mostWrong = (result.rows[0].mostwrong)
+              db.query(`
+              SELECT front
+              FROM cards
+              WHERE id=${result.rows[0].card_id}
+              `).then((result) => {
+                data.front = (result.rows[0].front)
+                res.send(data);
+              })
+            })
+          })
         })
       })
     })

@@ -9,7 +9,11 @@ export default function Study(props) {
     description: "",
     image: "",
     tags: "",
-    numOfCards: ""
+    numOfCards: "",
+    attempts: "",
+    averageTime: "",
+    mostWrong: "",
+    front: "",
   })
   
   const { id } = useParams();
@@ -21,7 +25,11 @@ export default function Study(props) {
         "description": res.data.deck.description,
         "image": res.data.deck.image_url,
         // "tags": res.data.tags
-        "numOfCards": res.data.numOfCards
+        "numOfCards": res.data.numOfCards,
+        "attempts": res.data.attempts,
+        "averageTime": res.data.averageTime,
+        "mostWrong": res.data.mostWrong,
+        "front": res.data.front,
       })
 
     })
@@ -35,6 +43,10 @@ export default function Study(props) {
       image={input.image}
       numOfCards={input.numOfCards}
       // tags={input.tags}
+      attempts={input.attempts}
+      averageTime={input.averageTime}
+      mostWrong={input.mostWrong}
+      front={input.front}
       />
     </div>
   )

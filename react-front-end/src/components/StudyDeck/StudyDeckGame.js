@@ -29,6 +29,8 @@ export default function StudyDeckGame(props) {
   const classes = useStyles();
   const { id } = useParams();
 
+  const { attempts, averageTime, mostWrong, front } = props;
+
   // Help to set the state to call the right component
   const FLASHCARDS = "FLASHCARDS";
   const TEST = "TEST";
@@ -78,7 +80,13 @@ export default function StudyDeckGame(props) {
       </div>
 
       <div className="game-info">
-        {mode === FLASHCARDS && <GameFlashCards />}
+        {mode === FLASHCARDS && 
+        <GameFlashCards 
+        attempts={attempts}
+        averageTime={averageTime}
+        mostWrong={mostWrong}
+        front={front}
+        />}
 
         {mode === TEST && <GameTest />}
 

@@ -4,7 +4,7 @@ import StudyDeckDisplay from "./StudyDeckDisplay";
 import StudyDeckGame from "./StudyDeckGame";
 
 export default function StudyIndex(props) {
-  const { title, description, image, tags, numOfCards } = props;
+  const { title, description, image, tags, numOfCards, attempts, averageTime, mostWrong, front } = props;
   return (
     <Fragment>
       <StudyDeckDisplay 
@@ -14,7 +14,12 @@ export default function StudyIndex(props) {
       // tags={tags}
       numOfCards={numOfCards}
       />
-      <StudyDeckGame />
+      <StudyDeckGame 
+      attempts={attempts}
+      averageTime={averageTime}
+      mostWrong={mostWrong}
+      front={front}
+      />
     </Fragment>
   );
 }
