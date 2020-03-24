@@ -68,7 +68,8 @@ export default function EditDeck() {
     }).then((res) => {console.log(res)})
   }
   return (
-    <div className='wrapper'>
+    <div className='deckWrapper'>
+      <div className='editBackground'/>
       <h2>{`EDIT for deck with id: ${id}`}</h2>
         {deck[0]}
       <div style={{display: 'flex', alignItems: 'center', padding: '10px', justifyContent: 'center'}}>

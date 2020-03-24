@@ -1,12 +1,15 @@
-.cardContainer {
-  display: grid;
-  grid-template-columns: 450px;
-  grid-template-rows: 300px 300px 300px;
-  justify-items: start;
-  align-self: center;
-}
-.wrapper {
+
+.deckWrapper {
   position: relative;
+  width: 95%;
+  margin: auto;
+  /* background-color: black; */
   /* overflow: hidden; */
   /* resize: both; */
+}
+.editBackground {
+  color: black;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
 }

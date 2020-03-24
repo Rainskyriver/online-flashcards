@@ -6,6 +6,7 @@ import axios from "axios";
 import DeckForm from '../DeckForm'
 import '../../styles/EditDeckRoute.css'
 
+
 export default function EditDeck() {
   const [id, setId] = useState(0)
   const [cards, setCards] = useState([])
@@ -28,10 +29,13 @@ export default function EditDeck() {
     setCards(prev => [...prev, <div key={id}><CardForm giveCardData={getCardData} id={id}/></div>])
     setId(prev => prev + 1)
   }
+  const hello = {
+     averageTime: {days: 34, hours: 12, minutes: 26, seconds: 22, milliseconds: 422.222}
+  }
   return (
-    <div className={'wrapper'}>
+    <div className={'deckWrapper'}>
       <h2>{`NEW deck`}</h2>
-      <DeckForm edit={true} giveDeckData={getDeckData} />
+      <DeckForm edit={true} averageTime={hello.averageTime} giveDeckData={getDeckData} />
       <div style={{display: 'flex', alignItems: 'center', padding: '10px', justifyContent: 'center'}}>
         <Empty onClick={newCard} />
       </div>

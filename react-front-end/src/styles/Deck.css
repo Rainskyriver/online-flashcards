@@ -1,10 +1,4 @@
-.new-deck {
-  display: flex;
-  justify-content: space-around;
-  background-color: lightyellow;
-  border-style: dashed;
-  padding: 16px;
-}
+
 
 .cover {
   display: flex;
