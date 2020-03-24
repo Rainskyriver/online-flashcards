@@ -1,0 +1,16 @@
+.container {
+  display: grid;
+  grid-template-columns: 450px 450px 450px 450px;
+  grid-template-rows: 300px 300px 300px;
+  justify-items: start;
+  align-self: center;
+}
+.wrapper {
+  position: relative;
+  /* overflow: hidden; */
+  /* resize: both; */
+}
+.congratulations-container {
+  position: absolute;
+  align-self: center;
+}
