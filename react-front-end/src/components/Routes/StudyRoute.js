@@ -9,19 +9,27 @@ export default function Study(props) {
     description: "",
     image: "",
     tags: "",
-    numOfCards: ""
+    numOfCards: "",
+    attempts: "",
+    averageTime: "",
+    mostWrong: "",
+    front: "",
   })
   
   const { id } = useParams();
 
   useEffect(() => {
     axios.get(`/api/study/${id}`).then((res) => {
-      // console.log(res.data)
       setInput({
         "title": res.data.deck.name,
         "description": res.data.deck.description,
         "image": res.data.deck.image_url,
         // "tags": res.data.tags
+        "numOfCards": res.data.numOfCards,
+        "attempts": res.data.attempts,
+        "averageTime": res.data.averageTime,
+        "mostWrong": res.data.mostWrong,
+        "front": res.data.front,
       })
 
     })
@@ -33,8 +41,12 @@ export default function Study(props) {
       title={input.title}
       description={input.description}
       image={input.image}
-      // numOfCards={}
+      numOfCards={input.numOfCards}
       // tags={input.tags}
+      attempts={input.attempts}
+      averageTime={input.averageTime}
+      mostWrong={input.mostWrong}
+      front={input.front}
       />
     </div>
   )

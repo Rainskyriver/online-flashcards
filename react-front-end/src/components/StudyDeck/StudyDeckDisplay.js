@@ -21,7 +21,7 @@ export default function StudyDeckDisplay(props) {
 
       <div className="right-display">
         <div>
-          <h3>Number of Cards: </h3><p>{numOfCards}Hey I've got cards</p>
+          <h3>Number of Cards: </h3><p>Hey! This deck has <strong>{numOfCards}</strong> cards!</p>
         </div>
         <div>
           <h3>Description: </h3><p>{description}</p>

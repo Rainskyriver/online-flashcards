@@ -86,16 +86,57 @@ App.get('/api/study/:id', (req, res) => {
   db.query(`
   SELECT name FROM tags
   WHERE id IN (SELECT tag_id FROM deck_tags
-    WHERE deck_id=${id})
+    WHERE deck_id=${id});
   `).then((result) => {
     data.tags = (result.rows);
     db.query(`
     SELECT * FROM decks
-    WHERE id=${id}
+    WHERE id=${id};
     `).then((result) => {
       data.deck = (result.rows[0]);
-      // console.log(data)
-      res.send(data);
+      db.query(`
+      SELECT COUNT(deck_id)
+      FROM cards
+      WHERE deck_id=${id};
+      `).then((result) => {
+        data.numOfCards = (result.rows[0].count)
+        db.query(`
+        SELECT COUNT(user_id) as attempts
+        FROM tests
+        WHERE user_id=3
+        AND deck_id=${id}
+        `).then((result) => {
+          data.attempts = (result.rows[0].attempts)
+          db.query(`
+          SELECT user_id, deck_id, avg(time_end - time_start) as average_time
+          FROM tests
+          WHERE user_id=3
+          AND deck_id=${id}
+          GROUP BY user_id, deck_id
+          `).then((result) => {
+            data.averageTime = (result.rows[0].average_time)
+            db.query(`
+            SELECT card_id, correct, COUNT(card_id) as mostwrong
+            FROM testquestions
+              WHERE correct=false
+              AND card_id IN (SELECT id FROM cards
+                WHERE deck_id=${id})
+            GROUP BY card_id, correct
+            ORDER BY mostwrong DESC LIMIT 1;
+            `).then((result) => {
+              data.mostWrong = (result.rows[0].mostwrong)
+              db.query(`
+              SELECT front
+              FROM cards
+              WHERE id=${result.rows[0].card_id}
+              `).then((result) => {
+                data.front = (result.rows[0].front)
+                res.send(data);
+              })
+            })
+          })
+        })
+      })
     })
   }).catch((e) => {
     console.error(e);
