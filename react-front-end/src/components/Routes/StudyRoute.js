@@ -16,12 +16,12 @@ export default function Study(props) {
 
   useEffect(() => {
     axios.get(`/api/study/${id}`).then((res) => {
-      // console.log(res.data)
       setInput({
         "title": res.data.deck.name,
         "description": res.data.deck.description,
         "image": res.data.deck.image_url,
         // "tags": res.data.tags
+        "numOfCards": res.data.numOfCards
       })
 
     })
@@ -33,7 +33,7 @@ export default function Study(props) {
       title={input.title}
       description={input.description}
       image={input.image}
-      // numOfCards={}
+      numOfCards={input.numOfCards}
       // tags={input.tags}
       />
     </div>

@@ -12,7 +12,7 @@ export default function StudyIndex(props) {
       description={description}
       image={image}
       // tags={tags}
-      // numOfCards={numOfCards}
+      numOfCards={numOfCards}
       />
       <StudyDeckGame />
     </Fragment>

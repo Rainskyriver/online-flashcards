@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import { Link, useParams } from "react-router-dom";
+import axios from 'axios';
+
 
 import GameFlashCards from "./GameFlashCards";
 import GameTest from "./GameTest";
@@ -18,6 +20,8 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
+
+
 
 export default function StudyDeckGame(props) {
   const [mode, setMode] = useState("FLASHCARDS");
@@ -40,6 +44,12 @@ export default function StudyDeckGame(props) {
       return `/study/${id}/match/`;
     }
   };
+
+  useEffect(() => {
+    axios.get(`/api/study/${id}`).then((res) => {
+      console.log(res.data)
+    })
+  }, [])
 
   return (
     <div className="game-display">
@@ -74,7 +84,6 @@ export default function StudyDeckGame(props) {
 
         {mode === MEMORYMATCH && <GameMemoryMatch />}
       </div>
-      {/* <Link to="/study/3/test"> */}
       <Button
         variant="contained"
         color="primary"
@@ -87,7 +96,6 @@ export default function StudyDeckGame(props) {
       >
         Play
       </Button>
-      {/* </Link> */}
     </div>
   );
 }

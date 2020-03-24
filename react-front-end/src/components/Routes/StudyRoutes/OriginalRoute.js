@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, IconButton } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
@@ -15,10 +15,7 @@ import Stopwatch from "./Stopwatch";
 
 import "../../../styles/Game.css";
 
-const moment = require("moment");
-
 export default function Original() {
-  // const [deck, setDeck] = useState({});
   const [cards, setCards] = useState([]);
   const [start, setStart] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
@@ -29,7 +26,6 @@ export default function Original() {
   // Gets data for the deck and cards based on deckid
   useEffect(() => {
     axios.get(`/api/study/${id}/original`).then(res => {
-      // setDeck(res.data.deck);
       setCards(res.data.cards);
     })
   }, []);
@@ -85,11 +81,11 @@ export default function Original() {
     leave: { opacity: 0, transform: "translate3d(-80%,0,0)" }
   });
 
-  const leftTransition = useTransition(currentCard, p => p, {
-    from: { opacity: 0, transform: "translate3d(-80%,0,0)" },
-    enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
-    leave: { opacity: 0, transform: "translate3d(100%,0,0)" }
-  });
+  // const leftTransition = useTransition(currentCard, p => p, {
+  //   from: { opacity: 0, transform: "translate3d(-80%,0,0)" },
+  //   enter: { opacity: 1, transform: "translate3d(0%,0,0)" },
+  //   leave: { opacity: 0, transform: "translate3d(100%,0,0)" }
+  // });
 
   // Setting the card answer value
   const handleCorrect = () => {

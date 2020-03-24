@@ -86,16 +86,31 @@ App.get('/api/study/:id', (req, res) => {
   db.query(`
   SELECT name FROM tags
   WHERE id IN (SELECT tag_id FROM deck_tags
-    WHERE deck_id=${id})
+    WHERE deck_id=${id});
   `).then((result) => {
     data.tags = (result.rows);
     db.query(`
     SELECT * FROM decks
-    WHERE id=${id}
+    WHERE id=${id};
     `).then((result) => {
       data.deck = (result.rows[0]);
-      // console.log(data)
-      res.send(data);
+      db.query(`
+      SELECT COUNT(deck_id)
+      FROM cards
+      WHERE deck_id=${id};
+      `).then((result) => {
+        data.numOfCards = (result.rows[0].count)
+        db.query(`
+        SELECT COUNT(user_id) as attempts
+        FROM tests
+        WHERE user_id=3
+        AND deck_id=2
+        `)
+        .then((result) => {
+        data.attempts = (result.rows[0].attempts)
+        res.send(data);
+        })
+      })
     })
   }).catch((e) => {
     console.error(e);
