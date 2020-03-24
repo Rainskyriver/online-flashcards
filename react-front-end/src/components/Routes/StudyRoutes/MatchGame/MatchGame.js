@@ -92,10 +92,10 @@ export default function MatchGame(props) {
     }
   }))
   const victoryScreen = () => {
-    if (flipHistory.length === 12) {
+    if (flipHistory.length === deckR.length) {
       return (
         <div>
-          <h2>Congratulations</h2>
+          <h2>Congratulations!</h2>
         </div>
       )
     }

@@ -17,6 +17,7 @@ export default function Match() {
   
   return (
     <div className="game-landing-page">
+      <Button href={`/study/${id}`}>Back to Study</Button>
       <MatchGame cards={cardData} />
     </div>
   )
