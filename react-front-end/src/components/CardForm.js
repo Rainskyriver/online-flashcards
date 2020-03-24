@@ -58,9 +58,9 @@ export default function CardForm(props) {
 
   const topVal = props.id * 300
   return (
-    <div>
+    <div className={'cardFormGrid'}>
 
-      <div className="cardFormContainer" style={{ alignItems: 'flex-between', position: 'relative', top: topVal}}>
+      <div className="cardFormContainer">
       <FlashCard
         ref={flashCardRef}
         question={input.question}

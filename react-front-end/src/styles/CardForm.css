@@ -1,9 +1,22 @@
-
+.cardFormContainer {
+  display: grid;
+  grid-template-columns: 450px 450px;
+  grid-template-rows: 300px;
+  justify-items: start;
+  grid-column-gap: 200px;
+  align-self: center;
+  justify-self: center;
+}
+.cardFormGrid {
+  display: grid;
+  grid-row-gap: 50px;
+  padding: 15px;
+}
 .f {
   position: absolute;
   max-width: 400px;
   width: 400px;
-  left: 1000px;
+  /* left: 1000px; */
   height: 250px;
   will-change: transform, opacity;
 }
@@ -17,14 +30,14 @@
   border-color: black;
 }
 
-.new-card {
+/* .new-card {
   display: flex;
   justify-content: space-between;
   background-color: lightyellow;
   border-style: dashed;
   padding: 3px;
   width: 100vw;
-}
+} */
 
 .card-form{
   align-self: flex-end;
