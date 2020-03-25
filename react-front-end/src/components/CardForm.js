@@ -92,7 +92,7 @@ export default function CardForm(props) {
                           name="question"
                           value={input.question}
                           onChange={e => handleChange(e, "question")}
-                          multiline
+                          
                           type="text"
                           label="Question"
                         />
@@ -103,7 +103,6 @@ export default function CardForm(props) {
                           name="image"
                           value={input.image}
                           onChange={e => handleChange(e, "image")}
-                          multiline
                           label="Image-URL"
                         />
                       </Grid>
@@ -113,7 +112,7 @@ export default function CardForm(props) {
                           name="hint"
                           value={input.hint}
                           onChange={e => handleChange(e, "hint")}
-                          multiline
+                          
                           label="Hint"
                         />
                       </Grid>
@@ -142,7 +141,7 @@ export default function CardForm(props) {
               >
                 <form onSubmit={handleSubmit} noValidate>
                   <Paper style={{ padding: 16 }}>
-                    <Grid container alignItems="flex-start" spacing={2}>
+                    <Grid container alignItems="flex-start" spacing={2} style={{}}>
                       <Grid item xs={12}>
                         <TextField
                           fullWidth
@@ -150,7 +149,7 @@ export default function CardForm(props) {
                           name="answer"
                           value={input.answer}
                           onChange={e => handleChange(e, "answer")}
-                          multiline
+                          
                           type="text"
                           label="Answer"
                         />
@@ -161,7 +160,7 @@ export default function CardForm(props) {
                           name="resources"
                           value={input.resources}
                           onChange={e => handleChange(e, "resources")}
-                          multiline
+                          
                           label="Resources"
                         />
                       </Grid>

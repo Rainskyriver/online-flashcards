@@ -7,6 +7,9 @@ import "../styles/Deck.css";
 import { makeStyles } from '@material-ui/core'; 
 import Modal from 'react-modal'
 import axios from "axios";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,39 +57,41 @@ export default function Deck(props) {
   const handleConfirm = () => {
     openModal();
   }
+  const handleDefault = (e) => {
+    e.target.src = 'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'
+  }
   const buttonHandler = () => {
     if (props.edit) {
       return (
         <div>
-          <Button disabled={true} onClick={handleEdit} >Edit</Button>
-          <Button disabled={true} onClick={handleConfirm} >Delete</Button>
+          <Button disabled={true} onClick={handleEdit} style={{minWidth: '0px'}} color={'primary'}><EditIcon/></Button>
+          <Button disabled={true} onClick={handleConfirm} style={{minWidth: '0px'}} color={'secondary'} ><DeleteIcon/></Button>
         </div>
       )
     } else {
       return (
         <div>
-          <Button onClick={handleEdit} >Edit</Button>
-          <Button onClick={handleConfirm} >Delete</Button>
+          <Button onClick={handleEdit} style={{minWidth: '0px'}}color={'primary'}><EditIcon/></Button>
+          <Button onClick={handleConfirm} style={{minWidth: '0px'}} color={'secondary'} ><DeleteIcon/></Button>
         </div>
       )
     }
   }
   return (
-    <Card className="root" style={{ borderRadius: "18px" }}>
+    <Card className="root" style={{  boxShadow: '0 10px 15px 0 rgba(0,0,0,.18)', borderRadius: "15px" }}>
         <div className="cover">
           <div onClick={handleSubmit} className="deck-image">
-            <img src={image} alt={title}></img>
+            <img onError={handleDefault} src={image} alt={title}></img>
           </div>
           <div className="deck-info">
-            <CardActions disableSpacing>
+            <CardActions style={{alignSelf: 'center'}}disableSpacing>
               <Typography
-                variant="body2"
+                variant="h6"
                 color="textSecondary"
                 align="center"
                 component="p"
-                style={{ textAlign: "left" }}
+                style={{ textAlign: "center" }}
               >
-                Title:
                 {title}
               </Typography>
             </CardActions>
@@ -98,13 +103,12 @@ export default function Deck(props) {
                 component="p"
                 style={{ textAlign: "left" }}
               >
-                Description:
                 {description}
               </Typography>
             </CardActions>
 
             <CardActions
-              style={{ justifyContent: "flex-start", marginTop: "auto" }}
+              style={{ justifyContent: "flex-end", marginTop: "auto" }}
               disableSpacing
               >
               <Typography
@@ -137,8 +141,8 @@ export default function Deck(props) {
                       flexDirection: "row",
                       justifyContent: "space-between"
                     }}>
-                    <Button onClick={handleDelete} variant={'contained'} >Yes</Button>
-                    <Button onClick={closeModal} variant={'contained'} >No</Button>
+                    <Button onClick={handleDelete} color={'secondary'}variant={'contained'} >Yes</Button>
+                    <Button onClick={closeModal} color={'primary'} variant={'contained'} >No</Button>
                     </div>
                   </div>
                 </Modal>
