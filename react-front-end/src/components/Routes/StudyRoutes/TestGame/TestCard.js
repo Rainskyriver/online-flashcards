@@ -1,7 +1,7 @@
 // import { render } from 'react-dom'
-import React, { useState, forwardRef, useImperativeHandle } from 'react';
-import { useSpring, animated as a }from 'react-spring';
-import '../../../../styles/FlashCard.css';
+import React, { useState, forwardRef, useImperativeHandle } from "react";
+import { useSpring, animated as a } from "react-spring";
+import "../../../../styles/FlashCard.css";
 
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -9,7 +9,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import {IconButton, Button} from "@material-ui/core/";
+import { IconButton, Button } from "@material-ui/core/";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -33,15 +33,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const TestCard = forwardRef((props, ref) => {
-  const [flipped, set] = useState(false)
+  const [flipped, set] = useState(false);
   const { question, image, hint, answer, resources, answered } = props;
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
     config: { mass: 5, tension: 500, friction: 80 }
-  })
+  });
   useImperativeHandle(ref, () => ({
-
     getAlert() {
       alert("getAlert from Child");
     },
@@ -51,7 +50,6 @@ const TestCard = forwardRef((props, ref) => {
         setExpanded(!expanded);
       }
     }
-
   }));
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -77,100 +75,100 @@ const TestCard = forwardRef((props, ref) => {
 
   return (
     <div>
-    <Card className="root" onClick={answered ? handleFlip : null}>
-      <a.div
-        className="c front"
-        style={{
-          zIndex: `${handleZIndex()}`,
-          opacity: opacity.interpolate(o => 1 - o),
-          transform
-        }}
-      >
-        <CardContent>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            align="center"
-            component="p"
-          >
-            {question}
-          </Typography>
-        </CardContent>
-
-        <CardActions
-          style={{ justifyContent: "flex-end", marginTop: "auto" }}
-          disableSpacing
+      <Card className="root" onClick={answered ? handleFlip : null}>
+        <a.div
+          className="c front"
+          style={{
+            zIndex: `${handleZIndex()}`,
+            opacity: opacity.interpolate(o => 1 - o),
+            transform
+          }}
         >
-          <Typography align="right" variant="subtitle2" component="p">
-            Hint
-          </Typography>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-            edge="end"
-            display="inline"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent style={{ padding: 0 }}>
-            <Typography paragraph>{hint}</Typography>
+          <CardContent>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              align="center"
+              component="p"
+            >
+              {question}
+            </Typography>
           </CardContent>
-        </Collapse>
-      </a.div>
 
-      <a.div
-        className="c back"
-        style={{
-          opacity,
-          transform: transform.interpolate(t => `${t} rotateX(180deg)`)
-        }}
-      >
-        <CardContent>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            align="center"
-            component="p"
+          <CardActions
+            style={{ justifyContent: "flex-end", marginTop: "auto" }}
+            disableSpacing
           >
-            {answer}
-          </Typography>
-        </CardContent>
+            <Typography align="right" variant="subtitle2" component="p">
+              Hint
+            </Typography>
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded
+              })}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+              edge="end"
+              display="inline"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </CardActions>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent style={{ padding: 0 }}>
+              <Typography paragraph>{hint}</Typography>
+            </CardContent>
+          </Collapse>
+        </a.div>
 
-        <CardActions
-          style={{ justifyContent: "flex-end", marginTop: "auto" }}
-          disableSpacing
+        <a.div
+          className="c back"
+          style={{
+            opacity,
+            transform: transform.interpolate(t => `${t} rotateX(180deg)`)
+          }}
         >
-          <Typography align="right" variant="subtitle2" component="p">
-            Resource
-          </Typography>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
-            edge="end"
-            display="inline"
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent style={{ padding: 0 }}>
-          Link to:<a href={resources}> {resources}</a>
+          <CardContent>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              align="center"
+              component="p"
+            >
+              {answer}
+            </Typography>
           </CardContent>
-        </Collapse>
-      </a.div>
-    </Card>
+
+          <CardActions
+            style={{ justifyContent: "flex-end", marginTop: "auto" }}
+            disableSpacing
+          >
+            <Typography align="right" variant="subtitle2" component="p">
+              Resource
+            </Typography>
+            <IconButton
+              className={clsx(classes.expand, {
+                [classes.expandOpen]: expanded
+              })}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+              edge="end"
+              display="inline"
+            >
+              <ExpandMoreIcon />
+            </IconButton>
+          </CardActions>
+          <Collapse in={expanded} timeout="auto" unmountOnExit>
+            <CardContent style={{ padding: 0 }}>
+              Link to:<a href={resources}> {resources}</a>
+            </CardContent>
+          </Collapse>
+        </a.div>
+      </Card>
     </div>
-  )
+  );
 });
 
-export default TestCard
+export default TestCard;
