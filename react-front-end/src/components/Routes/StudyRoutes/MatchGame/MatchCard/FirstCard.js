@@ -67,7 +67,7 @@ const FirstCard = forwardRef((props, ref) => {
           transform
         }}
       >
-        <CardContent style={{ alignSelf: 'center', display: "flex", alignItems: "center", height: "inherit"}}>
+        <CardContent>
           <img style={{size: '50px'}} src={'https://images-na.ssl-images-amazon.com/images/I/51-TrKw%2BYtL._AC_SX355_.jpg'}/>
         </CardContent>
       </a.div>
