@@ -236,6 +236,37 @@ App.post('/api/study/:id/original', (req, res) => {
       })
 })
 
+//Study test API
+App.get('/api/study/:id/test', (req, res) => {
+  const id = req.params.id;
+    let data = {};
+
+  db.query(`
+  SELECT name FROM tags
+  WHERE id IN (SELECT tag_id FROM deck_tags
+    WHERE deck_id=${id})
+  `).then((result) => {
+    data.tags = (result.rows);
+    db.query(`
+    SELECT * FROM decks
+    WHERE id=${id}
+    `).then((result) => {
+      data.deck = (result.rows[0]);
+      db.query(`
+      SELECT * FROM cards
+      WHERE deck_id=${id}
+      LIMIT 6;
+      `).then((result) => {
+        data.cards = (result.rows)
+        console.log(data)
+        res.send(data);
+      })
+    })
+  }).catch((e) => {
+    console.error(e);
+      })
+})
+
 
 //Users Decks API
 App.get('/api/users/:id', (req, res) => {
