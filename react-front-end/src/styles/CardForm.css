@@ -10,7 +10,7 @@
 .cardFormGrid {
   display: grid;
   grid-row-gap: 50px;
-  padding: 15px;
+  padding: 25px;
 }
 .f {
   position: absolute;
@@ -24,9 +24,9 @@
 .fr,
 .ba {
   background-size: cover;
-  border-radius: 15px;
+  border-radius: 5px;
   border-style: solid;
-  border-width: .5em;
+  border-width: 2px;
   border-color: black;
 }
 

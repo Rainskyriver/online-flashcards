@@ -33,7 +33,6 @@ export default function DeckForm(props) {
     props.giveDeckData(input);
   };
 
-  console.log(props.averageTime);
   return (
     <div className="new-deck">
         <Deck
@@ -60,7 +59,7 @@ export default function DeckForm(props) {
                         name="title"
                         value={input.title}
                         onChange={e => handleChange(e, "title")}
-                        multiline
+                        
                         label="Title"
                       />
                     </Grid>
@@ -71,7 +70,7 @@ export default function DeckForm(props) {
                         name="description"
                         value={input.description}
                         onChange={e => handleChange(e, "description")}
-                        multiline
+                        
                         label="Description"
                       />
                     </Grid>
@@ -94,7 +93,7 @@ export default function DeckForm(props) {
                         name="tags"
                         value={input.tags}
                         onChange={e => handleChange(e, "tags")}
-                        multiline
+                        
                         label="Tags"
                       />
                     </Grid>

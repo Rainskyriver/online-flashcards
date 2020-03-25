@@ -1,3 +1,8 @@
+:root {
+ --main-bg-color: #59D126;
+ --secondary-bg-color: #F9D25E;
+}
+
 
 .deckWrapper {
   position: relative;
@@ -12,4 +17,10 @@
   z-index: 1;
   height: 100%;
   width: 100%;
+}
+.saveButton {
+  position: 'fixed';
+  bottom:'0px'; 
+  z-Index:'5'; 
+  right:'0';
 }
