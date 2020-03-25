@@ -23,7 +23,6 @@ App.use(cookie({
   keys: ['key1']
 }));
 
-
 //Api Routes
 const cardsRoutes = require('./routes/cards')
 const decksRoutes = require('./routes/decks')
@@ -131,7 +130,33 @@ App.get('/api/study/:id', (req, res) => {
               WHERE id=${result.rows[0].card_id}
               `).then((result) => {
                 data.front = (result.rows[0].front)
-                res.send(data);
+                db.query(`
+                SELECT COUNT(correct) as totalcorrect
+                FROM testquestions
+                WHERE correct=true
+                AND test_id IN (SELECT id FROM tests
+                WHERE deck_id=${id}
+                AND user_id=3)
+                `).then((result) => {
+                  data.averageCorrect = (Math.floor((Number(result.rows[0].totalcorrect) / (Number(data.attempts) * Number(data.numOfCards))) * 100))
+                  db.query(`
+                  SELECT test_id, COUNT(correct) as bestattempt
+                  FROM testquestions
+                  WHERE correct=true
+                  GROUP BY test_id
+                  ORDER BY bestattempt DESC LIMIT 1
+                  `).then((result) => {
+                    data.bestAttempt = result.rows[0].bestattempt
+                    db.query(`
+                    SELECT id, time_start, time_end
+                    FROM tests
+                    WHERE id=${result.rows[0].test_id}
+                    `).then((result) => {
+                      data.bestAttemptData = result.rows[0]
+                      res.send(data);
+                    })
+                  })
+                })
               })
             })
           })
@@ -370,92 +395,6 @@ App.post('/api/decks/:id/delete', (req, res) => {
     console.log(res);
   })
 })
-
-App.get('/study/:id/original', (req, res) =>
-res.send('hello2')
-);
-
-App.get('/study/:id/test', (req, res) =>
-res.send('hello3')
-);
-
-App.get('/study/:id/match', (req, res) =>
-res.send('hello4')
-);
-
-App.get('/deck/:id', (req, res) =>
-res.send('hello5')
-);
-
-App.get('/search/:params', (req, res) =>
-res.send('hello6')
-);
-
-App.get('/study/:id', (req, res) =>
-  res.send('hello2')
-);
-
-App.get('/', (req, res) => 
-  res.send('hello')
-);
-
-
-// API Routes
-// API/USERS
-App.get('/api/users', (req, res) => 
-  res.send('hi api/users')
-);
-
-App.post('/api/users', (req, res) => 
-  res.send('post api/users')
-);
-
-// API/DECKS
-App.get('/api/decks', (req, res) => 
-  res.send('get api/decks')
-);
-
-App.post('/api/decks', (req, res) => 
-  res.send('post api/decks')
-);
-
-App.put('/api/decks', (req, res) => 
-  res.send('put api/decks')
-);
-
-App.delete('/api/decks', (req, res) => 
-  res.send('delete api/decks')
-);
-
-// API/CARDS
-App.get('/api/cards', (req, res) => 
-  res.send('get api/cards')
-);
-
-App.post('/api/cards', (req, res) => 
-  res.send('post api/cards')
-);
-
-App.put('/api/cards', (req, res) => 
-  res.send('put api/cards')
-);
-
-App.delete('/api/cards', (req, res) => 
-  res.send('delete api/cards')
-);
-
-// API/TESTS
-App.get('/api/tests', (req, res) => 
-  res.send('get api/tests')
-);
-
-App.post('/api/tests', (req, res) => 
-  res.send('post api/tests')
-);
-
-App.put('/api/tests', (req, res) => 
-  res.send('put api/tests')
-);
 
 // LISTENING ON THIS PORT
 App.listen(PORT, () => {
