@@ -143,8 +143,10 @@ App.get('/api/study/:id', (req, res) => {
                   SELECT test_id, COUNT(correct) as bestattempt
                   FROM testquestions
                   WHERE correct=true
-                  GROUP BY test_id
-                  ORDER BY bestattempt DESC LIMIT 1
+                  AND test_id IN (SELECT id FROM tests
+                  WHERE deck_id=8
+                  AND user_id=3)
+                  GROUP BY test_id LIMIT 1
                   `).then((result) => {
                     data.bestAttempt = result.rows[0].bestattempt
                     db.query(`

@@ -85,7 +85,6 @@ export default function DeckForm(props) {
                         name="image"
                         value={input.image}
                         onChange={e => handleChange(e, "image")}
-                        multiline
                         label="Image-URL"
                       />
                     </Grid>

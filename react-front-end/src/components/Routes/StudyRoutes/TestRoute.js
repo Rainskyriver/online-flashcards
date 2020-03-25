@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Button, FormHelperText } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import axios from "axios";
 import TestCard from "../StudyRoutes/TestGame/TestCard";
 import "../../../styles/Game.css";
 import Stopwatch from "./Stopwatch";
+import ProgressBar from "./ProgressBar";
+
 const { randomSelection, shuffle } = require("./TestGame/Helpers");
 
 export default function Test() {
@@ -115,6 +117,7 @@ export default function Test() {
               <Button onClick={handleNextCard}>Next Answer</Button>
             </div>
           </div>
+          <ProgressBar current={currentCard + 1} length={TestCards.length} />
         </>
       );
     }
