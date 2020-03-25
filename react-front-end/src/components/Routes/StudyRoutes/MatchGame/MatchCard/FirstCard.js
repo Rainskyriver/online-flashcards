@@ -39,6 +39,7 @@ const FirstCard = forwardRef((props, ref) => {
     if (image_url) {
       return (
         <img style={{
+          fontSize: '25px',
           height: 'auto',
           borderRadius: '8px',
           width: '25vw',
@@ -78,7 +79,7 @@ const FirstCard = forwardRef((props, ref) => {
           transform: transform.interpolate(t => `${t} rotateX(180deg)`)
         }}
       >
-        <CardContent>
+        <CardContent style={{ alignSelf: 'center', display: "flex", alignItems: "center", height: "inherit"}}>
           {content()}
         </CardContent>
       </a.div>

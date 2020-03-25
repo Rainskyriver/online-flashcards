@@ -85,12 +85,13 @@ const FlashCard = forwardRef((props, ref) => {
           transform
         }}
       >
-        <CardContent>
+        <CardContent style={{ alignSelf: 'center', display: "flex", alignItems: "center", height: "inherit"}}>
           <Typography
-            variant="body2"
+            variant="h5"
             color="textSecondary"
             align="center"
             component="p"
+
           >
             {question}
           </Typography>
@@ -130,9 +131,9 @@ const FlashCard = forwardRef((props, ref) => {
           transform: transform.interpolate(t => `${t} rotateX(180deg)`)
         }}
       >
-        <CardContent>
+        <CardContent style={{ alignSelf: 'center', display: "flex", alignItems: "center", height: "inherit"}}>
           <Typography
-            variant="body2"
+            variant="h5"
             color="textSecondary"
             align="center"
             component="p"
@@ -161,7 +162,7 @@ const FlashCard = forwardRef((props, ref) => {
             <ExpandMoreIcon />
           </IconButton>
         </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Collapse style={{ minHeight: null}}in={expanded} timeout="auto" unmountOnExit>
           <CardContent style={{ padding: 0 }}>
           Link to:<a href={resources}> {resources}</a>
           </CardContent>

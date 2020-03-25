@@ -5,8 +5,10 @@ import CardForm from '../CardForm'
 import axios from "axios";
 import DeckForm from '../DeckForm'
 import '../../styles/EditDeckRoute.css'
+import {green, yellow} from '@material-ui/core/colors'
 
-
+const primary = green[700];
+const secondary = []
 export default function EditDeck() {
   const [id, setId] = useState(0)
   const [cards, setCards] = useState([])
@@ -29,13 +31,10 @@ export default function EditDeck() {
     setCards(prev => [...prev, <div key={id}><CardForm giveCardData={getCardData} id={id}/></div>])
     setId(prev => prev + 1)
   }
-  const hello = {
-     averageTime: {days: 34, hours: 12, minutes: 26, seconds: 22, milliseconds: 422.222}
-  }
   return (
     <div className={'deckWrapper'}>
       <h2>{`NEW deck`}</h2>
-      <DeckForm edit={true} averageTime={hello.averageTime} giveDeckData={getDeckData} />
+      <DeckForm edit={true} giveDeckData={getDeckData} />
       <div style={{display: 'flex', alignItems: 'center', padding: '10px', justifyContent: 'center'}}>
         <Empty onClick={newCard} />
       </div>
@@ -43,7 +42,7 @@ export default function EditDeck() {
       {cards}
       </div>
       <form onSubmit={saveDeck}>
-      <Button type='submit' color={'primary'} variant={'contained'} style={{position: 'fixed', bottom:'0px', zIndex:'5', right:'0'}} >Save Deck</Button>
+      <Button type='submit' color={'primary'} variant={'contained'} style={{ width: '100%', position: 'fixed', bottom:'0px', zIndex:'5', right:'0'}} >Save Deck</Button>
       </form>
     </div>
   );
