@@ -27,7 +27,7 @@ export default function Original() {
   useEffect(() => {
     axios.get(`/api/study/${id}/original`).then(res => {
       setCards(res.data.cards);
-    })
+    });
   }, []);
 
   // Find cookie user id
@@ -115,6 +115,7 @@ export default function Original() {
             startTimer={startTime}
             answers={correctness}
             cards={cards}
+            game="original"
           />
 
           <div style={{ display: "flex", alignItems: "center" }}>
@@ -154,8 +155,6 @@ export default function Original() {
       );
     }
   };
-
-
 
   return (
     <div className="game-landing-page">

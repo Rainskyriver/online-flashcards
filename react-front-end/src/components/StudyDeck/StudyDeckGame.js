@@ -3,7 +3,6 @@ import Button from "@material-ui/core/Button";
 import { makeStyles } from "@material-ui/core/styles";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import { Link, useParams } from "react-router-dom";
-import axios from 'axios';
 
 
 import GameFlashCards from "./GameFlashCards";
@@ -21,15 +20,11 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-
-
 export default function StudyDeckGame(props) {
   const [mode, setMode] = useState("FLASHCARDS");
 
   const classes = useStyles();
   const { id } = useParams();
-
-  const { attempts, averageTime, mostWrong, front } = props;
 
   // Help to set the state to call the right component
   const FLASHCARDS = "FLASHCARDS";
@@ -46,12 +41,6 @@ export default function StudyDeckGame(props) {
       return `/study/${id}/match/`;
     }
   };
-
-  useEffect(() => {
-    axios.get(`/api/study/${id}`).then((res) => {
-      console.log(res.data)
-    })
-  }, [])
 
   return (
     <div className="game-display">
@@ -80,13 +69,7 @@ export default function StudyDeckGame(props) {
       </div>
 
       <div className="game-info">
-        {mode === FLASHCARDS && 
-        <GameFlashCards 
-        attempts={attempts}
-        averageTime={averageTime}
-        mostWrong={mostWrong}
-        front={front}
-        />}
+        {mode === FLASHCARDS && <GameFlashCards />}
 
         {mode === TEST && <GameTest />}
 

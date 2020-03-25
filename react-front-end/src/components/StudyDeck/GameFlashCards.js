@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-export default function GameFlashCards(props) {
+
+export default function GameFlashCards() {
   const [input, setInput] = useState({
     hours: "",
     minutes: "",
@@ -8,23 +11,24 @@ export default function GameFlashCards(props) {
     milliseconds: "",
     attempts: "",
     front: "",
+    mostWrong: "",
   })
 
-  const { attempts, averageTime, mostWrong, front } = props;
-
+  const { id } = useParams();
+  
   useEffect(() => {
-    setInput({
-      "hours": averageTime.hours || '00',
-      "minutes": averageTime.minutes || '00',
-      "seconds": averageTime.seconds || '00',
-      "milliseconds": averageTime.milliseconds,
-      "attempts": attempts || '00',
-      "front": front || "No attempts made yet"
+    axios.get(`/api/study/${id}`).then((res) => {
+      setInput({
+        "hours": res.data.averageTime.hours || '00',
+        "minutes": res.data.averageTime.minutes || '00',
+        "seconds": res.data.averageTime.seconds || '00',
+        "milliseconds": res.data.averageTime.milliseconds,
+        "attempts": res.data.attempts || '00',
+        "front": res.data.front || "No attempts made yet",
+        "mostWrong": res.data.mostWrong || ""
+      })
     })
-
-  }, [props])
-
-  console.log(input.front)
+  }, [])
 
   return (
     <div className="game-flash-cards">
@@ -43,7 +47,7 @@ export default function GameFlashCards(props) {
       <div className="game-right-display">
         <h1>History</h1>
         <div>
-          <p>Most Wrong: <strong>{input.front} {mostWrong}</strong></p>
+          <p>Most Wrong: <strong>{input.front} {input.mostWrong}</strong></p>
           <p>Average % Correct:</p>
           <p>Average Time Completion: <strong>{input.hours}:{input.minutes}:{input.seconds}</strong> (hh:mm:ss)</p>
           <p>Attempts: <strong>{input.attempts}</strong></p>
