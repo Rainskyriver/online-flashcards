@@ -9,7 +9,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import IconButton from "@material-ui/core/IconButton";
+import {IconButton, Button} from "@material-ui/core/";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
 
 const TestCard = forwardRef((props, ref) => {
   const [flipped, set] = useState(false)
-  const { question, image, hint, answer, resources } = props;
+  const { question, image, hint, answer, resources, answered } = props;
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
@@ -76,7 +76,8 @@ const TestCard = forwardRef((props, ref) => {
   };
 
   return (
-    <Card className="root" onClick={handleFlip}>
+    <div>
+    <Card className="root" onClick={answered ? handleFlip : null}>
       <a.div
         className="c front"
         style={{
@@ -168,6 +169,7 @@ const TestCard = forwardRef((props, ref) => {
         </Collapse>
       </a.div>
     </Card>
+    </div>
   )
 });
 

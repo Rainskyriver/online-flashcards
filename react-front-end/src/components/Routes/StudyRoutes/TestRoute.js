@@ -23,6 +23,9 @@ function shuffle(array) {
 }
 
 const randomSelection = (id, arr) => {
+  if ( arr.length < 1 ) {
+    return [];
+  }
   const returnArray = [];
   let firstIndex = Math.floor(Math.random() * arr.length)
   returnArray.push(arr[id])
@@ -40,29 +43,29 @@ const randomSelection = (id, arr) => {
 
 export default function Test() {
   const [cards, setCards] = useState([]);
+  const [start, setStart] = useState(false);
   const [answers, setAnswers] = useState([]);
-  const [currentCard, setCurrentCard] = useState(0);
+  const [currentCard, setCurrentCard] = useState(-1);
+  const [answered, setAnswered] = useState(false);
+  const [correct, setCorrect] = useState({});
 
   const { id } = useParams();
 
   useEffect(() => {
     axios.get(`/api/study/${id}/test`).then(res => {
       setCards(shuffle(res.data.cards));
+      setCurrentCard(0)
     });
   }, []);
 
   useEffect(() => {
-
-    setAnswers([cards[0], cards[1], cards[2]])
-
-  }, [cards])
-
-  console.log(answers)
-
+    setAnswers(shuffle(randomSelection(currentCard, cards)))
+  }, [currentCard])
 
   const TestCards = cards.map(result => {
     return (
       <TestCard
+        answered={answered}
         key={result.id}
         question={result.front}
         image={result.image_url}
@@ -72,13 +75,30 @@ export default function Test() {
       />
     );
   });
-  
-  // const RandomAnswers = answers.map(result => {
-  //   return (
-  //     <Button key={result.id}>{result.back}</Button>
-  //   )
-  // })
 
+  const answerHandler = (id) => {
+    if (id === cards[currentCard].id) {
+      setCorrect({...correct, [cards[currentCard].id]: true})
+    } else {
+      setCorrect({...correct, [cards[currentCard].id]: false})
+    }
+  }
+  const submitHandler = () => {
+    setAnswered(true);
+    console.log(correct[Object.keys(correct)[Object.keys(correct).length - 1]])
+  }
+  console.log(answers)
+  const RandomAnswers = answers.map(result => {
+    if (answered && correct[Object.keys(correct)[Object.keys(correct).length - 1]]) {
+      return (
+        <Button style={{color: 'green'}} disabled={true} onClick={() => answerHandler(result.id)} key={result.id}>{result.back}</Button>        
+      )
+    } else {
+      return (
+        <Button onClick={() => answerHandler(result.id)} key={result.id}>{result.back}</Button>
+      )
+    }
+  })
   const handleNextCard = () => {
     if (currentCard === TestCards.length - 1) {
       return;
@@ -86,19 +106,37 @@ export default function Test() {
     setCurrentCard(currentCard + 1);
   };
 
-
+  const startHandler = () => {
+    if (start) {
+      return (
+        <div>
+          {TestCards[currentCard]}
+          <div style={{ marginTop: "450px" }}>
+            {RandomAnswers}
+          </div>
+          <Button onClick={submitHandler} >Submit</Button>
+          <Button onClick={handleNextCard} >Next Answer</Button>
+        </div>
+      )
+    } else {
+      return (
+        <div className="start-container">
+        <Button onClick={() => setStart(true)}>
+          Start Test
+        </Button>
+        <h1 className="start-message">Are you ready to ace this test?!</h1>
+      </div>
+      )
+    }
+  }
 
   return (
     <div className="game-landing-page">
       <h2>{`Test for deck with id: ${id}`}</h2>
-      <Button>Start Study for Test</Button>
+      {startHandler()}
       <div>
-        {TestCards[currentCard]}
       </div>
-      <div style={{ marginTop: "450px" }}>
-        {/* {RandomAnswers} */}
-        <Button onClick={handleNextCard}>Next Answer</Button>
-      </div>
+
     </div>
   );
 }
