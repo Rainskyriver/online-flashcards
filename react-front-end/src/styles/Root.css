@@ -1,6 +1,6 @@
 .landing-page {
   display: flex;
-  background: url("https://www.psdgraphics.com/file/fresh-background.jpg");
+  background: url("https://i.imgur.com/RY5wte7.png");
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
@@ -20,7 +20,7 @@
   display: flex;
   flex-direction: column;
   width: 50vw;
-  padding-top: 150px;
+  padding-top: 5%;
   padding-left: 100px;
 }
 
@@ -28,10 +28,10 @@
   display: flex;
   justify-content: center;
   align-self: center;
-  width: 50%;
+  width: 50%
 }
 
 #landing-card {
   align-self: center;
-  width: 50vw;
+  width: 85%;
 }

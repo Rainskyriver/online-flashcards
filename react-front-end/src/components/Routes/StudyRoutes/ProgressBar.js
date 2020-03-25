@@ -26,12 +26,18 @@ export default function ProgressBar(props) {
     }
 
     progress();
-    
   }, [current]);
 
   return (
     <div className={classes.root}>
-      <LinearProgress style={{height:"inherit"}} variant="determinate" value={completed} />
+      <LinearProgress
+        style={{ height: "inherit" }}
+        variant="determinate"
+        value={completed}
+      />
+      <h2 style={{ textAlign: "center" }}>
+        {current}/{length}
+      </h2>
     </div>
   );
 }
