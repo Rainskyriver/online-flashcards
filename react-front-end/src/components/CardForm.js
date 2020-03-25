@@ -141,7 +141,7 @@ export default function CardForm(props) {
               >
                 <form onSubmit={handleSubmit} noValidate>
                   <Paper style={{ padding: 16 }}>
-                    <Grid container alignItems="flex-start" spacing={2} style={{}}>
+                    <Grid container alignItems="flex-start" spacing={2} style={{height: "-webkit-fill-available", marginBottom: "0px", marginTop: "0px"}}>
                       <Grid item xs={12}>
                         <TextField
                           fullWidth
