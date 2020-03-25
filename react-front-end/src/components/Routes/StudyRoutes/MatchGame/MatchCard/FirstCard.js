@@ -39,6 +39,7 @@ const FirstCard = forwardRef((props, ref) => {
     if (image_url) {
       return (
         <img style={{
+          fontSize: '25px',
           height: 'auto',
           borderRadius: '8px',
           width: '25vw',
@@ -66,7 +67,7 @@ const FirstCard = forwardRef((props, ref) => {
           transform
         }}
       >
-        <CardContent>
+        <CardContent style={{ alignSelf: 'center', display: "flex", alignItems: "center", height: "inherit"}}>
           <img style={{size: '50px'}} src={'https://images-na.ssl-images-amazon.com/images/I/51-TrKw%2BYtL._AC_SX355_.jpg'}/>
         </CardContent>
       </a.div>
@@ -78,7 +79,7 @@ const FirstCard = forwardRef((props, ref) => {
           transform: transform.interpolate(t => `${t} rotateX(180deg)`)
         }}
       >
-        <CardContent>
+        <CardContent style={{ alignSelf: 'center', display: "flex", alignItems: "center", height: "inherit"}}>
           {content()}
         </CardContent>
       </a.div>

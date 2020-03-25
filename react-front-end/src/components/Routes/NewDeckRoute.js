@@ -5,8 +5,10 @@ import CardForm from '../CardForm'
 import axios from "axios";
 import DeckForm from '../DeckForm'
 import '../../styles/EditDeckRoute.css'
+import {green, yellow} from '@material-ui/core/colors'
 
-
+const primary = green[700];
+const secondary = []
 export default function EditDeck() {
   const [id, setId] = useState(0)
   const [cards, setCards] = useState([])
@@ -43,7 +45,7 @@ export default function EditDeck() {
       {cards}
       </div>
       <form onSubmit={saveDeck}>
-      <Button type='submit' color={'primary'} variant={'contained'} style={{position: 'fixed', bottom:'0px', zIndex:'5', right:'0'}} >Save Deck</Button>
+      <Button type='submit' color={'primary'} variant={'contained'} style={{ width: '100%', position: 'fixed', bottom:'0px', zIndex:'5', right:'0'}} >Save Deck</Button>
       </form>
     </div>
   );

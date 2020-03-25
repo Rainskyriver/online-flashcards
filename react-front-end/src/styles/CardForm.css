@@ -10,7 +10,7 @@
 .cardFormGrid {
   display: grid;
   grid-row-gap: 50px;
-  padding: 15px;
+  padding: 25px;
 }
 .f {
   position: absolute;
