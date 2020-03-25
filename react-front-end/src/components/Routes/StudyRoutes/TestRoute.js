@@ -77,6 +77,7 @@ export default function Test() {
   });
 
   const answerHandler = (id) => {
+
     if (id === cards[currentCard].id) {
       setCorrect({...correct, [cards[currentCard].id]: true})
     } else {
@@ -87,7 +88,6 @@ export default function Test() {
     setAnswered(true);
     console.log(correct[Object.keys(correct)[Object.keys(correct).length - 1]])
   }
-  console.log(answers)
   const RandomAnswers = answers.map(result => {
     if (answered && correct[Object.keys(correct)[Object.keys(correct).length - 1]]) {
       return (
@@ -100,6 +100,7 @@ export default function Test() {
     }
   })
   const handleNextCard = () => {
+    setAnswered(false);
     if (currentCard === TestCards.length - 1) {
       return;
     }
