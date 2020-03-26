@@ -14,12 +14,6 @@ export default function EditDeck() {
   const [cards, setCards] = useState([])
   const [cardData, setCardData] = useState({})
   const [deckData, setDeckData] = useState({})
-  const getDeckData = (data => {
-    setDeckData(data)
-  })
-  const getCardData = ((id, input) => {
-    setCardData(prev => ({...prev, [id]: input}))
-  })
   const saveDeck = (e) => {
     e.preventDefault();
     const data = JSON.stringify({deckData, cardData})
@@ -28,13 +22,13 @@ export default function EditDeck() {
     }).then((res) => {console.log(res)})
   };
   const newCard = () => {
-    setCards(prev => [...prev, <div key={id}><CardForm giveCardData={getCardData} id={id}/></div>])
+    setCards(prev => [...prev, <div key={id}><CardForm giveCardData={setCardData} id={id}/></div>])
     setId(prev => prev + 1)
   }
   return (
     <div className={'deckWrapper'}>
       <h2>{`NEW deck`}</h2>
-      <DeckForm edit={true} giveDeckData={getDeckData} />
+      <DeckForm edit={true} giveDeckData={setDeckData} />
       <div style={{display: 'flex', alignItems: 'center', padding: '10px', justifyContent: 'center'}}>
         <Empty onClick={newCard} />
       </div>
