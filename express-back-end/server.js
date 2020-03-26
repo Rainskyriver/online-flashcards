@@ -364,6 +364,7 @@ App.post('/api/decks/:id/edit', (req, res) => {
   const id = req.params.id;
   const data = JSON.parse(req.body.data)
   const d = data.deckData
+  console.log(d.tags)
   const c = data.cardData
   if (d.name) {
     d.title = d.name

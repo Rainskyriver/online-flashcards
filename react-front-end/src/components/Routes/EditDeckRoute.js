@@ -18,9 +18,11 @@ export default function EditDeck() {
   useEffect(() => {
     axios.get(`/api/decks/${id}/edit`).then(res => {
       setCardData(res.data.cards)
-      setDeckData(res.data.deck)
+      setDeckData({...res.data.deck, tags: [...res.data.tags]})
+      // setTagData(res.data.tags)
     })
   }, [])
+  console.log(deckData)
   const cardList = Object.keys(cardData).map(key => {
     buildID++;
     return (
@@ -44,6 +46,7 @@ export default function EditDeck() {
         title={deckData.name} 
         description={deckData.description} 
         image={deckData.image_url} 
+        tags={deckData.tags}
         giveDeckData={setDeckData} 
         edit={true}
       />
