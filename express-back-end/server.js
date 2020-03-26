@@ -364,8 +364,8 @@ App.post('/api/decks/:id/edit', (req, res) => {
   const id = req.params.id;
   const data = JSON.parse(req.body.data)
   const d = data.deckData
-  console.log(d.tags)
   const c = data.cardData
+  console.log(d.tags)
   if (d.name) {
     d.title = d.name
   }
@@ -385,6 +385,12 @@ App.post('/api/decks/:id/edit', (req, res) => {
     INSERT INTO cards (deck_id, front, image_url, hint, back, resource)
     VALUES ${getSQLValues(id, cardValues)};
     `).then((data) => {
+      db.query(`
+      INSERT INTO tags (name) VALUES ('${d.tags}');`).then((result) => {
+        db.query(`
+        INSERT INTO deck_tags (deck_id, tag_id) VALUES
+        (${id}, (SELECT id FROM tags ORDER BY id DESC LIMIT 1));`)
+      }).catch(e => console.log(e))
     }).catch(e => console.log(e))
   }).catch(e => console.log(e)) 
   res.send(req.body);
