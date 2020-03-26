@@ -8,7 +8,7 @@ const moment = require("moment");
 export default function Stopwatch(props) {
   const [displayTime, setDisplayTime] = useState("");
 
-  const { startTimer, answers, cards, game } = props;
+  const { startTimer, answers, cards, game, title } = props;
 
   const requestRef = useRef();
   const { id } = useParams();
@@ -51,10 +51,12 @@ export default function Stopwatch(props) {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>{displayTime}</h1>
+      <h1 style={{color: "#3f51b5"}}>{title}</h1>
+      <h2>{displayTime}</h2>
       <Button
         variant="contained"
         color="primary"
+        style={{ marginBottom: "30px" }}
         size="large"
         onClick={() => stopTimer()}
         component={Link}

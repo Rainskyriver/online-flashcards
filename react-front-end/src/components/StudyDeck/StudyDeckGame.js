@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import { Link, useParams } from "react-router-dom";
 
-
 import GameFlashCards from "./GameFlashCards";
 import GameTest from "./GameTest";
 import GameMemoryMatch from "./GameMemoryMatch";
@@ -15,7 +14,8 @@ import "../../styles/StudyDeckGame.css";
 const useStyles = makeStyles(theme => ({
   root: {
     "& > *": {
-      margin: theme.spacing(1)
+      margin: theme.spacing(1),
+      marginBottom: theme.spacing(2)
     }
   }
 }));
@@ -43,37 +43,40 @@ export default function StudyDeckGame(props) {
   };
 
   return (
-    <div className="game-display">
-      <div className={classes.root} style={{ marginLeft: "2.5vw" }}>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => setMode(FLASHCARDS)}
-        >
-          Flash Cards
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => setMode(TEST)}
-        >
-          Test
-        </Button>
-        <Button
-          variant="outlined"
-          color="primary"
-          onClick={() => setMode(MEMORYMATCH)}
-        >
-          Memory Match
-        </Button>
-      </div>
+    <>
+      <div className="game-display">
+        <h3>Choose a study mode to begin!</h3>
+        <div className={classes.root}>
+          <Button
+            variant={mode === FLASHCARDS ? "contained" : "outlined"}
+            color="primary"
+            onClick={() => setMode(FLASHCARDS)}
+          >
+            Flash Cards
+          </Button>
+          <Button
+            variant={mode === TEST ? "contained" : "outlined"}
+            color="primary"
+            onClick={() => setMode(TEST)}
+          >
+            Test
+          </Button>
+          <Button
+            variant={mode === MEMORYMATCH ? "contained" : "outlined"}
+            color="primary"
+            onClick={() => setMode(MEMORYMATCH)}
+          >
+            Memory Match
+          </Button>
+        </div>
 
-      <div className="game-info">
-        {mode === FLASHCARDS && <GameFlashCards />}
+        <div className="game-info">
+          {mode === FLASHCARDS && <GameFlashCards />}
 
-        {mode === TEST && <GameTest />}
+          {mode === TEST && <GameTest />}
 
-        {mode === MEMORYMATCH && <GameMemoryMatch />}
+          {mode === MEMORYMATCH && <GameMemoryMatch />}
+        </div>
       </div>
       <Button
         variant="contained"
@@ -81,12 +84,12 @@ export default function StudyDeckGame(props) {
         size="large"
         startIcon={<PlayCircleFilledIcon />}
         onClick={() => handlePlay(mode)}
-        style={{ width: "fit-content", marginTop: "30px" }}
+        style={{ width: "100%", bottom: "0", position: "absolute" }}
         component={Link}
         to={handlePlay(mode)}
       >
         Play
       </Button>
-    </div>
+    </>
   );
 }

@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { Button, IconButton } from "@material-ui/core";
 import red from "@material-ui/core/colors/red";
 import green from "@material-ui/core/colors/green";
-import blue from "@material-ui/core/colors/blue";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { useTransition, animated } from "react-spring";
@@ -17,9 +16,11 @@ import "../../../styles/Game.css";
 
 export default function Original() {
   const [cards, setCards] = useState([]);
+  const [deckTitle, setDeckTitle] = useState();
   const [start, setStart] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
   const [correctness, setCorrectness] = useState({});
+  const [clicked, setClicked] = useState({});
 
   const { id } = useParams();
 
@@ -27,6 +28,7 @@ export default function Original() {
   useEffect(() => {
     axios.get(`/api/study/${id}/original`).then(res => {
       setCards(res.data.cards);
+      setDeckTitle(res.data.deck.name);
     });
   }, []);
 
@@ -74,6 +76,25 @@ export default function Original() {
     setCurrentCard(currentCard - 1);
   };
 
+  // Hotkeys to navigate through the test
+  const hotKeys = e => {
+    e = e || window.event;
+    if (e.keyCode === 37) {
+      previousCard();
+    } else if (e.keyCode === 39) {
+      nextCard();
+    } else if (e.keyCode === 88) {
+      handleIncorrect();
+    } else if (e.keyCode === 67) {
+      handleCorrect();
+    } else if (e.keyCode === 32) {
+      // ReactDOM.findDOMNode()
+      // document.getElementById('hotkey').click()
+    }
+  };
+
+  document.onkeydown = hotKeys;
+
   // For animation card slide
   const rightTransition = useTransition(currentCard, p => p, {
     from: { opacity: 0, transform: "translate3d(100%,0,0)" },
@@ -90,20 +111,31 @@ export default function Original() {
   // Setting the card answer value
   const handleCorrect = () => {
     setCorrectness({ ...correctness, [cards[currentCard].id]: true });
+    setClicked({ ...clicked, [cards[currentCard].id]: 2 });
   };
 
   const handleIncorrect = () => {
     setCorrectness({ ...correctness, [cards[currentCard].id]: false });
+    setClicked({ ...clicked, [cards[currentCard].id]: 1 });
   };
 
   const startGame = () => {
     if (start === false) {
       return (
         <div className="start-container">
-          <Button style={{ color: blue[500] }} onClick={() => setStart(true)}>
+          <h1>Flashcards for </h1>
+          <h1 style={{ marginTop: "0px", color: "#3f51b5" }}>"{deckTitle}"</h1>
+          <h2 className="start-message">
+            Are you ready to flip through all these cards?!
+          </h2>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ height: "100px", width: "50%", alignSelf: "center" }}
+            onClick={() => setStart(true)}
+          >
             Start Test
           </Button>
-          <h1 className="start-message">Are you ready to ace this test?!</h1>
         </div>
       );
     } else if (start === true) {
@@ -116,9 +148,16 @@ export default function Original() {
             answers={correctness}
             cards={cards}
             game="original"
+            title={deckTitle}
           />
 
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
             <div className="previous-button">
               <IconButton onClick={previousCard}>
                 <ArrowBackIcon />
@@ -138,12 +177,18 @@ export default function Original() {
           </div>
           <div className="answer-buttons">
             <Button
+              variant={
+                clicked[cards[currentCard].id] === 1 ? "contained" : "outlined"
+              }
               style={{ color: red[500] }}
               onClick={() => handleIncorrect()}
             >
               Incorrect
             </Button>
             <Button
+              variant={
+                clicked[cards[currentCard].id] === 2 ? "contained" : "outlined"
+              }
               style={{ color: green[500] }}
               onClick={() => handleCorrect()}
             >
@@ -158,8 +203,6 @@ export default function Original() {
 
   return (
     <div className="game-landing-page">
-      <h2>{`ORIGINAL for deck with id: ${id}, for user id ${userId}`}</h2>
-      <h1>HELLO</h1>
       <div>{startGame()}</div>
     </div>
   );

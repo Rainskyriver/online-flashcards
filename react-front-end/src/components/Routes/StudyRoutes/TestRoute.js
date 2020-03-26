@@ -11,11 +11,13 @@ const { randomSelection, shuffle } = require("./TestGame/Helpers");
 
 export default function Test() {
   const [cards, setCards] = useState([]);
+  const [deckTitle, setDeckTitle] = useState();
   const [start, setStart] = useState(false);
   const [answers, setAnswers] = useState([]);
   const [currentCard, setCurrentCard] = useState(-1);
   const [answered, setAnswered] = useState(false);
   const [correct, setCorrect] = useState({});
+  const [clicked, setClicked] = useState(false)
 
   const { id } = useParams();
 
@@ -23,6 +25,7 @@ export default function Test() {
     axios.get(`/api/study/${id}/test`).then(res => {
       setCards(shuffle(res.data.cards));
       setCurrentCard(0);
+      setDeckTitle(res.data.deck.name);
     });
   }, []);
 
@@ -73,7 +76,11 @@ export default function Test() {
       );
     } else {
       return (
-        <Button onClick={() => answerHandler(result.id)} key={result.id}>
+        <Button
+          variant="outlined"
+          onClick={() => answerHandler(result.id)}
+          key={result.id}
+        >
           {result.back}
         </Button>
       );
@@ -92,8 +99,17 @@ export default function Test() {
     if (start === false) {
       return (
         <div className="start-container">
-          <Button onClick={() => setStart(true)}>Start Test</Button>
-          <h1 className="start-message">Are you ready to ace this test?!</h1>
+          <h1>Testing for </h1>
+          <h1 style={{ marginTop: "0px", color: "#3f51b5" }}>"{deckTitle}"</h1>
+          <h2 className="start-message">Are you ready to ace this test?!</h2>
+          <Button
+            variant="contained"
+            color="primary"
+            style={{ height: "100px", width: "50%", alignSelf: "center" }}
+            onClick={() => setStart(true)}
+          >
+            Start Test
+          </Button>
         </div>
       );
     } else if (start === true) {
@@ -106,6 +122,7 @@ export default function Test() {
             answers={correct}
             cards={cards}
             game="test"
+            title={deckTitle}
           />
           <div className="game-box">{TestCards[currentCard]}</div>
           <div>
@@ -125,7 +142,6 @@ export default function Test() {
 
   return (
     <div className="game-landing-page">
-      <h2>{`Test for deck with id: ${id}`}</h2>
       <div>{startHandler()}</div>
     </div>
   );

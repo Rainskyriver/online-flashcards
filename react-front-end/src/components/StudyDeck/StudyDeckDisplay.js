@@ -33,6 +33,10 @@ export default function StudyDeckDisplay() {
     })
   }, [])
 
+  const handleDefault = (e) => {
+    e.target.src = 'https://media.sproutsocial.com/uploads/2017/02/10x-featured-social-media-image-size.png'
+  }
+
   return (
     <div className="deck-display">
       <div className="left-display">
@@ -41,6 +45,7 @@ export default function StudyDeckDisplay() {
         </div>
         <div>
           <img
+            onError={handleDefault}
             src={input.image}
             alt={input.title}
             className="deck-image"
@@ -49,14 +54,14 @@ export default function StudyDeckDisplay() {
       </div>
 
       <div className="right-display">
-        <div>
-          <h3>Number of Cards: </h3><p>Hey! This deck has <strong>{input.numOfCards}</strong> cards!</p>
+        <div style={{ fontSize: "larger" }}>
+          <h2 className="header-spacing">Number of Cards: </h2><p className="paragraph-spacing">Hey! This deck has <strong>{input.numOfCards}</strong> cards!</p>
         </div>
         <div>
-          <h3>Description: </h3><p>{input.description}</p>
+          <h2 className="header-spacing">Description: </h2><p className="paragraph-spacing">{input.description}</p>
         </div>
         <div>
-          <h3>Tags: </h3> <p>{input.tags}</p>
+          <h2 className="header-spacing">Tags: </h2> <p className="paragraph-spacing">{input.tags}</p>
         </div>
       </div>
     </div>

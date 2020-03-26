@@ -144,17 +144,18 @@ App.get('/api/study/:id', (req, res) => {
                   FROM testquestions
                   WHERE correct=true
                   AND test_id IN (SELECT id FROM tests
-                  WHERE deck_id=8
+                  WHERE deck_id=${id}
                   AND user_id=3)
-                  GROUP BY test_id LIMIT 1
+                  GROUP BY test_id 
+                  ORDER BY bestattempt DESC LIMIT 1
                   `).then((result) => {
                     data.bestAttempt = result.rows[0].bestattempt
                     db.query(`
-                    SELECT id, time_start, time_end
+                    SELECT id, (time_end - time_start) as besttime
                     FROM tests
                     WHERE id=${result.rows[0].test_id}
                     `).then((result) => {
-                      data.bestAttemptData = result.rows[0]
+                      data.bestAttemptTime = result.rows[0].besttime
                       res.send(data);
                     })
                   })
