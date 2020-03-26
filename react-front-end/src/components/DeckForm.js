@@ -30,7 +30,7 @@ export default function DeckForm(props) {
 
   const handleChange = (e, userInput) => {
     setInput({ ...input, [userInput]: e.target.value });
-    props.giveDeckData(input);
+    props.giveDeckData({...input, [userInput]: e.target.value});
   };
 
   return (

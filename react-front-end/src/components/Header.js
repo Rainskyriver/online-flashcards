@@ -97,9 +97,9 @@ export default function Header(props) {
   const classes = useStyles();
   const [inputvalue, setValue] = useState("");
   const [tags, setTags] = useState([]);
-  const handleChange = event => {
-    setValue(event.target.value);
-  };
+  const handleChange = (event, values) => {
+    setValue(values);
+    };
   useEffect(() => {
     //Get Tags
     axios.get("/api/tags").then(res => {setTags(res.data.tags);}).catch(err => {console.log(err);});
@@ -115,16 +115,17 @@ export default function Header(props) {
             <Typography className={classes.title} variant="h6" noWrap>
               Ofc
             </Typography>
-            <form action={`/search/${inputvalue.toLowerCase()}`} method="GET">
+            <form action={`/search/${inputvalue}`} method="GET">
               <Autocomplete
                 options={tags.map(tag => tag.name)}
+                onChange={handleChange}
                 renderInput={params => (
                   <div>
                     <Button type="submit"><SearchIcon /></Button>
                     <TextField
                     {...params}
                     label="Search..."
-                    onChange={handleChange}
+                    // onChange={handleChange}
                     value={inputvalue}
                     className={classes.inputRoot}
                     />

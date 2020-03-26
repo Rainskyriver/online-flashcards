@@ -14,12 +14,6 @@ export default function EditDeck() {
   // const [cards, setCards] = useState([])
   const [cardData, setCardData] = useState({})
   const [deckData, setDeckData] = useState({})
-  const getDeckData = (data => {
-    setDeckData(data)
-  })
-  const getCardData = ((id, input) => {
-    setCardData(prev => ({...prev, [id]: input}))
-  })
   
   useEffect(() => {
     axios.get(`/api/decks/${id}/edit`).then(res => {
@@ -32,8 +26,9 @@ export default function EditDeck() {
     return (
       <div key={buildID} >
         <CardForm 
+        deck_id={id}
         id={buildID}
-        giveCardData={getCardData}
+        giveCardData={setCardData}
         question={cardData[key].front}
         image={cardData[key].image_url}
         answer={cardData[key].back}
@@ -49,7 +44,7 @@ export default function EditDeck() {
         title={deckData.name} 
         description={deckData.description} 
         image={deckData.image_url} 
-        giveDeckData={getDeckData} 
+        giveDeckData={setDeckData} 
         edit={true}
       />
       )
@@ -79,7 +74,7 @@ export default function EditDeck() {
         {cardList}
       </div>
       <form onSubmit={saveDeck}>
-      <Button type='submit' color={'primary'} variant={'contained'} style={{position: 'fixed', bottom:'0px', zIndex:'5', right:'0'}} >Save Deck</Button>
+      <Button type='submit' color={'primary'} variant={'contained'} style={{ width: '100%', position: 'fixed', bottom:'0px', zIndex:'5', right:'0'}} >Save Deck</Button>
       </form>
     </div>
   )
