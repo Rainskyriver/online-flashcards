@@ -4,6 +4,6 @@ CREATE TABLE decks (
   user_id INTEGER REFERENCES users(id) ON DELETE CASCADE NOT NULL,
   name VARCHAR (255) NOT NULL,
   description TEXT NOT NULL,
-  image_url VARCHAR (255),
+  image_url TEXT, 
   public BOOLEAN DEFAULT true
 );
