@@ -34,9 +34,9 @@ export default function CardForm(props) {
   const flashCardRef = useRef();
   const [input, setInput] = useState({
     question: props.question ? props.question : "",
-    image: props.image ? props.image :  "",
-    hint: props.hint ? props.hint : "",
     answer: props.answer ? props.answer : "",
+    hint: props.hint ? props.hint : "",
+    image: props.image ? props.image :  "",
     resources: props.resources ? props.resources : ""
   });
 

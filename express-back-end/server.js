@@ -437,6 +437,7 @@ App.post('/api/decks/:id/edit', (req, res) => {
   if (d.image_url) {
     d.image = d.image_url
   }
+  console.log(c)
   db.query(`UPDATE decks SET 
     name = '${d.title}',
     description = '${d.description}',
@@ -447,16 +448,17 @@ App.post('/api/decks/:id/edit', (req, res) => {
     // //Get deck_id, front, back, hint, resource, image_url
     db.query(`DELETE FROM cards
     WHERE deck_id = ${id};
-    INSERT INTO cards (deck_id, front, image_url, hint, back, resource)
+    INSERT INTO cards (deck_id, front, back, hint, image_url, resource)
     VALUES ${getSQLValues(id, cardValues)};
-    `).then((data) => {
-      db.query(`
-      INSERT INTO tags (name) VALUES ('${d.tags}');`).then((result) => {
-        db.query(`
-        INSERT INTO deck_tags (deck_id, tag_id) VALUES
-        (${id}, (SELECT id FROM tags ORDER BY id DESC LIMIT 1));`)
-      }).catch(e => console.log(e))
-    }).catch(e => console.log(e))
+    `)
+    // .then((data) => {
+      // db.query(`
+      // INSERT INTO tags (name) VALUES ('${d.tags}');`).then((result) => {
+      //   db.query(`
+      //   INSERT INTO deck_tags (deck_id, tag_id) VALUES
+      //   (${id}, (SELECT id FROM tags ORDER BY id DESC LIMIT 1));`)
+      // }).catch(e => console.log(e))
+    // }).catch(e => console.log(e))
   }).catch(e => console.log(e)) 
   res.send(req.body);
 })
