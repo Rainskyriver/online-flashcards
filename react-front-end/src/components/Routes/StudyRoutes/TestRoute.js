@@ -15,7 +15,7 @@ export default function Test() {
   const [deckTitle, setDeckTitle] = useState();
   const [start, setStart] = useState(false);
   const [answers, setAnswers] = useState([]);
-  const [currentCard, setCurrentCard] = useState(-1);
+  const [currentCard, setCurrentCard] = useState(1);
   const [answered, setAnswered] = useState(false);
   const [correct, setCorrect] = useState({});
   const [stopTime, setStopTime] = useState(false);
@@ -71,6 +71,7 @@ export default function Test() {
       return (
         <Button
           variant="contained"
+          writable="true"
           style={{ backgroundColor: "#c5e1a5" }}
           disabled={true}
           onClick={() => answerHandler(result.id)}
@@ -97,7 +98,6 @@ export default function Test() {
     } else {
       return (
         <Button
-          variant="outlined"
           onClick={() => answerHandler(result.id)}
           key={result.id}
         >
@@ -113,6 +113,7 @@ export default function Test() {
       return;
     }
     setCurrentCard(currentCard + 1);
+    setHotkeyFlip(false)
   };
 
   // Hotkeys to navigate through the test
@@ -127,8 +128,7 @@ export default function Test() {
     } else if (e.keyCode === 49) {
       // 1 key
       answerHandler(Number(RandomAnswers[0].key))
-      // RandomAnswers[0].props.variant = "contained"
-      console.log(RandomAnswers[0])
+      console.log('for key 1', RandomAnswers[0])
     } else if (e.keyCode === 50) {
       // 2 key
       answerHandler(Number(RandomAnswers[1].key))
