@@ -1,7 +1,7 @@
 const getSQLValues = (deck_id, arr) => {
   let results = ''
   const values = Object.values(arr);
-  console.log(values);
+  // console.log(values);
   for (const value of values) {
     let item = []
     if (value.id) {
@@ -12,7 +12,7 @@ const getSQLValues = (deck_id, arr) => {
       results += "("+ deck_id +", '" + item.join("', '") + "'), "
     }
   }
-  console.log(results);
+  // console.log(results);
   return results.slice(0, -2) + ';';
 }
 module.exports = (getSQLValues);

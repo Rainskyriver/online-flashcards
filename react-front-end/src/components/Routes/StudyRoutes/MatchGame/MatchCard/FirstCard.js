@@ -38,14 +38,19 @@ const FirstCard = forwardRef((props, ref) => {
   const content = () => {
     if (image_url) {
       return (
-        <img style={{
-          fontSize: '25px',
-          height: 'auto',
-          borderRadius: '8px',
-          width: '25vw',
-          height: '30vh',
-          alignSelf: 'flex-start',
-          }} src={image_url}/>
+        // <img style={{
+        //   fontSize: '25px',
+        //   height: 'auto',
+        //   borderRadius: '8px',
+        //   width: '25vw',
+        //   height: '30vh',
+        //   alignSelf: 'flex-start',
+        //   }} src={image_url}/>
+          <div style={{
+            background: {image_url}
+          }}>
+
+          </div>
       )
     } else {
       return (
@@ -62,19 +67,19 @@ const FirstCard = forwardRef((props, ref) => {
         }}
         className="c front"
         style={{
+          background: 'rgb(29,229,253)',
+          background: 'linear-gradient(157deg, rgba(29,229,253,1) 0%, rgba(69,82,252,1) 100%)',
           zIndex: `${handleZIndex()}`,
           opacity: opacity.interpolate(o => 1 - o),
           transform
         }}
       >
-        <CardContent>
-          <img style={{size: '50px'}} src={'https://images-na.ssl-images-amazon.com/images/I/51-TrKw%2BYtL._AC_SX355_.jpg'}/>
-        </CardContent>
       </a.div>
 
       <a.div
         className="c back"
         style={{
+          backgroundImage: image_url ? `url(${image_url})` : null,
           opacity,
           transform: transform.interpolate(t => `${t} rotateX(180deg)`)
         }}

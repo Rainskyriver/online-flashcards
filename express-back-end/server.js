@@ -194,7 +194,6 @@ App.get('/api/study/:id/original', (req, res) => {
       WHERE deck_id=${id}
       `).then((result) => {
         data.cards = (result.rows)
-        console.log(data)
         res.send(data);
       })
     })
@@ -224,7 +223,6 @@ App.get('/api/study/:id/match', (req, res) => {
       LIMIT 6;
       `).then((result) => {
         data.cards = (result.rows)
-        console.log(data)
         res.send(data);
       })
     })
@@ -319,7 +317,6 @@ App.get('/api/study/:id/test', (req, res) => {
       LIMIT 6;
       `).then((result) => {
         data.cards = (result.rows)
-        console.log(data)
         res.send(data);
       })
     })
@@ -418,6 +415,12 @@ App.post('/api/decks/:id/edit', (req, res) => {
     INSERT INTO cards (deck_id, front, image_url, hint, back, resource)
     VALUES ${getSQLValues(id, cardValues)};
     `).then((data) => {
+      db.query(`
+      INSERT INTO tags (name) VALUES ('${d.tags}');`).then((result) => {
+        db.query(`
+        INSERT INTO deck_tags (deck_id, tag_id) VALUES
+        (${id}, (SELECT id FROM tags ORDER BY id DESC LIMIT 1));`)
+      }).catch(e => console.log(e))
     }).catch(e => console.log(e))
   }).catch(e => console.log(e)) 
   res.send(req.body);
@@ -428,7 +431,7 @@ App.post('/api/decks/:id/delete', (req, res) => {
   const id = req.params.id;
   db.query(`DELETE FROM decks
   WHERE id=${id}`).then((res) => {
-    console.log(res);
+    // console.log(res);
   })
 })
 

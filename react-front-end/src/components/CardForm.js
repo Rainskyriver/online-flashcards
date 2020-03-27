@@ -51,9 +51,11 @@ export default function CardForm(props) {
     }
   };
   const handleChange = (e, userInput) => {
+    e.persist()
     const id = props.id
     setInput({ ...input, [userInput]: e.target.value });
-    props.giveCardData(id, input)
+    // props.giveCardData(id, input)
+    props.giveCardData(prev => ({...prev, [id]: {...input, [userInput]: e.target.value}}))
   };
 
   const topVal = props.id * 300

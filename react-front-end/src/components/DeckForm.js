@@ -19,20 +19,19 @@ const validate = values => {
   }
   return errors;
 };
-
 export default function DeckForm(props) {
   const [input, setInput] = useState({
     title: props.title ? props.title : "",
     description: props.description ? props.description : "",
     image: props.image ? props.image : "",
-    tags: ""
+    tags: props.tags ? Object.values(props.tags).map((tag) => tag.name ).join(', ') :""
   });
 
   const handleChange = (e, userInput) => {
     setInput({ ...input, [userInput]: e.target.value });
-    props.giveDeckData(input);
+    props.giveDeckData({...input, [userInput]: e.target.value});
   };
-
+  console.log(props.tags)
   return (
     <div className="new-deck">
         <Deck

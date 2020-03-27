@@ -39,14 +39,13 @@ const SecondCard = forwardRef((props, ref) => {
         }}
         className="c front"
         style={{
+          background: 'rgb(29,229,253)',
+          background: 'linear-gradient(157deg, rgba(29,229,253,1) 0%, rgba(69,82,252,1) 100%)',
           zIndex: `${handleZIndex()}`,
           opacity: opacity.interpolate(o => 1 - o),
           transform
         }}
       >
-        <CardContent>
-          <img style={{size: '50px'}} src={'https://images-na.ssl-images-amazon.com/images/I/51-TrKw%2BYtL._AC_SX355_.jpg'}/>
-        </CardContent>
       </a.div>
 
       <a.div
