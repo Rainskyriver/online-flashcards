@@ -3,6 +3,7 @@ const getSQLValues = (deck_id, arr) => {
   const values = Object.values(arr);
   // console.log(values);
   for (const value of values) {
+    console.log(value)
     let item = []
     if (value.id) {
       item = (Object.values(value).slice(2));
