@@ -54,7 +54,7 @@ Solved by looking at each individual file associated with the file path to find 
 * Passing data between props for editting decks
 
 ### 21/03/20
-
+* Another good day!
 
 ### 22/03/20
 * Learned about requestAnimationFrame to make a smoother timer
@@ -69,10 +69,10 @@ https://www.postgresql.org/docs/9.5/sql-insert.html
 
 
 ### 24/03/20
-
+* Toughing out the css and design (We are developers, not designers. But it doesn't hurt to learn)
 
 ### 25/03/20
-
+* Setting event handlers on key down/up
 
 ### 26/03/20
 
