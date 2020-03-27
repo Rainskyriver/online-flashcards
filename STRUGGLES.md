@@ -73,6 +73,9 @@ https://www.postgresql.org/docs/9.5/sql-insert.html
 
 ### 25/03/20
 * Setting event handlers on key down/up
+https://keycode.info/
 
 ### 26/03/20
+* Wrapped up the last of the css and a few bugs!
+Thanks for being such a great partner Lian!
 

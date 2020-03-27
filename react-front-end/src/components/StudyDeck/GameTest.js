@@ -26,19 +26,19 @@ export default function GameFlashCards() {
   useEffect(() => {
     axios.get(`/api/study/${id}`).then(res => {
       setInput({
-        hours: res.data.averageTime.hours || "0",
-        minutes: res.data.averageTime.minutes || "0",
-        seconds: res.data.averageTime.seconds || "0",
-        milliseconds: res.data.averageTime.milliseconds,
-        attempts: res.data.attempts,
+        hours: res.data.testAverageTime.hours || "0",
+        minutes: res.data.testAverageTime.minutes || "0",
+        seconds: res.data.testAverageTime.seconds || "0",
+        milliseconds: res.data.testAverageTime.milliseconds,
+        attempts: res.data.testAttempts,
         front: res.data.front,
         mostWrong: res.data.mostWrong,
-        averageCorrect: res.data.averageCorrect,
-        bestAttempt: res.data.bestAttempt,
-        bestAttemptTimeHours: res.data.bestAttemptTime.hours || "0",
-        bestAttemptTimeMinutes: res.data.bestAttemptTime.minutes || "0",
-        bestAttemptTimeSeconds: res.data.bestAttemptTime.seconds || "0",
-        bestAttemptTimeMilliseconds: res.data.bestAttemptTime.milliseconds,
+        averageCorrect: res.data.testAverageCorrect,
+        bestAttempt: res.data.testBestAttempt,
+        bestAttemptTimeHours: res.data.testBestAttemptTime.hours || "0",
+        bestAttemptTimeMinutes: res.data.testBestAttemptTime.minutes || "0",
+        bestAttemptTimeSeconds: res.data.testBestAttemptTime.seconds || "0",
+        bestAttemptTimeMilliseconds: res.data.testBestAttemptTime.milliseconds,
         numOfCards: res.data.numOfCards
       });
     });
