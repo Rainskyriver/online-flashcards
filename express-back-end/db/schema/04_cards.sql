@@ -5,6 +5,6 @@ CREATE TABLE cards (
   front VARCHAR (255) NOT NULL,
   back VARCHAR (255) NOT NULL,
   hint VARCHAR(255),
-  image_url VARCHAR(255),
-  resource VARCHAR (255)
+  image_url TEXT,
+  resource TEXT
 );

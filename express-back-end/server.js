@@ -193,7 +193,6 @@ App.get('/api/study/:id/original', (req, res) => {
       WHERE deck_id=${id}
       `).then((result) => {
         data.cards = (result.rows)
-        console.log(data)
         res.send(data);
       })
     })
@@ -223,7 +222,6 @@ App.get('/api/study/:id/match', (req, res) => {
       LIMIT 6;
       `).then((result) => {
         data.cards = (result.rows)
-        console.log(data)
         res.send(data);
       })
     })
@@ -285,7 +283,6 @@ App.get('/api/study/:id/test', (req, res) => {
       LIMIT 6;
       `).then((result) => {
         data.cards = (result.rows)
-        console.log(data)
         res.send(data);
       })
     })
@@ -365,7 +362,6 @@ App.post('/api/decks/:id/edit', (req, res) => {
   const data = JSON.parse(req.body.data)
   const d = data.deckData
   const c = data.cardData
-  console.log(d.tags)
   if (d.name) {
     d.title = d.name
   }
@@ -401,7 +397,7 @@ App.post('/api/decks/:id/delete', (req, res) => {
   const id = req.params.id;
   db.query(`DELETE FROM decks
   WHERE id=${id}`).then((res) => {
-    console.log(res);
+    // console.log(res);
   })
 })
 
