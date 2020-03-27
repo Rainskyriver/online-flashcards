@@ -1,5 +1,5 @@
 // import { render } from 'react-dom'
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, { useState, forwardRef, useImperativeHandle, useEffect } from "react";
 import { useSpring, animated as a } from "react-spring";
 import "../../../../styles/FlashCard.css";
 
@@ -34,7 +34,15 @@ const useStyles = makeStyles(theme => ({
 
 const TestCard = forwardRef((props, ref) => {
   const [flipped, set] = useState(false);
-  const { question, image, hint, answer, resources, answered } = props;
+  const {
+    question,
+    image,
+    hint,
+    answer,
+    resources,
+    answered,
+    hotkeyFlip
+  } = props;
   const { transform, opacity } = useSpring({
     opacity: flipped ? 1 : 0,
     transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
@@ -72,6 +80,10 @@ const TestCard = forwardRef((props, ref) => {
       return 1;
     }
   };
+
+  useEffect(() => {
+    set(hotkeyFlip);
+  }, [hotkeyFlip]);
 
   return (
     <div>

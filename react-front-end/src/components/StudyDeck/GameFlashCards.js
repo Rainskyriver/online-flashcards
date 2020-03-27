@@ -50,8 +50,51 @@ export default function GameFlashCards() {
         <h1>Flash Cards</h1>
         <h3>
           Study the whole deck going through each card one by one, until all the
-          cards are done. OR YOU KNOW A BETTER DESCRIPTION!
+          cards are done.
         </h3>
+        <div>
+          <h4 style={{ marginBottom: "0px", textDecoration: "underline" }}>
+            Hotkeys:
+          </h4>
+          <Grid container spacing={0}>
+            <Grid item xs={12} sm={4}>
+              Next Card:
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <strong>"Right Arrow" Key</strong>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              Previous Card:
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <strong>"Left Arrow" Key</strong>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              Mark Incorrect:
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <strong>"X" Key</strong>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              Mark Correct:
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <strong>"C" Key</strong>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              Flip Card:
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <strong>"Space Bar" Key</strong>
+            </Grid>
+            <Grid item xs={12} sm={4}>
+              Complete Test:
+            </Grid>
+            <Grid item xs={12} sm={8}>
+              <strong>"Enter/Return" Key</strong>
+            </Grid>
+          </Grid>
+        </div>
       </div>
       <div className="game-right-display">
         <h1>History</h1>

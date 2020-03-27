@@ -7,16 +7,18 @@ const moment = require("moment");
 
 export default function Stopwatch(props) {
   const [displayTime, setDisplayTime] = useState("");
+  const [start, setStart] = useState(Date.now)
+  const [whichTest, setWhichTest] = useState(false);
 
-  const { startTimer, answers, cards, game, title } = props;
+  const { answers, cards, game, title, stopTime } = props;
 
   const requestRef = useRef();
   const { id } = useParams();
 
   const stopTimer = () => {
-    const startTime = moment(startTimer).format("YYYY-MM-DD h:mm:ss");
+    const startTime = moment(start).format("YYYY-MM-DD h:mm:ss");
     const endTime = moment().format("YYYY-MM-DD h:mm:ss");
-    const data = JSON.stringify({ startTime, endTime, answers, cards });
+    const data = JSON.stringify({ startTime, endTime, answers, cards, whichTest });
     axios
       .post(`/api/study/${id}/${game}`, {
         data
@@ -26,8 +28,22 @@ export default function Stopwatch(props) {
       });
   };
 
+  const returnKey = stop => {
+    if (stop) {
+      stopTimer();
+      window.location = `/study/${id}`;
+    }
+  };
+
+  useEffect(() => {
+    if (game === "original") {
+      setWhichTest(true)
+    }
+    returnKey(stopTime);
+  }, [stopTime]);
+
   const animate = () => {
-    let dur = moment.duration(moment().diff(startTimer));
+    let dur = moment.duration(moment().diff(start));
     let mins = dur
       .minutes()
       .toString()
@@ -51,7 +67,7 @@ export default function Stopwatch(props) {
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h1 style={{color: "#3f51b5"}}>{title}</h1>
+      <h1 style={{ color: "#3f51b5" }}>{title}</h1>
       <h2>{displayTime}</h2>
       <Button
         variant="contained"

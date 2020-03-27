@@ -49,10 +49,43 @@ export default function GameFlashCards() {
       <div className="game-left-display">
         <h1>Test</h1>
         <h3>
-          A multiple choice style test for studying. You go through the whole
-          deck, and a card with a question will prompt you to select an answer
-          out of three choices.
+          A multiple choice style test for studying. Each question will prompt you with three answers to choose from. Upon submission, flip the card.
         </h3>
+        <h4 style={{ marginBottom: "0px", textDecoration: "underline" }}>
+          Hotkeys:
+        </h4>
+        <Grid container spacing={0}>
+          <Grid item xs={12} sm={4}>
+            Next Card:
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <strong>"Right Arrow" Key</strong>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            Select Answer:
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <strong>"1", "2", "3" Key</strong>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            Submit Answer:
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <strong>"S" Key</strong>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            Flip Card:
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <strong>"Space Bar" Key</strong>
+          </Grid>
+          <Grid item xs={12} sm={4}>
+            Complete Test:
+          </Grid>
+          <Grid item xs={12} sm={8}>
+            <strong>"Enter/Return" Key</strong>
+          </Grid>
+        </Grid>
       </div>
       <div className="game-right-display">
         <h1>History</h1>

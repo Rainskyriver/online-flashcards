@@ -241,6 +241,8 @@ App.post('/api/study/:id/original', (req, res) => {
   const id = req.params.id;
   const startTime = data.startTime;
   const endTime = data.endTime;
+  const test = data.whichTest
+  console.log('here in the data', data)
 
   data.cards.forEach((card) => {
     if (!(card.id in answers)) {
@@ -250,8 +252,39 @@ App.post('/api/study/:id/original', (req, res) => {
 
   // id here is DeckId
   db.query(`
-  INSERT INTO tests (user_id, deck_id, time_start, time_end)
-  VALUES (3, '${id}', '${startTime}', '${endTime}')
+  INSERT INTO tests (user_id, deck_id, test, time_start, time_end)
+  VALUES (3, '${id}', '${test}', '${startTime}', '${endTime}')
+  RETURNING *;
+  `).then((data) => {
+    const testId = data.rows[0].id
+    db.query(`
+      INSERT INTO testquestions (card_id, test_id, correct)
+      VALUES ${getSQLTestQuestions(answers, testId)}
+    `)
+  }).catch((err) => {
+    console.log('here in error', err)
+      })
+})
+
+App.post('/api/study/:id/test', (req, res) => {
+  const data = JSON.parse(req.body.data)
+  const answers = data.answers;
+  const id = req.params.id;
+  const startTime = data.startTime;
+  const endTime = data.endTime;
+  const test = data.whichTest
+  console.log('here in the data', data)
+
+  data.cards.forEach((card) => {
+    if (!(card.id in answers)) {
+      answers[card.id] = false
+    }
+  })
+
+  // id here is DeckId
+  db.query(`
+  INSERT INTO tests (user_id, deck_id, test, time_start, time_end)
+  VALUES (3, '${id}', '${test}', '${startTime}', '${endTime}')
   RETURNING *;
   `).then((data) => {
     const testId = data.rows[0].id

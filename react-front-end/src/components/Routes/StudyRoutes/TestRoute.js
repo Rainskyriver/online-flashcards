@@ -6,6 +6,7 @@ import TestCard from "../StudyRoutes/TestGame/TestCard";
 import "../../../styles/Game.css";
 import Stopwatch from "./Stopwatch";
 import ProgressBar from "./ProgressBar";
+import green from "@material-ui/core/colors/green";
 
 const { randomSelection, shuffle } = require("./TestGame/Helpers");
 
@@ -17,7 +18,9 @@ export default function Test() {
   const [currentCard, setCurrentCard] = useState(-1);
   const [answered, setAnswered] = useState(false);
   const [correct, setCorrect] = useState({});
-  const [clicked, setClicked] = useState(false)
+  const [stopTime, setStopTime] = useState(false);
+  const [hotkeyFlip, setHotkeyFlip] = useState(false);
+  // const [clicked, setClicked] = useState(false);
 
   const { id } = useParams();
 
@@ -43,6 +46,7 @@ export default function Test() {
         hint={result.hint}
         answer={result.back}
         resources={result.resource}
+        hotkeyFlip={hotkeyFlip}
       />
     );
   });
@@ -66,7 +70,23 @@ export default function Test() {
     ) {
       return (
         <Button
-          style={{ color: "green" }}
+          variant="contained"
+          style={{ backgroundColor: "#c5e1a5" }}
+          disabled={true}
+          onClick={() => answerHandler(result.id)}
+          key={result.id}
+        >
+          {result.back}
+        </Button>
+      );
+    } else if (
+      answered &&
+      !correct[Object.keys(correct)[Object.keys(correct).length - 1]]
+    ) {
+      return (
+        <Button
+          variant="contained"
+          style={{ backgroundColor: "#ef9a9a" }}
           disabled={true}
           onClick={() => answerHandler(result.id)}
           key={result.id}
@@ -94,6 +114,37 @@ export default function Test() {
     }
     setCurrentCard(currentCard + 1);
   };
+
+  // Hotkeys to navigate through the test
+  const hotKeys = e => {
+    e = e || window.event;
+    if (e.keyCode === 39) {
+      // Right arrow key
+      handleNextCard();
+    } else if (e.keyCode === 83) {
+      // S key
+      submitHandler();
+    } else if (e.keyCode === 49) {
+      // 1 key
+      answerHandler(Number(RandomAnswers[0].key))
+      // RandomAnswers[0].props.variant = "contained"
+      console.log(RandomAnswers[0])
+    } else if (e.keyCode === 50) {
+      // 2 key
+      answerHandler(Number(RandomAnswers[1].key))
+    } else if (e.keyCode === 51) {
+      // 3 key
+      answerHandler(Number(RandomAnswers[2].key))
+    } else if (e.keyCode === 13) {
+      // Enter key
+      setStopTime(true);
+    } else if (e.keyCode === 32 && answered) {
+      // Space bar key
+      setHotkeyFlip(state => !state);
+    }
+  };
+
+  document.onkeydown = hotKeys;
 
   const startHandler = () => {
     if (start === false) {
@@ -123,18 +174,76 @@ export default function Test() {
             cards={cards}
             game="test"
             title={deckTitle}
+            stopTime={stopTime}
           />
           <div className="game-box">{TestCards[currentCard]}</div>
           <div>
             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               {RandomAnswers}
             </div>
-            <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-              <Button onClick={submitHandler}>Submit</Button>
-              <Button onClick={handleNextCard}>Next Answer</Button>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-evenly",
+                margin: "10px"
+              }}
+            >
+              <Button
+                disabled={answered ? true : false}
+                variant={answered ? "contained" : null}
+                onClick={submitHandler}
+              >
+                Submit
+              </Button>
+              <Button onClick={handleNextCard}>Next Question</Button>
             </div>
           </div>
           <ProgressBar current={currentCard + 1} length={TestCards.length} />
+          <h2
+            style={{
+              textAlign: "center",
+              textDecoration: "underline",
+              marginTop: "50px",
+              marginBottom: "0px"
+            }}
+          >
+            Hotkeys:
+          </h2>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignSelf: "center"
+            }}
+          >
+            <div style={{ marginLeft: "40px", marginRight: "10px" }}>
+              <p>
+                Next Card:
+                <br />
+                Select Answer:
+                <br />
+                Submit Answer:
+                <br />
+                Flip Card:
+                <br />
+                Complete Test:
+                <br />
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>"Right Arrow" Key</strong>
+                <br />
+                <strong>"1", "2", "3" Key</strong>
+                <br />
+                <strong>"S" Key</strong>
+                <br />
+                <strong>"Space Bar" Key</strong>
+                <br />
+                <strong>"Enter/Return" Key</strong>
+              </p>
+            </div>
+          </div>
         </>
       );
     }

@@ -8,6 +8,7 @@ import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import { useTransition, animated } from "react-spring";
 import axios from "axios";
 import FlashCard from "../../FlashCard";
+// import ReactDOM from "react-dom";
 
 import ProgressBar from "./ProgressBar";
 import Stopwatch from "./Stopwatch";
@@ -21,6 +22,8 @@ export default function Original() {
   const [currentCard, setCurrentCard] = useState(0);
   const [correctness, setCorrectness] = useState({});
   const [clicked, setClicked] = useState({});
+  const [stopTime, setStopTime] = useState(false);
+  const [hotkeyFlip, setHotkeyFlip] = useState(false);
 
   const { id } = useParams();
 
@@ -56,6 +59,7 @@ export default function Original() {
           hint={result.hint}
           answer={result.back}
           resources={result.resource}
+          hotkeyFlip={hotkeyFlip}
         />
       </animated.div>
     );
@@ -67,6 +71,7 @@ export default function Original() {
       return;
     }
     setCurrentCard(currentCard + 1);
+    setHotkeyFlip(false);
   };
 
   const previousCard = () => {
@@ -74,22 +79,31 @@ export default function Original() {
       return;
     }
     setCurrentCard(currentCard - 1);
+    setHotkeyFlip(false);
   };
 
   // Hotkeys to navigate through the test
   const hotKeys = e => {
     e = e || window.event;
     if (e.keyCode === 37) {
+      // Left arrow key
       previousCard();
     } else if (e.keyCode === 39) {
+      // Right arrow key
       nextCard();
     } else if (e.keyCode === 88) {
+      // X key
       handleIncorrect();
     } else if (e.keyCode === 67) {
+      // C key
       handleCorrect();
+    } else if (e.keyCode === 13) {
+      // Enter key
+      setStopTime(true);
+      console.log("hello hoang", stopTime);
     } else if (e.keyCode === 32) {
-      // ReactDOM.findDOMNode()
-      // document.getElementById('hotkey').click()
+      // Space bar key
+      setHotkeyFlip(currentState => !currentState);
     }
   };
 
@@ -139,16 +153,14 @@ export default function Original() {
         </div>
       );
     } else if (start === true) {
-      const startTime = Date.now();
-
       return (
         <>
           <Stopwatch
-            startTimer={startTime}
             answers={correctness}
             cards={cards}
             game="original"
             title={deckTitle}
+            stopTime={stopTime}
           />
 
           <div
@@ -196,6 +208,46 @@ export default function Original() {
             </Button>
           </div>
           <ProgressBar current={currentCard + 1} length={flashCards.length} />
+          <h2 style={{ textAlign: "center", textDecoration: "underline", marginTop: "50px", marginBottom: "0px" }}>Hotkeys:</h2>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignSelf: "center"
+            }}
+          >
+            <div style={{ marginLeft: "40px", marginRight: "10px" }}>
+              <p>
+                Next Card:
+                <br />
+                Previous Card:
+                <br />
+                Mark Incorrect:
+                <br />
+                Mark Correct:
+                <br />
+                Flip Card:
+                <br />
+                Complete Test:
+                <br />
+              </p>
+            </div>
+            <div>
+              <p>
+                <strong>"Right Arrow" Key</strong>
+                <br />
+                <strong>"Left Arrow" Key</strong>
+                <br />
+                <strong>"X" Key</strong>
+                <br />
+                <strong>"C" Key</strong>
+                <br />
+                <strong>"Space Bar" Key</strong>
+                <br />
+                <strong>"Enter/Return" Key</strong>
+              </p>
+            </div>
+          </div>
         </>
       );
     }
