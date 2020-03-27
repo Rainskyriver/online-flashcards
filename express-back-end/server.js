@@ -100,20 +100,23 @@ App.get('/api/study/:id', (req, res) => {
       `).then((result) => {
         data.numOfCards = (result.rows[0].count)
         db.query(`
-        SELECT COUNT(user_id) as attempts
+        SELECT test, COUNT(user_id) as attempts
         FROM tests
         WHERE user_id=3
         AND deck_id=${id}
+        GROUP BY test
         `).then((result) => {
-          data.attempts = (result.rows[0].attempts)
+          data.testAttempts = (result.rows[0].attempts)
+          data.originalAttempts = result.rows[1].attempts
           db.query(`
-          SELECT user_id, deck_id, avg(time_end - time_start) as average_time
+          SELECT user_id, deck_id, test, avg(time_end - time_start) as average_time
           FROM tests
           WHERE user_id=3
           AND deck_id=${id}
-          GROUP BY user_id, deck_id
+          GROUP BY user_id, deck_id, test
           `).then((result) => {
-            data.averageTime = (result.rows[0].average_time)
+            data.testAverageTime = (result.rows[0].average_time)
+            data.originalAverageTime = (result.rows[1].average_time)
             db.query(`
             SELECT card_id, correct, COUNT(card_id) as mostwrong
             FROM testquestions
@@ -136,27 +139,60 @@ App.get('/api/study/:id', (req, res) => {
                 WHERE correct=true
                 AND test_id IN (SELECT id FROM tests
                 WHERE deck_id=${id}
-                AND user_id=3)
+                AND user_id=3
+                AND test=true)
                 `).then((result) => {
-                  data.averageCorrect = (Math.floor((Number(result.rows[0].totalcorrect) / (Number(data.attempts) * Number(data.numOfCards))) * 100))
+                  data.originalAverageCorrect = (Math.floor((Number(result.rows[0].totalcorrect) / (Number(data.originalAttempts) * Number(data.numOfCards))) * 100))
                   db.query(`
-                  SELECT test_id, COUNT(correct) as bestattempt
+                  SELECT COUNT(correct) as totalcorrect
                   FROM testquestions
                   WHERE correct=true
                   AND test_id IN (SELECT id FROM tests
                   WHERE deck_id=${id}
-                  AND user_id=3)
-                  GROUP BY test_id 
-                  ORDER BY bestattempt DESC LIMIT 1
+                  AND user_id=3
+                  AND test=false)
                   `).then((result) => {
-                    data.bestAttempt = result.rows[0].bestattempt
+                    data.testAverageCorrect = (Math.floor((Number(result.rows[0].totalcorrect) / (Number(data.testAttempts) * Number(data.numOfCards))) * 100))
                     db.query(`
-                    SELECT id, (time_end - time_start) as besttime
-                    FROM tests
-                    WHERE id=${result.rows[0].test_id}
+                    SELECT test_id, COUNT(correct) as bestattempt
+                    FROM testquestions
+                    WHERE correct=true
+                    AND test_id IN (SELECT id FROM tests
+                    WHERE deck_id=${id}
+                    AND user_id=3
+                    AND test=true)
+                    GROUP BY test_id 
+                    ORDER BY bestattempt DESC LIMIT 1
                     `).then((result) => {
-                      data.bestAttemptTime = result.rows[0].besttime
-                      res.send(data);
+                      data.originalBestAttempt = result.rows[0].bestattempt;
+                      db.query(`
+                      SELECT id, (time_end - time_start) as besttime
+                      FROM tests
+                      WHERE id=${result.rows[0].test_id}
+                      `).then((result) => {
+                        data.originalBestAttemptTime = result.rows[0].besttime;
+                        db.query(`
+                        SELECT test_id, COUNT(correct) as bestattempt
+                        FROM testquestions
+                        WHERE correct=true
+                        AND test_id IN (SELECT id FROM tests
+                        WHERE deck_id=${id}
+                        AND user_id=3
+                        AND test=false)
+                        GROUP BY test_id 
+                        ORDER BY bestattempt DESC LIMIT 1
+                        `).then((result) => {
+                          data.testBestAttempt = result.rows[0].bestattempt;
+                          db.query(`
+                          SELECT id, (time_end - time_start) as besttime
+                          FROM tests
+                          WHERE id=${result.rows[0].test_id}
+                          `).then((result) => {
+                            data.testBestAttemptTime = result.rows[0].besttime;
+                            res.send(data);
+                          })
+                        })
+                      })
                     })
                   })
                 })
@@ -232,7 +268,7 @@ App.get('/api/study/:id/match', (req, res) => {
 })
 
 
-//Study Original game Timestamps
+//Study Original game data
 App.post('/api/study/:id/original', (req, res) => {
   const data = JSON.parse(req.body.data)
   const answers = data.answers;
@@ -240,7 +276,6 @@ App.post('/api/study/:id/original', (req, res) => {
   const startTime = data.startTime;
   const endTime = data.endTime;
   const test = data.whichTest
-  console.log('here in the data', data)
 
   data.cards.forEach((card) => {
     if (!(card.id in answers)) {
@@ -264,6 +299,7 @@ App.post('/api/study/:id/original', (req, res) => {
       })
 })
 
+//Study Test Multiple Choice game data
 App.post('/api/study/:id/test', (req, res) => {
   const data = JSON.parse(req.body.data)
   const answers = data.answers;
@@ -271,7 +307,6 @@ App.post('/api/study/:id/test', (req, res) => {
   const startTime = data.startTime;
   const endTime = data.endTime;
   const test = data.whichTest
-  console.log('here in the data', data)
 
   data.cards.forEach((card) => {
     if (!(card.id in answers)) {
