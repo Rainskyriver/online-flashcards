@@ -19,12 +19,14 @@
 .start-container{
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .start-message {
   text-align: center;
   border: solid;
   padding: 20px;
+  margin-bottom: 20px;
 }
 
 .answer-buttons {

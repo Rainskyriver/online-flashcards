@@ -5,16 +5,8 @@ export default function GameFlashCards(props) {
     <div className="game-memory-match">
       <div className="game-left-display">
         <h1>Memory Match</h1>
-        <h3>Options</h3>
-        <ul>
-          <li>checkbox1</li>
-          <li>checkbox2</li>
-          <li>checkbox3</li>
-          <li>checkbox4</li>
-          <li>checkbox5</li>
-          <li>checkbox6</li>
-        </ul>
-      </div>
+        <h3>Study by playing the classic Memory Match game!  You'll get a random selection of 12 cards in a 3x4 grid, from the selected deck.  Then flipping each card over, find the corresponding answer/question!</h3>
+        </div>
     </div>
   );
 }

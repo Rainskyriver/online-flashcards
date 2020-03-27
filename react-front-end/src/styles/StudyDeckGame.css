@@ -1,20 +1,20 @@
 .game-display {
   display: flex;
   flex-direction: column;
-  width: 80%;
+  width: 70%;
   height: 450px;
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 .game-info {
-  background-color: aquamarine;
+  background-color: rgb(230, 230, 230);
   border-style: solid;
   border-width: 1px;
   border-color: black;
   border-radius: 15px;
-  box-shadow: 5px 8px rgb(128, 220, 236);
-  height: 70%;
+  box-shadow: 0 10px 15px 0 rgba(0,0,0,.18);
+  height: 72%;
   padding-left: 5%;
 }
 
@@ -33,9 +33,12 @@
 }
 
 .game-left-display {
-  width: 50%;
+  width: 30%;
+  margin-right: 20%;
+
 }
 
 .game-right-display {
   width: 50%;
+  margin-right: 2%
 }

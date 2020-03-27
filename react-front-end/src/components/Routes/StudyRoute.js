@@ -4,7 +4,7 @@ import StudyDeckGame from "../StudyDeck/StudyDeckGame"
 
 export default function Study() {
   return (
-    <div>
+    <div style={{ height: "100%"}}> 
       <StudyDeckDisplay />
       <StudyDeckGame />
     </div>
