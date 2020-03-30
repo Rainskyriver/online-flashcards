@@ -5,7 +5,7 @@ An online study assistant, with the use of flashcards.  Of Course is meant to be
 Finals Project for Lighthouse Labs Bootcamp.
 
 ## Take a Look
-![](name-of-giphy.gif)
+!["Gif demo for OFC"](https://github.com/Rainskyriver/online-flashcards/blob/master/gif/OFC.gif)
 
 ## Getting Started
 
