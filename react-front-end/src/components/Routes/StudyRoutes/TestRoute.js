@@ -98,6 +98,7 @@ export default function Test() {
     } else {
       return (
         <Button
+          // variant="outlined"
           onClick={() => answerHandler(result.id)}
           key={result.id}
         >
@@ -128,6 +129,7 @@ export default function Test() {
     } else if (e.keyCode === 49) {
       // 1 key
       answerHandler(Number(RandomAnswers[0].key))
+      // RandomAnswers[0].props.variant = "contained"
       console.log('for key 1', RandomAnswers[0])
     } else if (e.keyCode === 50) {
       // 2 key
