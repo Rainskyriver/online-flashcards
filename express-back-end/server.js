@@ -384,7 +384,7 @@ App.post('/api/decks/new', (req, res) => {
   WHERE name='${d.title}';
   
   INSERT INTO decks (user_id, name, description, image_url) 
-  VALUES (3, '${d.title}', '${d.description}', '${d.image}') RETURNING *;
+  VALUES (3, '${d.title}', '${d.description}', '${d.image}') RETURNING *
   `).then((data) => {
     const cardValues = Object.values(c)
     const deckID = data[1].rows[0].id;
@@ -467,7 +467,7 @@ App.post('/api/decks/:id/edit', (req, res) => {
 App.post('/api/decks/:id/delete', (req, res) => {
   const id = req.params.id;
   db.query(`DELETE FROM decks
-  WHERE id=${id}`).then((res) => {
+  WHERE id=${id};`).then((res) => {
     // console.log(res);
   })
 })
