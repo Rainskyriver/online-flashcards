@@ -98,8 +98,11 @@ export default function Header(props) {
   const [inputvalue, setValue] = useState("");
   const [tags, setTags] = useState([]);
   const handleChange = (event, values) => {
-    setValue(values);
-    };
+    setValue(values)
+  };
+  const handleType = (e) => {
+    setValue(e.target.value)
+  }
   useEffect(() => {
     //Get Tags
     axios.get("/api/tags").then(res => {setTags(res.data.tags);}).catch(err => {console.log(err);});
@@ -109,11 +112,15 @@ export default function Header(props) {
       <div className={classes.root}>
         <AppBar>
           <Toolbar>
+          <Link className={classes.link} to="/">
+            <div style={{width: '50px', padding: '2px'}}>
+              <img  href="/"  style={{height: 'auto'}} src="https://vectr.com/rainskyriver/i5jtSIazk.svg?width=640&height=640&select=i5jtSIazkpage0"/>
+            </div>
+          </Link>
             <Link className={classes.link} to="/">
               Home
             </Link>
             <Typography className={classes.title} variant="h6" noWrap>
-              Ofc
             </Typography>
             <form action={`/search/${inputvalue}`} method="GET">
               <Autocomplete
@@ -125,7 +132,7 @@ export default function Header(props) {
                     <TextField
                     {...params}
                     label="Search..."
-                    // onChange={handleChange}
+                    onChange={handleType}
                     value={inputvalue}
                     className={classes.inputRoot}
                     />
