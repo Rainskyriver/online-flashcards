@@ -48,7 +48,7 @@ export default function StudyDeckDisplay() {
             onError={handleDefault}
             src={input.image}
             alt={input.title}
-            className="deck-image"
+            className="deck-display-image"
           ></img>
         </div>
       </div>

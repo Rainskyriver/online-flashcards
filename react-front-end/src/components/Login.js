@@ -86,7 +86,7 @@ export default function Login(props) {
         >
           <Button onClick={closeModal}>X</Button>
           <form onSubmit={handleLogin} action="/login" method="POST" style={{ display: "flex" }}>
-            <Button type="submit">Login</Button>
+            <Button variant="contained" color="primary" type="submit">Login</Button>
           </form>
         </div>
       </Modal>
