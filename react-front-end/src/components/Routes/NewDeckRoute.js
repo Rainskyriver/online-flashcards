@@ -19,7 +19,7 @@ export default function EditDeck() {
     const data = JSON.stringify({deckData, cardData})
     axios.post('/api/decks/new', {
       data
-    }).then((res) => {console.log(res)})
+    }).then((res) => window.location.href="/users/3")
   };
   const newCard = () => {
     setCards(prev => [...prev, <div key={id}><CardForm giveCardData={setCardData} id={id}/></div>])
