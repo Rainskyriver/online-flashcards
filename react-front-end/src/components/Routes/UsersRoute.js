@@ -21,7 +21,7 @@ export default function Users() {
     if (cookies.get('LoggedIn')) {
       return (
       <div  className='searchElement' key={deck.id}>
-        <Deck image={deck.image_url} title={deck.name} description={deck.description} id={deck_id} deck_id={deck.id}/>
+        <Deck setDecks={setDecks} image={deck.image_url} title={deck.name} description={deck.description} id={deck_id} deck_id={deck.id}/>
       </div>
       )
     } else {

@@ -101,7 +101,7 @@ export default function Header(props) {
     setValue(values)
   };
   const handleType = (e) => {
-    setValue(e.target.value)
+    setValue((e.target.value).toLowerCase())
   }
   useEffect(() => {
     //Get Tags

@@ -18,7 +18,11 @@ const useStyles = makeStyles(theme => ({
     }
   }
 }));
-
+const removeIndex = (arr, index) => {
+  const results = arr.slice();
+  results.splice(index, 1)
+  return results;
+}
 const customStyles = {
   content: {
     display: "flex",
@@ -53,6 +57,7 @@ export default function Deck(props) {
   }
   const handleDelete = () => {
     axios.post(`/api/decks/${deck_id}/delete`)
+    props.setDecks(prev => removeIndex(prev, id))
   }
   const handleConfirm = () => {
     openModal();
